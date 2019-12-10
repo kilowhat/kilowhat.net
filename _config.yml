@@ -1,0 +1,27 @@
+title: KILOWHAT
+description: >
+  Services and plugins offered by Clark Winlelmann
+baseurl: ""
+url: "https://kilowhat.net"
+twitter_username: clarkwinkelmann
+github_username:  clarkwinkelmann
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+
+google_analytics: 1 # Enables Google Analytics, but we override it with Matomo
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
