@@ -8,6 +8,7 @@ permalink: /flarum/extensions/wordpress
 - **Translations**: English only
 - **Flarum compatibility**: beta 10+
 - See on [flagrow.io](https://flagrow.io/extensions/kilowhat/flarum-ext-wordpress)
+- See on [Flarum Discuss](https://discuss.flarum.org/d/22229-premium-wordpress-integration)
 
 ## Introduction
 
