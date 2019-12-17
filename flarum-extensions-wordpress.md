@@ -4,11 +4,25 @@ title: Flarum Wordpress Integration
 permalink: /flarum/extensions/wordpress
 ---
 
-- **Price:** 5.39 USD/month
+- **Price:** 5 USD/month + VAT depending on your country
 - **Translations**: English only
 - **Flarum compatibility**: beta 10+
 - See on [flagrow.io](https://flagrow.io/extensions/kilowhat/flarum-ext-wordpress)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/22229-premium-wordpress-integration)
+
+Table of content:
+
+- [Introduction](#introduction)
+- [Changelog](#changelog)
+- [Demo](#demo)
+- [Requirements](#requirements)
+- [Compatibility](#compatibility)
+- [Installation](#installation)
+- [Integrity considerations](#integrity-considerations)
+- [Support](#support)
+- [Settings in Wordpress plugin](#settings-in-wordpress-plugin)
+- [Settings in Flarum extension](#settings-in-flarum-extension)
+- [How global login/logout works](#how-global-loginlogout-works)
 
 ## Introduction
 
@@ -48,6 +62,20 @@ Discussions can be automatically locked and hidden when the comments status is c
 
 Guest posting is not possible with this integration enabled.
 
+## Changelog
+
+### Version 1.1 - December 17, 2019
+
+- Added compatibility for custom Wordpress login path
+- Added more options for excerpt generation
+
+You can update the Flarum extension via Bazaar or Composer.
+The Wordpress plugin does not need to be updated.
+
+### Version 1.0 - December 10, 2019
+
+Initial release.
+
 ## Demo
 
 A demo/test website is available at <https://wordpress-flarum-demo.http418.ch/>.
@@ -70,8 +98,18 @@ Please get in touch if you would like admin access.
 Only the current Flarum version is supported.
 New features and fixes in the extension will only work with the latest Flarum version.
 
+## Compatibility
+
 Most other Wordpress plugins and Flarum extensions should be compatible.
 The extension makes many changes to Wordpress and Flarum logout systems that could cause issues with other extensions.
+
+Wordpress plugins/features verified compatible:
+
+- [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): Hide login, Login Captcha
+
+Wordpress plugins/feature verified incompatible:
+
+- [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): 2FA (Flarum login bypasses 2FA)
 
 ## Installation
 
@@ -259,6 +297,19 @@ The value must match with the corresponding setting in the Wordpress plugin.
 
 See the documentation for the Wordpress plugin for how to choose the value.
 
+### Wordpress login path
+
+*Since version 1.1*
+
+**Optional**
+
+If the Wordpress login endpoint was renamed, you can enter the new path relative to the Wordpress url here.
+Do not include the leading `/`.
+
+For example if your Wordpress login is now at `https://example.com/secretlogin`, use `secretlogin`.
+
+Leaving this setting empty will use `wp-login.php`.
+
 ### Username for new users
 
 The logic used to generate Flarum usernames.
@@ -334,19 +385,58 @@ Posting or locking the discussion will trigger updates on the Wordpress post.
 Lock status will be kept in sync with the "Allow comments" setting of the Wordpress post.
 Updating from either Wordpress or Flarum will update the other side.
 
-### Length of the content excerpt
+### Whitelist of HTML tags to keep in the excerpt
+
+*Since version 1.1*
 
 **Optional**
 
+This feature will load the Wordpress Post HTML inside Symfony's DOM crawler.
+If the HTML is invalid, this filter will be skipped and a message will be written to the log file.
+
+HTML tags to keep in the excerpt.
+Multiple tags can be specified separated by commas.
+
+For example to keep only paragraphs and lists but exclude images, you can use `p,ul`.
+
+Setting an empty value (default) will skip this filter.
+
+### Length of the content excerpt (in number of HTML nodes)
+
+*Since version 1.1*
+
+**Optional**
+
+This feature will load the Wordpress Post HTML inside Symfony's DOM crawler.
+If the HTML is invalid, this filter will be skipped and a message will be written to the log file.
+
+The maximum number of HTML top-level nodes to keep in the excerpt.
+Under must circumstances, this can be considered as the number of paragraphs to keep.
+
+If you enable the HTML tags filter (see above), nodes are counted after the whitelist filter has been applied.
+
+Setting 0 or an empty value (default) will skip this filter.
+
+### Length of the content excerpt (in characters)
+
+**Optional**
+
+This feature does not require the Wordpress Post to contain valid HTML.
+
 Controls the length of Wordpress post summaries in Flarum.
 
-The number of characters to keep at most.
+The number of characters to keep at minimum.
 The characters are counted in the HTML source of the post.
-Flarum will cut the text at the last closing paragraph before the given length is reached.
+Flarum will cut the text at the next closing paragraph after the given length is reached.
+
+*Before version 1.1*, the text was cut at the last paragraph before the length was reached.
 
 If no match is found, the whole post will be included.
 
-Setting 0 or an empty value (default), will copy the whole Wordpress post all the time.
+This feature can be enabled together with the HTML whitelist.
+It can also be enabled together with the node count but it probably doesn't make much sense to do so.
+
+Setting 0 or an empty value (default) will skip this filter.
 
 ### Tag IDs for new comment threads
 
