@@ -22,6 +22,7 @@ Table of content:
 - [Support](#support)
 - [Settings in Wordpress plugin](#settings-in-wordpress-plugin)
 - [Settings in Flarum extension](#settings-in-flarum-extension)
+- [Third-party integrations](#third-party-integrations)
 - [How global login/logout works](#how-global-loginlogout-works)
 
 ## Introduction
@@ -63,6 +64,13 @@ Discussions can be automatically locked and hidden when the comments status is c
 Guest posting is not possible with this integration enabled.
 
 ## Changelog
+
+### Version 1.2 - January 7, 2020
+
+- Added search gambits for third-party integrations
+
+You can update the Flarum extension via Bazaar or Composer.
+The Wordpress plugin does not need to be updated.
 
 ### Version 1.1 - December 17, 2019
 
@@ -485,6 +493,52 @@ If the Wordpress post is published again, a new discussion will be created for i
 Same as above but for when a post has been permanently deleted from Wordpress.
 
 If the Flarum discussion is kept, it will be unlinked from Wordpress and posting/locking will no longer send requests to Wordpress.
+
+### Permissions
+
+A singe permission is currently visible on the Permissions page of Flarum:
+
+*Since version 1.2*
+
+**Third-party gambits**: see below for third-party integrations.
+Keep it on Admin only unless you know what you're doing!
+
+## Third-party integrations
+
+*Since version 1.2*
+
+You might want to integrate this extension with your own custom features.
+For this reason we offer a few additional parameters that are not used by the extension itself but can be useful to you.
+
+The way the extension is designed, all links between Wordpress and Flarum are managed inside Flarum.
+This means there's no way to get the Flarum user ID or username from inside Wordpress.
+
+Some warnings:
+
+- The Flarum username can still be changed by the user later on if you enabled the "Make users choose their username on first visit" option and they have not yet activated their forum account. Avoid storing it in Wordpress.
+- The Flarum user ID might change if a user is deleted from Flarum manually, or if their email is manually changed from Flarum instead of Wordpress. Avoid storing it in Wordpress.
+- I don't recommended calling the internal login endpoint for other purposes as the parameters are susceptible to change without warning, and it might also create unnecessary tokens that have a very long lifetime and are never invalidated.
+
+In order to let you query the Flarum API from Wordpress, these additional gambits were added to Flarum:
+
+- `GET /api/users?filter[q]=wordpressid:1`: will let you retrieve a Flarum user via its Wordpress user ID
+- `GET /api/discussions?filter[q]=wordpressid:1`: will let you retrieve a Flarum discussion via its Wordpress post ID
+
+The gambits are added to the search feature of Flarum, so those endpoints will return a list of results.
+If a resource is found, `data` will contain a single result.
+An empty `data` object results indicates no results.
+There are no 404 errors on that endpoint.
+
+By default, only admins can use the gambits.
+You can control who can use the gambits via the "Third-party gambits" permission on the Permissions page.
+
+Additionally, the internal login endpoint also returns the Flarum user ID and username along with the token.
+The return payload looks like this:
+
+    # Request (request body not documented on purpose, see kilowhat-flarum-login.php file if needed)
+    POST /api/kilowhat/wordpress/user/login/1
+    # Response
+    {"user_id":42,"username":"DemoUser","token":"TUaJ7o3N8VftAz4wLFghApT4YZF6H0fCaou1uhvM"}
 
 ## How global login/logout works
 
