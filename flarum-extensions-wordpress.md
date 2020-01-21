@@ -68,9 +68,10 @@ Guest posting is not possible with this integration enabled.
 ### Version 1.2.1 - January 21, 2020
 
 - Fixed incorrect comments count (was off by 1) being synced to Wordpress.
+- Fixed incorrect comments count in the iframe (was always 1 less than the real count).
 
 You can update the Flarum extension via Bazaar or Composer.
-The Wordpress plugin does not need to be updated.
+Works with any version of the Wordpress plugin.
 
 ### Wordpress plugin 1.1 - January 21, 2020
 
@@ -79,14 +80,14 @@ The Wordpress plugin does not need to be updated.
 
 The plugin must be manually updated.
 The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.1.0.zip).
-The Flarum extension does not need to be updated.
+Works with any version of the Flarum extension.
 
 ### Version 1.2 - January 7, 2020
 
 - Added search gambits for third-party integrations
 
 You can update the Flarum extension via Bazaar or Composer.
-The Wordpress plugin does not need to be updated.
+Works with any version of the Wordpress plugin.
 
 ### Version 1.1 - December 17, 2019
 
@@ -94,7 +95,7 @@ The Wordpress plugin does not need to be updated.
 - Added more options for excerpt generation.
 
 You can update the Flarum extension via Bazaar or Composer.
-The Wordpress plugin does not need to be updated.
+Works with any version of the Wordpress plugin.
 
 ### Version 1.0 - December 10, 2019
 
