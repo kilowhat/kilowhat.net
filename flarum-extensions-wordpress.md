@@ -65,6 +65,22 @@ Guest posting is not possible with this integration enabled.
 
 ## Changelog
 
+### Version 1.2.1 - January 21, 2020
+
+- Fixed incorrect comments count (was off by 1) being synced to Wordpress.
+
+You can update the Flarum extension via Bazaar or Composer.
+The Wordpress plugin does not need to be updated.
+
+### Wordpress plugin 1.1 - January 21, 2020
+
+- Add ability to only enable comments integration for some post types (posts and pages by default). This fixes Woocommerce compatibility as well as probably other plugins.
+- Add compatibility with Nextend Social Login plugin.
+
+The plugin must be manually updated.
+The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.1.0.zip).
+The Flarum extension does not need to be updated.
+
 ### Version 1.2 - January 7, 2020
 
 - Added search gambits for third-party integrations
@@ -74,8 +90,8 @@ The Wordpress plugin does not need to be updated.
 
 ### Version 1.1 - December 17, 2019
 
-- Added compatibility for custom Wordpress login path
-- Added more options for excerpt generation
+- Added compatibility for custom Wordpress login path.
+- Added more options for excerpt generation.
 
 You can update the Flarum extension via Bazaar or Composer.
 The Wordpress plugin does not need to be updated.
@@ -113,7 +129,9 @@ The extension makes many changes to Wordpress and Flarum logout systems that cou
 
 Wordpress plugins/features verified compatible:
 
-- [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): Hide login, Login Captcha
+- [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): Hide login, Login Captcha.
+- [Woocommerce](https://woocommerce.com/): compatible since version 1.1.0 of the Wordpress plugin. Reviews and order comments from Woocommerce are left untouched.
+- [Nextend social login](https://nextendweb.com/social-login/): compatible since version 1.1.0 of the Wordpress plugin. Login via social in Wordpress correctly connects into Flarum at the same time. It's recommended to **not enable any social login in Flarum** to prevent any confusion as to which button belongs to which application.
 
 Wordpress plugins/feature verified incompatible:
 
@@ -125,7 +143,7 @@ You must install both the Wordpress plugin and Flarum extension.
 
 ### On Wordpress
 
-- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.0.0.zip). Current version is 1.0.0
+- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.1.0.zip). Current version is 1.1.0
 - Extract the content of the ZIP file and place the `kilowhat-flarum` folder under `wp-content/plugins`
 - Open the Wordpress admin panel and enable the plugin
 - See below for Wordpress settings
@@ -239,6 +257,19 @@ Enables the "comments" integration features.
 The corresponding setting must be enabled in the Flarum extension as well.
 
 All settings regarding comments integration are found in the Flarum extension.
+
+### Comments post types
+
+*Since version 1.1 of the Wordpress plugin*
+
+**Default value: `post,page`**
+
+Lets you customize which post types will use the comments integration when enabling comments.
+You can specify multiple post types separated by a comma.
+Post types not included here will default to normal Wordpress comments if comments are enabled on them.
+
+Setting this value will not change whether comments are opened or closed by default.
+Default comments status is still controlled by the corresponding native Wordpress settings.
 
 ## Settings in Flarum extension
 
