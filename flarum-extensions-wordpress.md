@@ -65,6 +65,13 @@ Guest posting is not possible with this integration enabled.
 
 ## Changelog
 
+### Version 1.2.2 - February 19, 2020
+
+- Add support for excerpts in sticky and summaries extension. Existing Wordpress discussions won't have excerpts. You can fix that by manually updating the `first_post_id` in the database.
+
+You can update the Flarum extension via Bazaar or Composer.
+Works with any version of the Wordpress plugin.
+
 ### Version 1.2.1 - January 21, 2020
 
 - Fixed incorrect comments count (was off by 1) being synced to Wordpress.
