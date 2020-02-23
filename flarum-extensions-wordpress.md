@@ -65,6 +65,13 @@ Guest posting is not possible with this integration enabled.
 
 ## Changelog
 
+### Version 1.2.3 - February 23, 2020
+
+- Add `formatContent` method for compatibility with third-party extensions that expect `firstPost` to be a `CommentPost`.
+
+You can update the Flarum extension via Bazaar or Composer.
+Works with any version of the Wordpress plugin.
+
 ### Version 1.2.2 - February 19, 2020
 
 - Add support for excerpts in sticky and summaries extension. Existing Wordpress discussions won't have excerpts. You can fix that by manually updating the `first_post_id` in the database.
@@ -144,6 +151,10 @@ Wordpress plugins/features verified compatible:
 Wordpress plugins/feature verified incompatible:
 
 - [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): 2FA (Flarum login bypasses 2FA)
+
+When used together with [FriendsOfFlarum Follow Tags](https://discuss.flarum.org/d/20525-friendsofflarum-follow-tags), the post content for new discussions will not be rendered.
+Instead you will see `Array`, maybe accompanied by the "Array to string conversion" error message if you have not hidden the PHP notices on your server.
+This problem will have to be fixed in FriendsOfFlarum Follow Tags.
 
 ## Installation
 
