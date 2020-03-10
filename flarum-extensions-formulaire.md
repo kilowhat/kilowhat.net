@@ -7,7 +7,7 @@ permalink: /flarum/extensions/formulaire
 - **Price:** 5 USD/month + VAT depending on your country
 - **Bundled translations**: English and French
 - **Flarum compatibility**: beta 12+
-- See purchase on [flagrow.io](https://flagrow.io/extensions/kilowhat/flarum-ext-formulaire)
+- See and purchase on [flagrow.io](https://flagrow.io/extensions/kilowhat/flarum-ext-formulaire)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23063)
 
 Table of content:

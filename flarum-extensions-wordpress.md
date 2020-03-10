@@ -5,9 +5,9 @@ permalink: /flarum/extensions/wordpress
 ---
 
 - **Price:** 5 USD/month + VAT depending on your country
-- **Translations**: English only
-- **Flarum compatibility**: beta 10+
-- See on [flagrow.io](https://flagrow.io/extensions/kilowhat/flarum-ext-wordpress)
+- **Bundled translations**: English
+- **Flarum compatibility**: beta 12+
+- See and purchase on [flagrow.io](https://flagrow.io/extensions/kilowhat/flarum-ext-wordpress)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/22229-premium-wordpress-integration)
 
 Table of content:
@@ -64,6 +64,13 @@ Discussions can be automatically locked and hidden when the comments status is c
 Guest posting is not possible with this integration enabled.
 
 ## Changelog
+
+### Version 1.2.4 - March 10, 2020
+
+- Flarum beta 12 compatibility
+
+You can update the Flarum extension via Bazaar or Composer.
+Works with any version of the Wordpress plugin.
 
 ### Version 1.2.3 - February 23, 2020
 
