@@ -18,6 +18,7 @@ Table of content:
 - [Requirements](#requirements)
 - [Compatibility](#compatibility)
 - [Installation](#installation)
+- [Troubleshooting](#troubleshooting)
 - [Integrity considerations](#integrity-considerations)
 - [Support](#support)
 - [Settings in Wordpress plugin](#settings-in-wordpress-plugin)
@@ -63,7 +64,19 @@ Discussions can be automatically locked and hidden when the comments status is c
 
 Guest posting is not possible with this integration enabled.
 
-## Changelog
+## Flarum changelog
+
+### Version 1.3.0 - April 2, 2020
+
+- New admin dashboard for Wordpress
+- Added Installation wizard
+- Added Health check
+- Added "Use post date" option for the comments integration
+- Tags for the "Tag for new comment threads" option can now be selected from a dropdown
+- Fix for user tokens that would end up in the log file
+
+You can update the Flarum extension via Bazaar or Composer.
+Requires version 1.2 or greater of the Wordpress plugin.
 
 ### Version 1.2.4 - March 10, 2020
 
@@ -94,7 +107,39 @@ Works with any version of the Wordpress plugin.
 You can update the Flarum extension via Bazaar or Composer.
 Works with any version of the Wordpress plugin.
 
-### Wordpress plugin 1.1 - January 21, 2020
+### Version 1.2.0 - January 7, 2020
+
+- Added search gambits for third-party integrations
+
+You can update the Flarum extension via Bazaar or Composer.
+Works with any version of the Wordpress plugin.
+
+### Version 1.1.0 - December 17, 2019
+
+- Added compatibility for custom Wordpress login path.
+- Added more options for excerpt generation.
+
+You can update the Flarum extension via Bazaar or Composer.
+Works with any version of the Wordpress plugin.
+
+### Version 1.0.0 - December 10, 2019
+
+Initial release.
+
+## Wordpress changelog
+
+### Version 1.2.0 - April 2, 2020
+
+- Added Wizard and Health check features
+- Added "Use post date" option
+- Stop pinging Flarum API about post types that are not synchronized
+- Fix posts not being synced when they are created and published at the same time. This was causing issues with plugins that auto-publish posts from feeds
+
+The plugin must be manually updated.
+The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.2.0.zip).
+Works with any version of the Flarum extension.
+
+### Version 1.1.0 - January 21, 2020
 
 - Add ability to only enable comments integration for some post types (posts and pages by default). This fixes Woocommerce compatibility as well as probably other plugins.
 - Add compatibility with Nextend Social Login plugin.
@@ -103,22 +148,7 @@ The plugin must be manually updated.
 The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.1.0.zip).
 Works with any version of the Flarum extension.
 
-### Version 1.2 - January 7, 2020
-
-- Added search gambits for third-party integrations
-
-You can update the Flarum extension via Bazaar or Composer.
-Works with any version of the Wordpress plugin.
-
-### Version 1.1 - December 17, 2019
-
-- Added compatibility for custom Wordpress login path.
-- Added more options for excerpt generation.
-
-You can update the Flarum extension via Bazaar or Composer.
-Works with any version of the Wordpress plugin.
-
-### Version 1.0 - December 10, 2019
+### Version 1.0.0 - December 10, 2019
 
 Initial release.
 
@@ -169,10 +199,12 @@ You must install both the Wordpress plugin and Flarum extension.
 
 ### On Wordpress
 
-- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.1.0.zip). Current version is 1.1.0
+- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.2.0.zip). Current version is 1.2.0
 - Extract the content of the ZIP file and place the `kilowhat-flarum` folder under `wp-content/plugins`
 - Open the Wordpress admin panel and enable the plugin
-- See below for Wordpress settings
+- Go the the **Flarum admin panel** and follow the installation wizard
+
+See below for Wordpress settings.
 
 ### On Flarum
 
@@ -180,7 +212,53 @@ You must install both the Wordpress plugin and Flarum extension.
 - Connect Bazaar with your flagrow.io account
 - Purchase the "KILOWHAT Wordpress Integration" extension via Bazaar or flagrow.io
 - Install and enable the extension via Bazaar
-- See below for Flarum settings
+- Go to the new Wordpress tab and fill in your Wordpress credentials in the installation wizard
+
+See below for Flarum settings.
+
+## Troubleshooting
+
+### The installation wizard is stuck
+
+If you constantly receive "Flarum is already connected with Wordpress" or "We could not authenticate with the given credentials".
+
+Double-check the URL, username and password that you entered in the wizard.
+
+If you previously ran the wizard and that an error happened, it's possible the setup is blocked in a half-finished configuration.
+
+To run the wizard again:
+
+- Delete the "Wordpress URL" setting in Flarum
+- Delete the "Flarum API key" setting in Wordpress
+
+And refresh the Flarum admin dashboard.
+The wizard should be available again.
+
+### Health check
+
+When you open the Wordpress tab in the Flarum admin dashboard, the health check will run.
+
+The checks includes:
+
+- Common Flarum URL misconfiguration
+- Access to the Wordpress API
+- Disparities between the values entered in Wordpress vs Flarum
+- Verify all required Flarum extensions are enabled
+- Check that the tags and users referenced in the settings exist
+
+Green: no issues detected.
+
+Red: a list of the issues will be explained.
+
+The health check reports are hard-coded in English and can't be translated at this time.
+
+### There is another error
+
+Check the `<flarum>/storage/logs` folder.
+It will contain a log file named with the current date.
+
+All errors triggered by the Flarum extension should be logged in that file.
+The log file also contains the history of all requests that Wordpress made to Flarum.
 
 ## Integrity considerations
 
@@ -216,6 +294,8 @@ The settings can be found under Settings > General.
 
 **Required**
 
+*This setting is auto-filled when you configure the extension via the wizard in the Flarum admin dashboard.*
+
 The URL to your Flarum site homepage, including the protocol, but without any ending slash.
 
 The URL must be HTTPS.
@@ -242,6 +322,8 @@ Invalid examples:
 
 **Required**
 
+*This setting is auto-filled when you configure the extension via the wizard in the Flarum admin dashboard.*
+
 In the Flarum extension settings, copy the **Flarum API Key** value and paste it here.
 
 You cannot use another Flarum API key, it has to be the one shown in the Flarum extension settings because it's also used for url signing and reverse authentication by Flarum.
@@ -249,6 +331,8 @@ You cannot use another Flarum API key, it has to be the one shown in the Flarum 
 ### Flarum User ID
 
 **Required, default value: 1**
+
+*This setting is auto-filled when you configure the extension via the wizard in the Flarum admin dashboard.*
 
 The Flarum user that will be used to perform the API calls.
 
@@ -266,6 +350,8 @@ Most settings regarding SSO integration are found in the Flarum extension.
 ### Cookie domain
 
 **Required if Wordpress domain is different from Flarum domain**
+
+*This setting is auto-filled when you configure the extension via the wizard in the Flarum admin dashboard.*
 
 The domain on which Flarum login cookies will be set and cleared.
 
@@ -316,6 +402,8 @@ Then refresh the admin panel page to automatically generate a new API key. Don't
 
 **Required**
 
+*This setting is auto-filled when you configure the extension via the wizard.*
+
 The URL to your Wordpress site, including the protocol, but without any ending slash or `index.php`.
 
 The URL must be HTTPS.
@@ -337,6 +425,8 @@ Invalid examples:
 
 **Required with the comments integration**
 
+*This setting is auto-filled when you configure the extension via the wizard.*
+
 Must be a valid Wordpress username that is allowed to enable and disable comments on any post.
 
 ### Enable SSO integration
@@ -356,6 +446,8 @@ See login/logout section below for details on how the global login works.
 ### Cookie Domain
 
 **Required if Wordpress domain is different from Flarum domain**
+
+*This setting is auto-filled when you configure the extension via the wizard.*
 
 The domain entered here will be used to clear Flarum login cookies set by Wordpress.
 The value must match with the corresponding setting in the Wordpress plugin.
@@ -503,14 +595,17 @@ It can also be enabled together with the node count but it probably doesn't make
 
 Setting 0 or an empty value (default) will skip this filter.
 
-### Tag IDs for new comment threads
+### Tag for new comment threads
 
 **Optional**
 
 Flarum tags to set on new discussions created by Wordpress.
-Multiple tag IDs must be separated by commas.
 
-You can find tag IDs by looking inside the database table `tags`.
+You can select primary or secondary tags via the dropdown.
+The number of tags selected doesn't need to match the Flarum tags for minimum and maximum settings.
+
+If you want to add multiple top-level primary tags or want to use a combination of primary and secondary tags, you can manually enter a list of tag IDs to use.
+Select "Custom values" in the dropdown and enter a comma-separated list of tag IDs (not slugs) in the text field that appears.
 
 Requires the Tags extension to be enabled.
 
@@ -524,6 +619,21 @@ Such a discussion is always at the bottom of the discussion list until a first p
 If you would like the discussion to rise to the top of the discussion list in Flarum even if no one comments immediately, you can enable this feature.
 
 When enabled, the discussion will show as having one new unread post for users, with the date being the same as the discussion creation.
+
+### Use Wordpress post date as the discussion creation date
+
+*Since version 1.3*
+
+By default Flarum discussions will use the current time as their creation date.
+
+When enabled, the discussion creation date will be copied from Wordpress post date.
+
+For this option to work, you must set the Wordpress post date before publishing the post.
+It works with date in the past as well as in the future.
+
+If the date is in the past, the new discussion will not appear at the top of Flarum discussion list until a first user replies, even if "Set the summary post as the last post of new discussions" is enabled.
+
+Changing the Wordpress post date on a post that already has a linked Flarum discussion will have no effect.
 
 ### Action when a Wordpress post is hidden
 
