@@ -64,6 +64,15 @@ Discussions can be automatically locked and hidden when the comments status is c
 
 Guest posting is not possible with this integration enabled.
 
+### Admin panel
+
+Some screenshots of the admin panel that you will find in the Flarum dashboard.
+
+<div class="picture-row">
+<img src="/medias/extensions/wordpress/dashboard-v2.png" alt="Dashboard">
+<img src="/medias/extensions/wordpress/wizard.png" alt="Installation wizard">
+</div>
+
 ## Flarum changelog
 
 ### Version 1.3.0 - April 2, 2020
