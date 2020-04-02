@@ -75,6 +75,13 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.3.1 - April 2, 2020
+
+- Fix Wordpress URL HTTPS health check
+
+You can update the Flarum extension via Bazaar or Composer.
+Requires version 1.2 or greater of the Wordpress plugin.
+
 ### Version 1.3.0 - April 2, 2020
 
 - New admin dashboard for Wordpress
