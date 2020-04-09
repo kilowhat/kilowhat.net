@@ -75,6 +75,13 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.3.3 - April 9, 2020
+
+- Fix HTTP error messages that were not shown correctly in Health check and Wizard
+
+You can update the Flarum extension via Bazaar or Composer.
+Requires version 1.2 or greater of the Wordpress plugin.
+
 ### Version 1.3.2 - April 3, 2020
 
 - Add session dropdown to iframe and make title translatable
