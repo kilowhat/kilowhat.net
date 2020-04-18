@@ -4,10 +4,10 @@ title: Flarum Formulaire
 permalink: /flarum/extensions/formulaire
 ---
 
-- **Price:** 5 USD/month + VAT depending on your country
+- **Price**: 5 USD/month
 - **Bundled translations**: English and French
 - **Flarum compatibility**: beta 12+
-- See and purchase on [flagrow.io](https://flagrow.io/extensions/kilowhat/flarum-ext-formulaire)
+- See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23063)
 
 Table of content:
@@ -18,6 +18,7 @@ Table of content:
 - [Requirements](#requirements)
 - [Compatibility](#compatibility)
 - [Installation](#installation)
+- [Update](#update)
 - [Support](#support)
 - [Warnings](#warnings)
 - [Extension settings](#extension-settings)
@@ -30,6 +31,8 @@ Table of content:
 ## Introduction
 
 Formulaire is a premium extension bringing an advanced form builder to Flarum.
+
+<iframe width="740" height="416" src="https://www.youtube.com/embed/reFqzTzAof4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Multiple form types are included:
 
@@ -103,11 +106,21 @@ As time goes on this section will be filled with any extension that could be inc
 
 ## Installation
 
-- Install and enable the [Bazaar extension](https://discuss.flarum.org/d/5151-bazaar-the-extension-marketplace)
-- Connect Bazaar with your flagrow.io account
-- Purchase the "KILOWHAT Formulaire" extension via Bazaar or flagrow.io
-- Install and enable the extension via Bazaar
+- Purchase the ["KILOWHAT Formulaire"](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire) extension via the Extiverse website
+- If this is your first premium extension purchase from Extiverse, follow the "Composer configuration" instructions available at <https://extiverse.com/premium/subscriptions>
+- Install the extension via Composer: `composer require kilowhat/flarum-ext-formulaire`
+- Open the Flarum admin panel and enable the extension
 - See below for the settings
+
+## Update
+
+When an update is available, the [Changelog](#changelog) will be updated above and a message will be posted on the [Flarum Discuss discussion](https://discuss.flarum.org/d/23063).
+
+You can use the following commands to update:
+
+    composer require kilowhat/flarum-ext-formulaire
+    php flarum update
+    php flarum cache:clear
 
 ## Support
 

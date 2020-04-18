@@ -4,10 +4,10 @@ title: Flarum Wordpress Integration
 permalink: /flarum/extensions/wordpress
 ---
 
-- **Price:** 5 USD/month + VAT depending on your country
+- **Price**: 5 USD/month
 - **Bundled translations**: English
 - **Flarum compatibility**: beta 12+
-- See and purchase on [flagrow.io](https://flagrow.io/extensions/kilowhat/flarum-ext-wordpress)
+- See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/22229-premium-wordpress-integration)
 
 Table of content:
@@ -18,6 +18,7 @@ Table of content:
 - [Requirements](#requirements)
 - [Compatibility](#compatibility)
 - [Installation](#installation)
+- [Update](#update)
 - [Troubleshooting](#troubleshooting)
 - [Integrity considerations](#integrity-considerations)
 - [Support](#support)
@@ -29,6 +30,8 @@ Table of content:
 ## Introduction
 
 The Flarum Wordpress integration is a premium extension developed by Clark Winkelmann.
+
+<iframe width="740" height="416" src="https://www.youtube.com/embed/GyjRB6dEEmo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 It offers two main features:
 
@@ -238,13 +241,29 @@ See below for Wordpress settings.
 
 ### On Flarum
 
-- Install and enable the [Bazaar extension](https://discuss.flarum.org/d/5151-bazaar-the-extension-marketplace)
-- Connect Bazaar with your flagrow.io account
-- Purchase the "KILOWHAT Wordpress Integration" extension via Bazaar or flagrow.io
-- Install and enable the extension via Bazaar
+- Purchase the ["KILOWHAT Wordpress Integration"](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress) extension via the Extiverse website
+- If this is your first premium extension purchase from Extiverse, follow the "Composer configuration" instructions available at <https://extiverse.com/premium/subscriptions>
+- Install the extension via Composer: `composer require kilowhat/flarum-ext-wordpress`
+- Open the Flarum admin panel and enable the extension
 - Go to the new Wordpress tab and fill in your Wordpress credentials in the installation wizard
 
 See below for Flarum settings.
+
+## Update
+
+When an update to either the Wordpress plugin or Flarum extension is available, the Changelog will be updated above and a message will be posted on the [Flarum Discuss discussion](https://discuss.flarum.org/d/22229).
+
+### Updating the Wordpress plugin
+
+When an update is available, the link to the new ZIP file will be provided in the changelog.
+
+### Updating the Flarum extension
+
+When an update is available, you can use the following commands to update:
+
+    composer require kilowhat/flarum-ext-wordpress
+    php flarum update
+    php flarum cache:clear
 
 ## Troubleshooting
 
