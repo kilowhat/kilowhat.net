@@ -6,7 +6,7 @@ permalink: /flarum/extensions/formulaire
 
 - **Price**: 5 USD/month
 - **Bundled translations**: English and French
-- **Flarum compatibility**: beta 12+
+- **Flarum compatibility**: beta 13+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23063)
 
@@ -75,6 +75,15 @@ This feature is in beta and fields can only be filled after a discussion has bee
 *Planned features:* fields in discussion composer.
 
 ## Changelog
+
+### Version 1.0.2 - May 6, 2020
+
+- Fix issues with drag and drop in form editor and multi-field
+- Use new beta 13 features, add beta 13 compatibility
+
+### Version 1.0.1 - March 20, 2020
+
+- Add missing code in policy that had been removed by mistake in 1.0.0
 
 ### Version 1.0 - March 10, 2020
 
