@@ -78,6 +78,14 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.3.4 - May 6, 2020
+
+- Flarum beta 13 compatibility
+- Remove unused code for features not yet implemented
+
+You can update the Flarum extension via Bazaar or Composer.
+Requires version 1.2 or greater of the Wordpress plugin.
+
 ### Version 1.3.3 - April 9, 2020
 
 - Fix HTTP error messages that were not shown correctly in Health check and Wizard
