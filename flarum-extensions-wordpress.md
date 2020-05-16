@@ -169,6 +169,14 @@ Initial release.
 
 ## Wordpress changelog
 
+### Version 1.3.0 - May 16, 2020
+
+- Added comments shortcode for compatibility with custom theme builders
+
+The plugin must be manually updated.
+The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.3.0.zip).
+Works with any version of the Flarum extension.
+
 ### Version 1.2.0 - April 2, 2020
 
 - Added Wizard and Health check features
@@ -240,7 +248,7 @@ You must install both the Wordpress plugin and Flarum extension.
 
 ### On Wordpress
 
-- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.2.0.zip). Current version is 1.2.0
+- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.3.0.zip). Current version is 1.3.0
 - Extract the content of the ZIP file and place the `kilowhat-flarum` folder under `wp-content/plugins`
 - Open the Wordpress admin panel and enable the plugin
 - Go the the **Flarum admin panel** and follow the installation wizard
@@ -439,6 +447,15 @@ Post types not included here will default to normal Wordpress comments if commen
 
 Setting this value will not change whether comments are opened or closed by default.
 Default comments status is still controlled by the corresponding native Wordpress settings.
+
+### Shortcode for custom themes
+
+If for some reason your theme builder is not replacing normal comments with the Flarum iframe, there is a `[flarum_comments]` shortcode you can use.
+
+On a Newspaper theme, replace `[tdb_single_comments ...]` with `[flarum_comments]`.
+
+The presence of the shortcode alone is not sufficient to enable comments.
+Make sure the post type is whitelisted in the settings and that comments are enabled on the post.
 
 ## Settings in Flarum extension
 
