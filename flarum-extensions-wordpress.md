@@ -450,6 +450,8 @@ Default comments status is still controlled by the corresponding native Wordpres
 
 ### Shortcode for custom themes
 
+*Since version 1.3 of the Wordpress plugin*
+
 If for some reason your theme builder is not replacing normal comments with the Flarum iframe, there is a `[flarum_comments]` shortcode you can use.
 
 On a Newspaper theme, replace `[tdb_single_comments ...]` with `[flarum_comments]`.
