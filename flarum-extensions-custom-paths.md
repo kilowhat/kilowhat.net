@@ -57,6 +57,7 @@ The following extensions are incompatible:
 
 - [JasperVriends's SEO](https://discuss.flarum.org/d/18316) (the extension won't be able to add SEO meta tags on pages that you have customized through Custom Paths). I will try to find some workaround.
 - [Wordpress integration](/flarum/extensions/wordpress) (discussion links won't work from iframe). Fix coming soon!
+- [FriendsOfFlarum's Sitemap](https://discuss.flarum.org/d/14941) (paths are hard-coded in the sitemap extension)
 
 Most other Flarum extensions should work fine alongside Custom Paths, but no integration will be automatically provided.
 
