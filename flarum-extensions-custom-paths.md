@@ -34,7 +34,11 @@ You can optionally enable redirects from the old paths to the new paths.
 
 ## Changelog
 
-### Version 1.0 - May 20, 2020
+### Version 1.0.1 - May 20, 2020
+
+- Fix issues with original paths that include variables.
+
+### Version 1.0.0 - May 20, 2020
 
 Initial release.
 
