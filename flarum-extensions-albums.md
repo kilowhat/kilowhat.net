@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Flarum Albums
+title: Albums
 permalink: /flarum/extensions/albums
 ---
 
