@@ -100,9 +100,8 @@ Please get in touch if you would like admin access.
 
 ## Requirements
 
-- Flarum version must be beta 12 or higher
+- Flarum version must be beta 13
 - You must have SSH and Composer access on the Flarum hosting
-- Flarum server must be able to use Bazaar, which often requires 1GB of RAM or swap
 
 Only the current Flarum version is supported.
 New features and fixes in the extension will only work with the latest Flarum version.
@@ -128,15 +127,15 @@ When an update is available, the [Changelog](#changelog) will be updated above a
 You can use the following commands to update:
 
     composer require kilowhat/flarum-ext-formulaire
-    php flarum update
+    php flarum migrate
     php flarum cache:clear
 
 ## Support
 
 If you are having issues with the extension, check the following:
 
-- If the extension doesn't install, check your system meets Bazaar requirement and check logs under the Bazaar history tab (spinning arrow icon)
-- If an error happens during activation or usage of the extension, check the logs in `<flarum>/storage/logs`
+- If the extension doesn't install, check you have correctly configured Extiverse's private repository.
+- If an error happens during activation or usage of the extension, check the logs in `<flarum>/storage/logs`.
 
 If you are still having issues, please copy the output of the logs above, as well as the output of `php flarum info` and send an email to <support@kilowhat.net>.
 

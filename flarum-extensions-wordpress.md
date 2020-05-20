@@ -83,28 +83,28 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 - Flarum beta 13 compatibility
 - Remove unused code for features not yet implemented
 
-You can update the Flarum extension via Bazaar or Composer.
+You can update the Flarum extension via Composer.
 Requires version 1.2 or greater of the Wordpress plugin.
 
 ### Version 1.3.3 - April 9, 2020
 
 - Fix HTTP error messages that were not shown correctly in Health check and Wizard
 
-You can update the Flarum extension via Bazaar or Composer.
+You can update the Flarum extension via Composer.
 Requires version 1.2 or greater of the Wordpress plugin.
 
 ### Version 1.3.2 - April 3, 2020
 
 - Add session dropdown to iframe and make title translatable
 
-You can update the Flarum extension via Bazaar or Composer.
+You can update the Flarum extension via Composer.
 Requires version 1.2 or greater of the Wordpress plugin.
 
 ### Version 1.3.1 - April 2, 2020
 
 - Fix Wordpress URL HTTPS health check
 
-You can update the Flarum extension via Bazaar or Composer.
+You can update the Flarum extension via Composer.
 Requires version 1.2 or greater of the Wordpress plugin.
 
 ### Version 1.3.0 - April 2, 2020
@@ -116,7 +116,7 @@ Requires version 1.2 or greater of the Wordpress plugin.
 - Tags for the "Tag for new comment threads" option can now be selected from a dropdown
 - Fix for user tokens that would end up in the log file
 
-You can update the Flarum extension via Bazaar or Composer.
+You can update the Flarum extension via Composer.
 Requires version 1.2 or greater of the Wordpress plugin.
 
 ### Version 1.2.4 - March 10, 2020
@@ -212,9 +212,8 @@ Please get in touch if you would like admin access.
 ## Requirements
 
 - Wordpress version must be 5.0 or higher (lower might work, but not tested)
-- Flarum version must be beta 10 or higher
+- Flarum version must be beta 13
 - You must have SSH and Composer access on the Flarum hosting
-- Flarum server must be able to use Bazaar, which often requires 1GB of RAM or swap
 - Wordpress and Flarum must be hosted on the same domain, or subdomains of the same domain (cookie limitations)
 - Wordpress and Flarum must be accessible via HTTPS and HTTP urls must be redirected to HTTPS
 - Wordpress and Flarum may be hosted on the same server or a different server
@@ -278,7 +277,7 @@ When an update is available, the link to the new ZIP file will be provided in th
 When an update is available, you can use the following commands to update:
 
     composer require kilowhat/flarum-ext-wordpress
-    php flarum update
+    php flarum migrate
     php flarum cache:clear
 
 ## Troubleshooting
@@ -340,8 +339,8 @@ Otherwise some Wordpress IDs might still be in the database and cause errors and
 
 If you are having issues with the extension, check the following:
 
-- If the extension doesn't install, check your system meets Bazaar requirement and check logs under the Bazaar history tab (spinning arrow icon)
-- If an error happens during activation or usage of the extension, check the logs in `<flarum>/storage/logs`
+- If the extension doesn't install, check you have correctly configured Extiverse's private repository.
+- If an error happens during activation or usage of the extension, check the logs in `<flarum>/storage/logs`.
 
 If you are still having issues, please copy the output of the logs above, as well as the output of `php flarum info` and send an email to <support@kilowhat.net>.
 
