@@ -78,6 +78,14 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.4.0 - May 22, 2020
+
+- Improve link handling in iframe, now links in user content will also open in `_parent`
+- Add support for paths customized through the [Custom Paths](/flarum/extensions/custom-paths) extension
+
+You can update the Flarum extension via Composer.
+Requires version 1.2 or greater of the Wordpress plugin.
+
 ### Version 1.3.4 - May 6, 2020
 
 - Flarum beta 13 compatibility
