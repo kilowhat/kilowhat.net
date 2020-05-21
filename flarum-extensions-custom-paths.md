@@ -34,6 +34,10 @@ You can optionally enable redirects from the old paths to the new paths.
 
 ## Changelog
 
+### Version 1.0.2 - May 22, 2020
+
+- Fix issues with loading order.
+
 ### Version 1.0.1 - May 20, 2020
 
 - Fix issues with original paths that include variables.
@@ -56,7 +60,6 @@ Custom Paths provides integration with the following extensions:
 The following extensions are incompatible:
 
 - [JasperVriends's SEO](https://discuss.flarum.org/d/18316) (the extension won't be able to add SEO meta tags on pages that you have customized through Custom Paths). I will try to find some workaround.
-- [Wordpress integration](/flarum/extensions/wordpress) (discussion links won't work from iframe). Fix coming soon!
 - [FriendsOfFlarum's Sitemap](https://discuss.flarum.org/d/14941) (paths are hard-coded in the sitemap extension)
 
 Most other Flarum extensions should work fine alongside Custom Paths, but no integration will be automatically provided.
@@ -66,6 +69,7 @@ You may request additional integrations on the Discuss page.
 ## Known issues
 
 - The URLs in emails won't be updated. You can use [FriendsOfFlarum's Pretty Mail](https://discuss.flarum.org/d/11178) with a custom HTML template to correct the URL.
+- You can't re-use an existing path, like `/d/` or `/all` or `/settings` or others anytime, `/t/` or `/tags` when the Tags extension is enabled, or `/p/` when the Pages extension is enabled.
 - The "Following" link in the side navigation doesn't have an "active" effect when the page is displayed if the path has been customized.
 - The Flags page can't be loaded or redirected when typing the URL directly. This is a bug in Flarum, see [flarum/flags#23](https://github.com/flarum/flags/pull/23).
 - The eye icon in the Pages admin panel won't open the correct URL if it was customized, but the customized path is correctly applied.
@@ -113,6 +117,11 @@ Only the paths for your enabled extensions will be customizable.
 ### Paths
 
 Each of the paths can be customized by entering an alternate path segment in the text field, then saving with the button at the bottom of the modal.
+
+**Do not reuse a path**.
+You cannot re-assign a path that was originally for another route, like `/d/`, `/t/` (if Tags are enabled) or `/p/` (if Pages are enabled).
+You cannot use the same path two times.
+Doing so will lock you out of the forum and you will need to edit the settings in the database to regain access.
 
 There is no data validation, but for optimal compatibility with browsers you should only use the following:
 
