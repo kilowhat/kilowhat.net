@@ -4,6 +4,8 @@ title: Custom Paths
 permalink: /flarum/extensions/custom-paths
 ---
 
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths)
+
 - **Price**: 10 USD lifetime license
 - **Bundled translations**: English
 - **Flarum compatibility**: beta 13+

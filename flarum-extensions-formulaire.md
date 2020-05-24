@@ -4,6 +4,8 @@ title: Flarum Formulaire
 permalink: /flarum/extensions/formulaire
 ---
 
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire)
+
 - **Price**: 5 USD/month
 - **Bundled translations**: English and French
 - **Flarum compatibility**: beta 13+

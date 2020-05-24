@@ -4,6 +4,8 @@ title: Flarum Wordpress Integration
 permalink: /flarum/extensions/wordpress
 ---
 
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress)
+
 - **Price**: 5 USD/month
 - **Bundled translations**: English
 - **Flarum compatibility**: beta 12+
