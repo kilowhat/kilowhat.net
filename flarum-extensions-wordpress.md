@@ -6,7 +6,7 @@ permalink: /flarum/extensions/wordpress
 
 [![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress)
 
-- **Price**: 5 USD/month
+- **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English
 - **Flarum compatibility**: beta 12+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress)
