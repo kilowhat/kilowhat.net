@@ -39,7 +39,11 @@ The logs are read-only, preventing any tempering.
 
 ## Changelog
 
-### Version 1.0 - June 14, 2020
+### Version 1.0.1 - June 21, 2020
+
+- Fix `user:` search gambit not being compatible with MariaDB.
+
+### Version 1.0.0 - June 14, 2020
 
 Initial release.
 
