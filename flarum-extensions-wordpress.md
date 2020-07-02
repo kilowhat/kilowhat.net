@@ -80,6 +80,14 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.5.0 - July 2, 2020
+
+- Add compatibility with FoF Follow Tags, Reflar Webhooks and possibly other extensions
+- Fix PHP notice when syncing Wordpress posts
+
+You can update the Flarum extension via Composer.
+Requires version 1.2 or greater of the Wordpress plugin.
+
 ### Version 1.4.0 - May 22, 2020
 
 - Improve link handling in iframe, now links in user content will also open in `_parent`
@@ -247,9 +255,8 @@ Wordpress plugins/feature verified incompatible:
 
 - [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): 2FA (Flarum login bypasses 2FA)
 
-When used together with [FriendsOfFlarum Follow Tags](https://discuss.flarum.org/d/20525-friendsofflarum-follow-tags), the post content for new discussions will not be rendered.
-Instead you will see `Array`, maybe accompanied by the "Array to string conversion" error message if you have not hidden the PHP notices on your server.
-This problem will have to be fixed in FriendsOfFlarum Follow Tags.
+Up to version 1.4.0, [FriendsOfFlarum Follow Tags](https://discuss.flarum.org/d/20525-friendsofflarum-follow-tags) would not render the Wordpress post content and [Reflar Webhooks](https://discuss.flarum.org/d/17812-webhooks-by-reflar) would fail to send new discussion hooks.
+This is fixed since version 1.5.0.
 
 ## Installation
 
