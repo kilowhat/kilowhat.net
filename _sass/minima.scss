@@ -65,3 +65,21 @@ h3 {
     margin: 10px;
   }
 }
+
+.pro-badge {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 0.6em;
+  font-weight: bold;
+  background: #684ba6;
+  color: white;
+}
+
+.yes {
+  color: #009926;
+}
+
+.no {
+  color: #f73c31;
+}

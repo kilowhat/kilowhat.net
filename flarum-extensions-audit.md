@@ -4,17 +4,18 @@ title: Flarum Audit Log
 permalink: /flarum/extensions/audit
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-audit/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-audit)
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
 
-- **Price**: 5 USD/month or 50 USD/year
+- **Price**: 4 USD/month or 40 USD/year
 - **Bundled translations**: English
 - **Flarum compatibility**: beta 13+
-- See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-audit)
+- See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/24206)
 
 Table of content:
 
 - [Introduction](#introduction)
+- [Free vs Pro](#free-vs-pro)
 - [Changelog](#changelog)
 - [Requirements](#requirements)
 - [Compatibility](#compatibility)
@@ -37,7 +38,35 @@ The logs are read-only, preventing any tempering.
 <img src="/medias/extensions/audit/log-browser.png" alt="Log browser in the admin panel">
 </div>
 
+## Free vs Pro
+
+A [free version](https://discuss.flarum.org/d/24432) is available with limited features.
+
+To get access to all feature and to support the ongoing development of the extension, consider upgrading to Pro!
+
+|--------------------------------|------------------------------|-----|
+| Feature                        | Free                         | Pro |
+|--------------------------------|------------------------------|-----|
+| **Logged events**              |                              | |
+| Flarum core user events        | <span class="yes">Yes</span> | <span class="yes">Yes</span> |
+| Flarum core discussion events  | <span class="yes">Yes</span> | <span class="yes">Yes</span> |
+| Flarum core post events        | <span class="yes">Yes</span> | <span class="yes">Yes</span> |
+| Flarum core extensions events  | <span class="yes">Yes</span> | <span class="yes">Yes</span> |
+| Flarum core admin panel events | <span class="no">No</span>   | <span class="yes">Yes</span> |
+| Community extensions events    | <span class="no">No</span>   | <span class="yes">Yes</span> |
+| **Browsing**                   |                              | |
+| Via admin panel                | <span class="yes">Yes</span> | <span class="yes">Yes</span> |
+| Via discussion and profiles    | <span class="no">No</span>   | <span class="yes">Yes</span> |
+| Customize who can see the logs | <span class="no">No</span>   | <span class="yes">Yes</span> |
+| **Support**                    |                              | |
+| Support                        | Community-only               | Email |
+| Download                       | Via Packagist                | Via Extiverse |
+
 ## Changelog
+
+### Version 1.1.0 - June 29, 2020
+
+- Separate extension into Free and Pro
 
 ### Version 1.0.1 - June 21, 2020
 
@@ -65,23 +94,31 @@ As time goes on this section will be filled with any extension that could be inc
 
 ## Installation
 
-- Purchase the ["KILOWHAT Audit Log"](https://extiverse.com/extension/kilowhat/flarum-ext-audit) extension via the Extiverse website
+> These instructions apply to the Pro version only.
+> For the free version, consult the dedicated [Discuss](https://discuss.flarum.org/d/24432) thread.
+
+- Purchase the ["KILOWHAT Audit Pro"](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro) extension via the Extiverse website
 - If this is your first premium extension purchase from Extiverse, follow the "Composer configuration" instructions available at <https://extiverse.com/premium/subscriptions>
-- Install the extension via Composer: `composer require kilowhat/flarum-ext-audit`
+- Install the extension via Composer: `composer require kilowhat/flarum-ext-audit-pro`
 - Open the Flarum admin panel and enable the extension
 - See below for the settings
 
 ## Update
 
+> These instructions apply to the Pro version only.
+> For the free version, consult the dedicated [Discuss](https://discuss.flarum.org/d/24432) thread.
+
 When an update is available, the [Changelog](#changelog) will be updated above and a message will be posted on the [Flarum Discuss discussion](https://discuss.flarum.org/d/24206).
 
 You can use the following commands to update:
 
-    composer require kilowhat/flarum-ext-audit
+    composer require kilowhat/flarum-ext-audit-pro
     php flarum migrate
     php flarum cache:clear
 
 ## Support
+
+> Support is only available for users of the Pro version.
 
 If you are having issues with the extension, check the following:
 
@@ -100,7 +137,7 @@ I won't install the extension for you.
 
 The extension has a single setting which is a permission found on the Permissions page of the admin panel.
 
-### View audit log
+### View audit log <span class="pro-badge">pro only</span>
 
 Users with this permission can access all logs via the API.
 
@@ -140,21 +177,21 @@ The following gambits can be used to search in logs:
 
 ### Flarum Core
 
-- `cache_cleared`: When the cache is manually cleared
+- `cache_cleared` <span class="pro-badge">pro only</span>: When the cache is manually cleared
 - `discussion.created`: When a discussion is created
 - `discussion.deleted`: When a discussion is permanently deleted
 - `discussion.hidden`: When a discussion is soft-deleted
 - `discussion.renamed`: When a discussion title changes (data logged: old title, new title)
 - `discussion.restored`: When a soft-deleted discussion is restored
-- `extension.enabled`: When an extension is enabled via the admin panel
-- `extension.disabled`: When an extension is disabled via the admin panel
-- `permission_changed`: When a permission is edited via the admin panel (data logged: old groups, new groups)
+- `extension.enabled` <span class="pro-badge">pro only</span>: When an extension is enabled via the admin panel
+- `extension.disabled` <span class="pro-badge">pro only</span>: When an extension is disabled via the admin panel
+- `permission_changed` <span class="pro-badge">pro only</span>: When a permission is edited via the admin panel (data logged: old groups, new groups)
 - `post.created`: When a post is created
 - `post.deleted`: When a post is permanently deleted
 - `post.hidden`: When a post is soft-deleted
 - `post.restored`: When a soft-deleted post is restored
 - `post.revised`: When a post content is edited (no data logged at this time)
-- `setting_changed`: When a setting is edited via the admin panel (data logged: old value, new value. data is logged only for known non-sensitive fields)
+- `setting_changed` <span class="pro-badge">pro only</span>: When a setting is edited via the admin panel (data logged: old value, new value. data is logged only for known non-sensitive fields)
 - `user.activated`: When a user is activated by an administrator or extension
 - `user.activated_with_email`: When a user is activated via the activation email
 - `user.avatar_changed`: When a user avatar is replaced with a new avatar
@@ -209,20 +246,20 @@ As such, the activation of the extension is shown as Guest / unknown.
 ### Flarum Tags
 
 - `discussion.tagged`: When the tags of a discussion are modified (data logged: old tags, new tags)
-- `tag.created`: When a tag is created
-- `tag.deleted`: When a tag is permanently deleted
-- `tag.updated`: When a tag is modified via the admin panel
+- `tag.created` <span class="pro-badge">pro only</span>: When a tag is created
+- `tag.deleted` <span class="pro-badge">pro only</span>: When a tag is permanently deleted
+- `tag.updated` <span class="pro-badge">pro only</span>: When a tag is modified via the admin panel
 
 ### FriendsOfFlarum Ban IPs
 
-- `fof_ban_ips.banned`: When an IP is banned (data logged: IP, reason)
-- `fof_ban_ips.unbanned`: When an IP is unbanned (data logged: IP)
+- `fof_ban_ips.banned` <span class="pro-badge">pro only</span>: When an IP is banned (data logged: IP, reason)
+- `fof_ban_ips.unbanned` <span class="pro-badge">pro only</span>: When an IP is unbanned (data logged: IP)
 
 **Known issue**: `unbanned` is not logged when unbanning a single issue due to [FriendsOfFlarum/ban-ips#4](https://github.com/FriendsOfFlarum/ban-ips/issues/4).
 
 ### FriendsOfFlarum Impersonate
 
-- `user.impersonated`: When a user is impersonated
+- `user.impersonated` <span class="pro-badge">pro only</span>: When a user is impersonated
 
 ### FriendsOfFlarum Mason
 
@@ -241,8 +278,8 @@ Integration planned.
 *Note:* due to the immutability of audit logs, logs related to a post prior to the split won't be visible in the new discussion audit log modal.
 The `discussion:` gambit will only return posts if those posts were in the given discussion at the moment of the event.
 
-- `discussion.split_away`: When a discussion is split (data logged: new discussion ID, number of posts moved)
-- `discussion.split_into`: When a discussion is split (data logged: original discussion ID, number of posts moved)
+- `discussion.split_away` <span class="pro-badge">pro only</span>: When a discussion is split (data logged: new discussion ID, number of posts moved)
+- `discussion.split_into` <span class="pro-badge">pro only</span>: When a discussion is split (data logged: original discussion ID, number of posts moved)
 
 Two events are used together so that they easily appear in both discussion's history.
 
@@ -260,13 +297,13 @@ All files upload and downloads are already logged by Upload itself.
 
 *Note:* Requires version 0.2.0 or greater of `fof/user-bio`.
 
-- `user.bio_changed`: When a user bio is changed
+- `user.bio_changed` <span class="pro-badge">pro only</span>: When a user bio is changed
 
 ### FriendsOfFlarum Username Request
 
-- `user.username_requested`: When a username request is created (data logged: new username)
-- `user.username_request_approved`: When a username request is approved (data logged: old username, new username)
-- `user.username_request_rejected`: When a username request is rejected (data logged: new username, reason)
+- `user.username_requested` <span class="pro-badge">pro only</span>: When a username request is created (data logged: new username)
+- `user.username_request_approved` <span class="pro-badge">pro only</span>: When a username request is approved (data logged: old username, new username)
+- `user.username_request_rejected` <span class="pro-badge">pro only</span>: When a username request is rejected (data logged: new username, reason)
 
 ### KILOWHAT Cimaise
 
