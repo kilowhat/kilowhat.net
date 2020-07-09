@@ -64,9 +64,11 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
-### Version 1.1.0 - June 29, 2020
+### Version 1.1.0 - July 9, 2020
 
 - Separate extension into Free and Pro
+- Rename pro package from `kilowhat/flarum-ext-audit` to `kilowhat/flarum-ext-audit-pro`
+- Add admin page header with documentation links and version
 
 ### Version 1.0.1 - June 21, 2020
 
