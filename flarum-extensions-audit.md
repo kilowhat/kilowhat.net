@@ -64,11 +64,16 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.2.0 - July 11, 2020
+
+- Add missing translation for "comment".
+- <span class="pro-badge">pro only</span> Add support for `clarkwinkelmann/flarum-ext-author-change`.
+
 ### Version 1.1.0 - July 9, 2020
 
-- Separate extension into Free and Pro
-- Rename pro package from `kilowhat/flarum-ext-audit` to `kilowhat/flarum-ext-audit-pro`
-- Add admin page header with documentation links and version
+- Separate extension into Free and Pro.
+- Rename pro package from `kilowhat/flarum-ext-audit` to `kilowhat/flarum-ext-audit-pro`.
+- Add admin page header with documentation links and version.
 
 ### Version 1.0.1 - June 21, 2020
 
@@ -333,6 +338,14 @@ Settings changes are logged by `setting_changed`.
 
 ### ClarkWinkelmann Author Change
 
+*Note:* Requires version 0.2.0 or greater of `clarkwinkelmann/flarum-ext-author-change`.
+
+- `discussion.create_date_changed` <span class="pro-badge">pro only</span>: When a discussion start date is changed
+- `discussion.user_changed` <span class="pro-badge">pro only</span>: When a discussion author is changed
+- `post.create_date_changed` <span class="pro-badge">pro only</span>: When a post start date is changed
+- `post.edit_date_changed` <span class="pro-badge">pro only</span>: When a post edit date is changed
+- `post.user_changed` <span class="pro-badge">pro only</span>: When a post author is changed
+
 Integration planned for a future release.
 
 ### ClarkWinkelmann Catch The Fish
@@ -350,10 +363,6 @@ Users created by administrators will reflect the administrator as the actor inst
 No special integration.
 
 Users logging in via passwordless will be logged as `user.logged_in` like password logins.
-
-### ClarkWinkelmann Post Date
-
-Integration planned, but only after Post Date gets an overhaul.
 
 ### ClarkWinkelmann Status
 
