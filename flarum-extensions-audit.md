@@ -64,6 +64,10 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.2.1 - July 11, 2020
+
+- Fix for wrong version being read causing the admin page to fail loading.
+
 ### Version 1.2.0 - July 11, 2020
 
 - Add missing translation for "comment".
