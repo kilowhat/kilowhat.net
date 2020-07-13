@@ -251,8 +251,8 @@ As such, the activation of the extension is shown as Guest / unknown.
 
 *Note:* There is no log when a ban naturally expires.
 
-- `user.suspened`: When a user is suspended (data logged: until date)
-- `user.unsuspened`: When a user is manually unsuspended
+- `user.suspended`: When a user is suspended (data logged: until date)
+- `user.unsuspended`: When a user is manually unsuspended
 
 ### Flarum Tags
 

@@ -267,7 +267,7 @@ You must install both the Wordpress plugin and Flarum extension.
 - Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.3.0.zip). Current version is 1.3.0
 - Extract the content of the ZIP file and place the `kilowhat-flarum` folder under `wp-content/plugins`
 - Open the Wordpress admin panel and enable the plugin
-- Go the the **Flarum admin panel** and follow the installation wizard
+- Go to the **Flarum admin panel** and follow the installation wizard
 
 See below for Wordpress settings.
 
