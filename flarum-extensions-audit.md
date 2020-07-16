@@ -64,6 +64,12 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.2.2 - July 16, 2020
+
+- <span class="pro-badge">pro only</span> Fix PHP Warning being issued during permission change.
+
+This release was not tagged for the free version.
+
 ### Version 1.2.1 - July 11, 2020
 
 - Fix for wrong version being read causing the admin page to fail loading.
