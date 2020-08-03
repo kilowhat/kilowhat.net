@@ -80,6 +80,14 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.6.0 - August 3, 2020
+
+- Better error handling in case a Wordpress plugin interferes with the login redirect
+- Add Flarum modal login compatibility with WP-Members Wordpress plugin
+
+You can update the Flarum extension via Composer.
+Requires **version 1.4** or greater of the Wordpress plugin.
+
 ### Version 1.5.0 - July 2, 2020
 
 - Add compatibility with FoF Follow Tags, Reflar Webhooks and possibly other extensions
@@ -187,6 +195,15 @@ Initial release.
 
 ## Wordpress changelog
 
+### Version 1.4.0 - August 3, 2020
+
+- Enables the fixes released in the Flarum extension version 1.6.0
+- Fixes the post update date being updated each time the comment count changes
+
+The plugin must be manually updated.
+The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.4.0.zip).
+Works with any version of the Flarum extension.
+
 ### Version 1.3.0 - May 16, 2020
 
 - Added comments shortcode for compatibility with custom theme builders
@@ -250,13 +267,15 @@ Wordpress plugins/features verified compatible:
 - [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): Hide login, Login Captcha.
 - [Woocommerce](https://woocommerce.com/): compatible since version 1.1.0 of the Wordpress plugin. Reviews and order comments from Woocommerce are left untouched.
 - [Nextend social login](https://nextendweb.com/social-login/): compatible since version 1.1.0 of the Wordpress plugin. Login via social in Wordpress correctly connects into Flarum at the same time. It's recommended to **not enable any social login in Flarum** to prevent any confusion as to which button belongs to which application.
+- [WP-Members](https://wordpress.org/plugins/wp-members/): custom login forms compatible since version 1.6.0 of the Flarum extension. There are some edge cases in case you manage to be logged in on one side but not the other, you'll need to logout before logging back in.
 
 Wordpress plugins/feature verified incompatible:
 
-- [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): 2FA (Flarum login bypasses 2FA)
+- [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): 2FA (Flarum login bypasses 2FA).
+- [Ultimate Member](https://wordpress.org/plugins/ultimate-member/): custom login forms not supported.
 
-Up to version 1.4.0, [FriendsOfFlarum Follow Tags](https://discuss.flarum.org/d/20525-friendsofflarum-follow-tags) would not render the Wordpress post content and [Reflar Webhooks](https://discuss.flarum.org/d/17812-webhooks-by-reflar) would fail to send new discussion hooks.
-This is fixed since version 1.5.0.
+Up to version 1.4.0 of the Flarum extension, [FriendsOfFlarum Follow Tags](https://discuss.flarum.org/d/20525-friendsofflarum-follow-tags) would not render the Wordpress post content and [Reflar Webhooks](https://discuss.flarum.org/d/17812-webhooks-by-reflar) would fail to send new discussion hooks.
+This is fixed since version 1.5.0 of the Flarum extension.
 
 ## Installation
 
@@ -264,7 +283,7 @@ You must install both the Wordpress plugin and Flarum extension.
 
 ### On Wordpress
 
-- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.3.0.zip). Current version is 1.3.0
+- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.4.0.zip). Current version is 1.4.0
 - Extract the content of the ZIP file and place the `kilowhat-flarum` folder under `wp-content/plugins`
 - Open the Wordpress admin panel and enable the plugin
 - Go to the **Flarum admin panel** and follow the installation wizard
