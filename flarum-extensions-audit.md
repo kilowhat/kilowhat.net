@@ -64,6 +64,17 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.3.0 - October 20, 2020
+
+- Add compatibility with Flarum beta 14.
+- Add missing text for `post.approved` action.
+- Add `reason` information to `post.flagged` action.
+- Only log `post.flagged` for flags submitted by users (no longer logs flag creation by Approval/Akismet).
+- Add `post.dismissed_flags` action.
+
+This version cannot be installed on Flarum beta 13.
+It will automatically install when you upgrade to Flarum beta 14 by following the official release guide.
+
 ### Version 1.2.2 - July 16, 2020
 
 - <span class="pro-badge">pro only</span> Fix PHP Warning being issued during permission change.
@@ -241,7 +252,8 @@ As such, the activation of the extension is shown as Guest / unknown.
 
 ### Flarum Flags
 
-- `post.flagged`: When a post is flagged (no data logged at this time)
+- `post.flagged`: When a post is flagged (data logged: reason, since version 1.3.0)
+- `post.dismissed_flags`: When the flags of a post are dismissed.
 
 ### Flarum Lock
 
