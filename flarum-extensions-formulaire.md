@@ -27,6 +27,7 @@ Table of content:
 - [Form options](#form-options)
 - [Submission options](#submission-options)
 - [Field options](#fields-options)
+- [Replacement variables](#replacement-variables)
 - [Import and export](#import-and-export)
 - [Extensibility](#extensibility)
 
@@ -77,6 +78,21 @@ This feature is in beta and fields can only be filled after a discussion has bee
 *Planned features:* fields in discussion composer.
 
 ## Changelog
+
+### Version 1.1.0 - October 21, 2020
+
+- **Changed:** it is now possible to enable notifications on non-standalone forms.
+- **Changed:** "accept submissions" and "allow edit" form settings now also available to non-standalone forms.
+- **Changed:** Viewing profile and discussion forms is now controlled by additional permissions instead of the global "view submission list" permission.
+- **Added:** new feature to create discussions automatically from a submission for Discussion fields.
+- **Added:** customizable title and body in notification emails.
+- **Fixed:** file uploads being invisible in readonly submissions.
+- **Fixed:** issue when Formulaire was enabled while Tags was disabled.
+
+This version is only compatible with Flarum beta 13.
+The Flarum beta 14 update will be released within a week.
+
+Some of the new features were sponsored by a client.
 
 ### Version 1.0.2 - May 6, 2020
 
@@ -181,6 +197,14 @@ By default the form is shown centered on the page without any side navigation.
 **Fill standalone forms**: which users can fill standalone forms.
 It is planned to make it customizable per-form, but the permission is currently global.
 
+**View user profile submissions**: which users can see profile fields on all user profiles.
+By default users can only see their own submissions.
+*Available since version 1.1.0.*
+
+**View discussion fields submissions**: which users can see discussion fields on all discussions.
+By default users can only see their own submissions.
+*Available since version 1.1.0.*
+
 **Create forms (beta)**: which users can create new forms.
 The owner of a form can manage the form options and submissions.
 At the moment the owner cannot see the list of submissions.
@@ -211,27 +235,50 @@ By default the url to the form will be a UUID.
 For standalone forms, the form will be available at `/forms/<slug or uuid>`.
 Profile forms will be available at `/u/<username>/forms/<slug or uuid>`.
 
-The following options are only available in standalone mode:
+**Automatically create discussions from form submission**: only available for discussion fields.
+When disabled, submissions can only be created from an existing discussion page.
+When enabled, submissions can also be created through the form url like if it was a standalone form.
+When created through the standalone form, a discussion will automatically be created and attached to the submission.
+*Available since version 1.1.0.*
+
+**Options for new discussions**: available when *Automatically create discussions from form submission* is enabled.
+**Discussion title** and **Post content** accept replacement variables as described in [Replacement variables](#replacement-variables).
+If not specified, Formulaire will attempt to find a field with a slug of `title` and `content` respectively, and default to the form title and an empty content.
+**Discussion tags** accepts a comma-separated list of tag slugs.
+The tag the form is linked to (if selected) will always be added in addition to this list of tags.
 
 **Accept new submissions**: as it says.
+Prior to version 1.1.0, was only available for standalone forms.
 
 **Allow users to edit their existing submissions**: as it says.
+Prior to version 1.1.0, was only available for standalone forms.
 
 **Max submissions**: optional, the maximum number of submissions before the form automatically closes.
 When the max submissions number is reached, it has the same effect as if **Accept new submissions** was disabled.
 Locked submissions count towards the max submissions.
 Deleted submissions no longer count towards the max submissions.
+Prior to version 1.1.0, was only available for standalone forms.
+It is not advisable to set this setting for non-standalone forms.
 
 **Send confirmation email to participants**: toggle to send an email with a summary of the answers to the user who submitted the form.
 If the form contains a field with key `email`, an email will also be sent to that address.
 
+**Confirmation email template**: available when *Send confirmation email to participants* is enabled.
+**Title** and **Body** accept replacement variables as described in [Replacement variables](#replacement-variables).
+Title defaults to the name of the form while Body defaults to an empty string.
+
 **Send a copy of the data to those comma-separated emails**: when filled, an email with a summary of the answers is sent to those addresses.
+
+**Notification email template**: available when *Send a copy of the data to those comma-separated emails* is enabled.
+**Title** and **Body** accept replacement variables as described in [Replacement variables](#replacement-variables).
+Title defaults to the name of the form while Body defaults to an empty string.
 
 **Confirmation message on the web**: optional, the message to show once the field has been submitted.
 This message is not secret, it's exposed via the API even to users who did not submit the form yet.
 
 **Confirmation message via email**: optional, the message to show at the top of the email sent to users.
 Only has an effect if **Send confirmation email to participants** is enabled.
+*In version 1.1.0, this option was moved to Confirmation email template*.
 
 **Delete**: forms can be soft-deleted.
 A soft-deleted form will no longer be visible to users and will no longer accept answer or edits to submissions.
@@ -344,6 +391,44 @@ Only applies if the number of entries is greater than zero or if the field is re
 **Maximum**: optional, maximum (inclusive) number of allowed entries.
 
 *Limitations*: only one level deep is possible.
+
+## Replacement variables
+
+Some fields accept "magic" text that will be replaced with a value from the form submission or other record.
+
+Consult the documentation above to see which fields support "Replacement variables".
+
+A variable takes the form `{slug}` where `slug` must be the slug of a field that's at the first level of the submission.
+The slug of a field can be obtained or modified by turning on "Expert mode" on the form builder.
+By default slugs are long unique UUIDs, so the replacement variable will look something like `{af927b85-f19a-4710-8c94-add4ea6c3ca6}`.
+Fields that are more than one level deep (Multi-entries) are not available.
+
+The documentation above refers to `{title}` and `{content}`.
+Those variables look for fields that have been manually applied a slug of `title` or `content` respectively.
+
+The following special values are also available for replacement, assuming no field exists with the same slug:
+
+- `{user_id}`: ID of the submission owner.
+- `{user_display_name}`: Display Name of the submission owner.
+- `{user_username}`: Username of the submission owner.
+- `{user_email}`: Email of the submission owner.
+- `{user_group_ids}`: Comma-separated list of group IDs the submission owner belongs to.
+- `{user_group_names}`: Comma-separated list of singular group names the submission owner belongs to.
+
+"Submission owner" refers to the user attached to a submission.
+It's always the actor for a standalone form, but will be the author of the discussion for discussion fields and the subject for profile fields, even if another user is the first to fill in that form.
+
+For example if you had a field "Date" with slug `af927b85-f19a-4710-8c94-add4ea6c3ca6`, you could set the confirmation email to
+
+```text
+Confirmation of your appointment on {af927b85-f19a-4710-8c94-add4ea6c3ca6}
+```
+
+And you could set the notification email (to admin) to:
+
+```text
+{user_username}'s appointment on {af927b85-f19a-4710-8c94-add4ea6c3ca6}
+```
 
 ## Import and export
 
