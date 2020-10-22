@@ -92,7 +92,7 @@ This feature is in beta and fields can only be filled after a discussion has bee
 This version is only compatible with Flarum beta 13.
 The Flarum beta 14 update will be released within a week.
 
-Some of the new features were sponsored by a client.
+The new features were sponsored by [Konica Minolta](https://www.aire.link/). Thanks!
 
 ### Version 1.0.2 - May 6, 2020
 
