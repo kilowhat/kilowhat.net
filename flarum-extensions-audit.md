@@ -106,7 +106,8 @@ Initial release.
 
 ## Requirements
 
-- Flarum version must be beta 13
+- Flarum version must be beta 13 or beta 14
+- MySQL 5.7.8+ or MariaDB 10.2.7+ (for `JSON` data type support)
 - You must have SSH and Composer access on the Flarum hosting
 
 Only the current Flarum version is supported.

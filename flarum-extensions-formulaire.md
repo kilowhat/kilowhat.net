@@ -119,6 +119,7 @@ Please get in touch if you would like admin access.
 ## Requirements
 
 - Flarum version must be beta 13
+- MySQL 5.7.8+ or MariaDB 10.2.7+ (for `JSON` data type support)
 - You must have SSH and Composer access on the Flarum hosting
 
 Only the current Flarum version is supported.
