@@ -80,6 +80,15 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.6.1 - November 3, 2020
+
+- Flarum beta 14 compatibility
+
+This version can only be installed on Flarum beta 14.
+
+You can update the Flarum extension via Composer.
+Requires **version 1.4** or greater of the Wordpress plugin.
+
 ### Version 1.6.0 - August 3, 2020
 
 - Better error handling in case a Wordpress plugin interferes with the login redirect
