@@ -36,6 +36,16 @@ You can optionally enable redirects from the old paths to the new paths.
 
 ## Changelog
 
+### Version 1.0.3 - November 3, 2020
+
+- Flarum beta 14 compatibility.
+- Fix `/u/<username>/mentions` not being affected by the `/u/` customization.
+
+**User Directory** and **Pages** support has NOT been tested as those extensions have not been released for beta 14 yet.
+They should still be compatible with **Custom Paths** once up to date.
+
+This version can only be installed on Flarum beta 14 and will automatically be installed when you migrate to Flarum beta 14 with Flarum's official instructions.
+
 ### Version 1.0.2 - May 22, 2020
 
 - Fix issues with loading order.
@@ -55,8 +65,8 @@ Custom Paths provides integration with the following extensions:
 - Flarum's Tags
 - Flarum's Subscriptions
 - Flarum's Flags
-- [FriendsOfFlarum's User Directory](https://discuss.flarum.org/d/5682)
-- [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301)
+- [FriendsOfFlarum's User Directory](https://discuss.flarum.org/d/5682) - Not tested on beta 14 yet!
+- [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301) - Not tested on beta 14 yet!
 - [Askvortsov's Categories](https://discuss.flarum.org/d/23184)
 
 The following extensions are incompatible:
