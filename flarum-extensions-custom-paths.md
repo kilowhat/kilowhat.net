@@ -36,13 +36,19 @@ You can optionally enable redirects from the old paths to the new paths.
 
 ## Changelog
 
+### Version 1.1.0 - December 27, 2020
+
+- Flarum beta 15 compatibility.
+- Add ability to customize FoF Gamification rankings page.
+- Add ability to customize the user profile page filters (`/discussions`, `/mentions`).
+- Add ability to re-use paths.
+
+This version can only be installed on Flarum beta 15 and will automatically be installed when you migrate to Flarum beta 15 with Flarum's official instructions.
+
 ### Version 1.0.3 - November 3, 2020
 
 - Flarum beta 14 compatibility.
 - Fix `/u/<username>/mentions` not being affected by the `/u/` customization.
-
-**User Directory** and **Pages** support has NOT been tested as those extensions have not been released for beta 14 yet.
-They should still be compatible with **Custom Paths** once up to date.
 
 This version can only be installed on Flarum beta 14 and will automatically be installed when you migrate to Flarum beta 14 with Flarum's official instructions.
 
@@ -65,8 +71,10 @@ Custom Paths provides integration with the following extensions:
 - Flarum's Tags
 - Flarum's Subscriptions
 - Flarum's Flags
-- [FriendsOfFlarum's User Directory](https://discuss.flarum.org/d/5682) - Not tested on beta 14 yet!
-- [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301) - Not tested on beta 14 yet!
+- Flarum's Mentions (since 1.1.0)
+- [FriendsOfFlarum's User Directory](https://discuss.flarum.org/d/5682)
+- [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301)
+- [FriendsOfFlarum's Gamification](https://discuss.flarum.org/d/20671) (since 1.1.0)
 - [Askvortsov's Categories](https://discuss.flarum.org/d/23184)
 
 The following extensions are incompatible:
@@ -80,11 +88,15 @@ You may request additional integrations on the Discuss page.
 
 ## Known issues
 
+- The user profile filters (`/discussions`, `/mentions` suffix) are not affected by the "Redirect" setting. Typing the old URL will always redirect to the homepage. (This is because this is a frontend-only route)
+- The eye icon in the FoF Pages admin panel won't open the correct URL if it was customized, but the customized path is correctly applied. (the original path is hard-coded in the admin panel)
+
+Issues in previous versions that have been fixed as of 1.1.0:
+
 - The URLs in emails won't be updated. You can use [FriendsOfFlarum's Pretty Mail](https://discuss.flarum.org/d/11178) with a custom HTML template to correct the URL.
 - You can't re-use an existing path, like `/d/` or `/all` or `/settings` or others anytime, `/t/` or `/tags` when the Tags extension is enabled, or `/p/` when the Pages extension is enabled.
 - The "Following" link in the side navigation doesn't have an "active" effect when the page is displayed if the path has been customized.
 - The Flags page can't be loaded or redirected when typing the URL directly. This is a bug in Flarum, see [flarum/flags#23](https://github.com/flarum/flags/pull/23).
-- The eye icon in the Pages admin panel won't open the correct URL if it was customized, but the customized path is correctly applied.
 
 ## Installation
 
@@ -121,19 +133,19 @@ I won't install the extension for you.
 
 ## Extension settings
 
-All settings can be found in the settings modal available via the Extensions page of the admin panel.
+All settings can be found in the extension page of the admin panel.
 
 You don't need to install/enable all the compatible extensions.
 Only the paths for your enabled extensions will be customizable.
 
 ### Paths
 
-Each of the paths can be customized by entering an alternate path segment in the text field, then saving with the button at the bottom of the modal.
+Each of the paths can be customized by entering an alternate path segment in the text field, then saving with the button at the bottom of the page.
 
-**Do not reuse a path**.
-You cannot re-assign a path that was originally for another route, like `/d/`, `/t/` (if Tags are enabled) or `/p/` (if Pages are enabled).
-You cannot use the same path two times.
-Doing so will lock you out of the forum and you will need to edit the settings in the database to regain access.
+**Be careful with path re-use**.
+Since version 1.1.0, you can re-use tokens that were part of other URLs in new paths.
+For example you can use `/t/` (originally for tags) for discussions, provided you set the tags path to something different.
+The extension will not check for duplicated paths, but Flarum won't work correctly if you use the same path twice.
 
 There is no data validation, but for optimal compatibility with browsers you should only use the following:
 
