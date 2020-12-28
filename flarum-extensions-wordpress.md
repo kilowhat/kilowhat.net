@@ -80,7 +80,7 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
-### Versions 1.6.3 - December 28, 2020
+### Version 1.6.3 - December 28, 2020
 
 - Flarum beta 15 compatibility
 
