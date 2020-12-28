@@ -80,6 +80,15 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Versions 1.6.3 - December 28, 2020
+
+- Flarum beta 15 compatibility
+
+This version can only be installed on Flarum beta 15.
+
+The new version will automatically be installed when you migrate to Flarum beta 15 with Flarum's official instructions.
+Requires **version 1.4** or greater of the Wordpress plugin.
+
 ### Versions 1.6.1 & 1.6.2 - November 3, 2020
 
 - Flarum beta 14 compatibility
@@ -284,6 +293,10 @@ Wordpress plugins/feature verified incompatible:
 
 - [Shield Security](https://en-gb.wordpress.org/plugins/wp-simple-firewall/): 2FA (Flarum login bypasses 2FA).
 - [Ultimate Member](https://wordpress.org/plugins/ultimate-member/): custom login forms not supported.
+
+Flarum extensions verified incompatible:
+
+- [FriendsOfFlarum Night Mode](https://discuss.flarum.org/d/21492-friendsofflarum-night-mode): causes the CSS to not load in the comments iframe.
 
 Up to version 1.4.0 of the Flarum extension, [FriendsOfFlarum Follow Tags](https://discuss.flarum.org/d/20525-friendsofflarum-follow-tags) would not render the Wordpress post content and [Reflar Webhooks](https://discuss.flarum.org/d/17812-webhooks-by-reflar) would fail to send new discussion hooks.
 This is fixed since version 1.5.0 of the Flarum extension.
