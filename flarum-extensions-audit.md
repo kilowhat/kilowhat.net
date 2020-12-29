@@ -64,6 +64,19 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.3.1 - December 28, 2020
+
+- Add compatibility with Flarum beta 15.
+- Use native Flarum admin page.
+- Fix incorrect tag change log.
+
+Due to a [a change](https://github.com/flarum/core/issues/2514) in Flarum security release 14.1 for Tags, Audit Log was no longer able to log tag changes correctly.
+This resulted in the old tags being logged as both old and new.
+The fix is only available for beta 15.
+
+This version can only be installed on Flarum beta 15.
+It will automatically install when you upgrade to Flarum beta 15 by following the official release guide.
+
 ### Version 1.3.0 - October 20, 2020
 
 - Add compatibility with Flarum beta 14.
