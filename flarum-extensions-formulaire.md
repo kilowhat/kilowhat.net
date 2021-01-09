@@ -35,6 +35,8 @@ Table of content:
 
 Formulaire is a premium extension bringing an advanced form builder to Flarum.
 
+The video below shows some of the main features. New features have since been added.
+
 <iframe width="740" height="416" src="https://www.youtube.com/embed/reFqzTzAof4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Multiple form types are included:
@@ -53,22 +55,23 @@ You can customize max submissions and configure email notifications.
 
 ### User profile
 
-Similar to Flagrow Masquerade.
-
 Each user profile form becomes a new page under a user profile.
 
-At the moment the profile fields are private.
-Only moderators and the user itself can see the answers.
+You can customize who can read and edit forms separately, including setting a different value for own users vs other users.
 
-Each form can be configured so that only members of a given group must fill it.
+Each form can be configured so it only appears on profiles of a particular user group.
+
+Profile forms can also be added to the Flarum Sign Up page and can be made required for registration.
+
+This enables a wide range of public and private profile use cases.
 
 *Example use cases:* private contact info, payment details, curriculum vitae, ...
 
-*Planned features:* public profile, user card fields, registration fields.
+*Planned features:* user card fields.
 
-### Discussion fields (beta)
+Similar to the FriendsOfFlarum Masquerade open-source extension.
 
-Similar to Flagrow Mason. 
+### Discussion fields
 
 The fields show up on discussions.
 The discussion author is able to edit them.
@@ -77,7 +80,26 @@ This feature is in beta and fields can only be filled after a discussion has bee
 
 *Planned features:* fields in discussion composer.
 
+Similar to the FriendsOfFlarum Mason open-source extension.
+
 ## Changelog
+
+### Version 1.2.0 - January 9, 2021
+
+- **Changed:** Redesigned form manager UI.
+- **Changed:** Profiles of suspended users can no longer be edited by non-moderators.
+- **Changed:** Discussion fields of locked and hidden discussions can no longer be edited by non-moderators.
+- **Changed:** Removed ability for guests to submit "automatic discussion" forms because Flarum couldn't accept guest discussions.
+- **Added:** Export tool. Controlled by a new permission.
+- **Added:** User profile forms can now be added to the sign up modal.
+- **Added:** New detailed (see own, see any, edit own, edit any) global and form-specific permissions for user profiles and discussion fields.
+- **Added:** You can now set a private form title different from the public title.
+- **Fixed:** required fields not always required in new submissions.
+- **Fixed:** missing pagination controls on the submission list.
+
+**If you are currently using user profiles or discussion fields, you will need to adjust the 6 new permissions to match your existing permissions!**
+
+This version is only compatible with Flarum beta 13.
 
 ### Version 1.1.0 - October 21, 2020
 
@@ -90,7 +112,6 @@ This feature is in beta and fields can only be filled after a discussion has bee
 - **Fixed:** issue when Formulaire was enabled while Tags was disabled.
 
 This version is only compatible with Flarum beta 13.
-The Flarum beta 14 update will be released within a week.
 
 The new features were sponsored by [Konica Minolta](https://www.aire.link/). Thanks!
 
@@ -198,19 +219,45 @@ By default the form is shown centered on the page without any side navigation.
 **Fill standalone forms**: which users can fill standalone forms.
 It is planned to make it customizable per-form, but the permission is currently global.
 
-**View user profile submissions**: which users can see profile fields on all user profiles.
-By default users can only see their own submissions.
-*Available since version 1.1.0.*
+**View own profile fields**, **View any profile fields**: which users can see a particular profile.
+The "own" permission is evaluated if the profile belongs to the current visitor.
+Otherwise the "any" permission is evaluated.
+"View own" must be set to "Everyone / non-enabled users" to become available for the sign up form.
+*View any available since version 1.1.0, view own available since version 1.2.0.*
 
-**View discussion fields submissions**: which users can see discussion fields on all discussions.
-By default users can only see their own submissions.
-*Available since version 1.1.0.*
+**Edit own profile fields**, **Edit any profile fields**: which users can edit a particular profile.
+The "own" permission is evaluated if the profile belongs to the current visitor.
+Otherwise the "any" permission is evaluated.
+*Available since version 1.2.0.*
+There is currently no option to exclude locked or soft-deleted submissions, but you can include the lock and deletion dates and filter the data offline based on those columns.
 
-**Create forms (beta)**: which users can create new forms.
+Other information in case you wanted to access the data manually:
+
+The data column of the formulaire_submissions table contains a JSON object representing a submission. Each key of the JSON object can be customized via “expert mode” in the form opions.
+
+Files are stored separately. The JSON object just contains the UUID of the uploaded file(s).
+Forms
+
+A form template is described by a JSON object.
+
+To import/export the JSON template, see Template import/export option above.
+**View own discussion fields**, **View any discussion fields**: which users can see the fields on a particular discussion.
+The "own" permission is evaluated if the discussion belongs to the current visitor.
+Otherwise the "any" permission is evaluated.
+"View own" must be set to "Everyone / non-enabled users" to become available for the sign up form.
+*View any available since version 1.1.0, view own available since version 1.2.0.*
+
+**Edit own discussion fields**, **Edit any discussion fields**: which users can edit the fields on a particular discussion.
+The "own" permission is evaluated if the discussion belongs to the current visitor.
+Otherwise the "any" permission is evaluated.
+*Available since version 1.2.0.*
+
+**Create forms**: which users can create new forms.
 The owner of a form can manage the form options and submissions.
 At the moment the owner cannot see the list of submissions.
 
 **Moderate all forms**: which users can see/edit all forms and submissions.
+This permission has priority over all other access settings, including "See/edit any profile/discussion fields".
 
 **View the list of forms that aren't deleted** (for third-party extensions): allows listing all forms, even if they no longer accept submissions.
 This permission was added for third-party extensions that might want to list forms to visitors.
@@ -222,19 +269,56 @@ The extension doesn't include such a list by itself.
 
 ## Form options
 
-**Expert mode**: toggles between normal and expert mode in the template builder.
+### In top-right control dropdown
+
+**Template import/export**: opens a new tab which allows copy-pasting the JSON version of the form template.
+This feature is useful if you need to clone a form, or migrate it to a different forum.
+To export, first save the form, then click the button.
+To import, click the button, paste the JSON, then save the form.
+
+**Enable/disable expert mode**: toggles between normal and expert mode in the template builder.
 This only switches the mode in your own browser and is not saved along with the form.
+
+**Delete**: forms can be soft-deleted.
+A soft-deleted form will no longer be visible to users and will no longer accept answer or edits to submissions.
+A soft-deleted form can be permanently deleted.
+
+### In header
+
+**Private title**: title of the form in the manager.
+This title is only visible to form moderators.
+You can use it to better organize the list of forms.
+By default it is modified everytime you edit the public title if the two values are identical.
+Enter a different value to stop the public title from being applied.
+*Available since version 1.2.0.*
+
+**Slug**: optional, token for the url.
+By default the URL to the form will be a UUID.
+For standalone forms, the form will be available at `/forms/<slug or uuid>`.
+Profile forms will be available at `/u/<username>/forms/<slug or uuid>`.
+This field is not visible for discussion fields.
+
+### In "Template" tab
+
+**Public title**: title of the form.
+This title is visible on the page when the form is displayed.
+It is used as the link/tab/section title for user profiles and discussion fields.
+
+**Template**: see **Fields options** below for the available field types.
+
+**Preview**: opens a new page to preview the form.
+The page might not always render correctly for non-standalone forms.
+A better preview page is coming in a future version.
+
+### In "Placement" tab
 
 **Special form types**: choose the type of form.
 See [Introduction](#introduction) for the explanation of the different types.
 
-**Title**: title of the form.
-Visible to users.
-
-**Slug**: optional, token for the url.
-By default the url to the form will be a UUID.
-For standalone forms, the form will be available at `/forms/<slug or uuid>`.
-Profile forms will be available at `/u/<username>/forms/<slug or uuid>`.
+**Show in sign up**: show fields inside of the sign up modal in addition to the user profile.
+Only available for user profiles.
+When you enable this option, you must also verify that the permissions allow "Everyone / non-enabled members" to view and submit the form.
+*Available since version 1.2.0.*
 
 **Automatically create discussions from form submission**: only available for discussion fields.
 When disabled, submissions can only be created from an existing discussion page.
@@ -248,18 +332,32 @@ If not specified, Formulaire will attempt to find a field with a slug of `title`
 **Discussion tags** accepts a comma-separated list of tag slugs.
 The tag the form is linked to (if selected) will always be added in addition to this list of tags.
 
-**Accept new submissions**: as it says.
-Prior to version 1.1.0, was only available for standalone forms.
+### In "Access" tab
 
-**Allow users to edit their existing submissions**: as it says.
-Prior to version 1.1.0, was only available for standalone forms.
+**Accept new submissions**: enables the form.
+On standalone forms, this only controls the creation of new submissions.
+On user profiles or discussion fields, this controls whether the form is available for users or only in draft mode for moderators.
+
+**Allow users to edit their existing submissions**: enables submission edit.
+Only available on standalone forms.
 
 **Max submissions**: optional, the maximum number of submissions before the form automatically closes.
 When the max submissions number is reached, it has the same effect as if **Accept new submissions** was disabled.
 Locked submissions count towards the max submissions.
 Deleted submissions no longer count towards the max submissions.
-Prior to version 1.1.0, was only available for standalone forms.
-It is not advisable to set this setting for non-standalone forms.
+This setting is only available for standalone forms and discussion fields with "automatically create discussions".
+It is however not advisable to set this setting for non-standalone forms.
+
+**Permissions**: configure local permissions to override global permissions.
+Not available on standalone forms.
+When "Use defaults" is selected, the global value for the permission of the same name is used.
+When set, only this value is checked and the global value is ignored.
+See the Permissions section above for how "own"/"any" work.
+*Available since version 1.2.0.*
+
+### In "Notifications" tab
+
+The Notifications tab is only available for standalone forms and discussion fields with "automatically create discussion" option.
 
 **Send confirmation email to participants**: toggle to send an email with a summary of the answers to the user who submitted the form.
 If the form contains a field with key `email`, an email will also be sent to that address.
@@ -281,11 +379,9 @@ This message is not secret, it's exposed via the API even to users who did not s
 Only has an effect if **Send confirmation email to participants** is enabled.
 *In version 1.1.0, this option was moved to Confirmation email template*.
 
-**Delete**: forms can be soft-deleted.
-A soft-deleted form will no longer be visible to users and will no longer accept answer or edits to submissions.
-A soft-deleted form can be permanently deleted.
-
 ## Submission options
+
+Only available for standalone forms.
 
 **Lock**: prevents the submission from being edited, even if **Allow users to edit their existing submissions** is enabled on the form.
 
@@ -435,8 +531,22 @@ And you could set the notification email (to admin) to:
 
 ### Submissions
 
-More options will be added in later releases.
-At the moment you can only access the raw data of the submissions via the database.
+Since version 1.2.0, an export tool is available on the submission list page.
+You can select the fields and metadata to include.
+
+In table style (XLSX, XLS, ODS, CSV), the "heading" option controls the first row of the data.
+Multi-entries are serialized as JSON and put into a single cell.
+
+In non-table style (JSON), the "heading" option controls the key names.
+If two keys share the same name, the second will be automatically suffixed.
+JSON export preserves the full multi-level hierarchy of forms.
+
+There is a known issue with the table preview: dates are not rendered correctly (you are seeing the Excel internal format).
+The value is however correct in the exported file.
+
+There is currently no option to exclude locked or soft-deleted submissions, but you can include the lock and deletion dates and filter the data offline based on those columns.
+
+Other information in case you wanted to access the data manually:
 
 The `data` column of the `formulaire_submissions` table contains a JSON object representing a submission.
 Each key of the JSON object can be customized via "expert mode" in the form opions.
@@ -447,9 +557,8 @@ The JSON object just contains the UUID of the uploaded file(s).
 ### Forms
 
 A form template is described by a JSON object.
-That template can be copied from the textarea below the template editor.
 
-You can paste a template into another form's template editor to create a new form with identical fields.
+To import/export the JSON template, see **Template import/export** option above.
 
 ## Extensibility
 
