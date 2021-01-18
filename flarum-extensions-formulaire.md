@@ -84,6 +84,21 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.3.0 - January 18, 2021
+
+- **Changed:** Compatible with Flarum beta 15.
+- **Changed:** custom drag and drop implementation replacing html5sortable. This shouldn't change anything for the end user. Unfortunately drag and drop on mobile still isn't available at this time.
+- **Fixed:** files not visible in email summary.
+- **Fixed:** moderators not able to restore soft-deleted submissions.
+- **Fixed:** missing padding on mobile when filling standalone form.
+- (developer) **Removed:** beta 13 workarounds and backports have been removed. The native Flarum classes for Dropdown, LoadingIndicator and VisibilityScope are now used.
+- (developer) **Fixed:** missing javascript exports for components introduced in previous releases.
+
+This version is only compatible with Flarum beta 15.
+Compatibility with Flarum beta 14 was skipped.
+
+The new version will automatically be installed when you migrate to Flarum beta 15 with Flarum's official instructions.
+
 ### Version 1.2.0 - January 9, 2021
 
 - **Changed:** Redesigned form manager UI.
