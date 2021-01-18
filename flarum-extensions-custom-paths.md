@@ -36,6 +36,10 @@ You can optionally enable redirects from the old paths to the new paths.
 
 ## Changelog
 
+### Version 1.2.0 - January 18, 2021
+
+- Add ability to customize Formulaire standalone form and submission URLs.
+
 ### Version 1.1.0 - December 27, 2020
 
 - Flarum beta 15 compatibility.
@@ -72,6 +76,7 @@ Custom Paths provides integration with the following extensions:
 - Flarum's Subscriptions
 - Flarum's Flags
 - Flarum's Mentions (since 1.1.0)
+- [KILOWHAT Formulaire](/flarum/extensions/formulaire) (since 1.2.0)
 - [FriendsOfFlarum's User Directory](https://discuss.flarum.org/d/5682)
 - [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301)
 - [FriendsOfFlarum's Gamification](https://discuss.flarum.org/d/20671) (since 1.1.0)
