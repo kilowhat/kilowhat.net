@@ -8,7 +8,7 @@ permalink: /flarum/extensions/wordpress
 
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English
-- **Flarum compatibility**: beta 12+
+- **Flarum compatibility**: beta 15+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/22229-premium-wordpress-integration)
 

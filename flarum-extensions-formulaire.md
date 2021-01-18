@@ -8,7 +8,7 @@ permalink: /flarum/extensions/formulaire
 
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English and French
-- **Flarum compatibility**: beta 13+
+- **Flarum compatibility**: beta 15+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23063)
 

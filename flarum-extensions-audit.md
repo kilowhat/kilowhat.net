@@ -8,7 +8,7 @@ permalink: /flarum/extensions/audit
 
 - **Price**: 4 USD/month or 40 USD/year
 - **Bundled translations**: English
-- **Flarum compatibility**: beta 13+
+- **Flarum compatibility**: beta 15+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/24206)
 

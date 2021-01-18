@@ -8,7 +8,7 @@ permalink: /flarum/extensions/custom-paths
 
 - **Price**: 10 USD lifetime license
 - **Bundled translations**: English
-- **Flarum compatibility**: beta 13+
+- **Flarum compatibility**: beta 15+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23872)
 
