@@ -36,6 +36,14 @@ You can optionally enable redirects from the old paths to the new paths.
 
 ## Changelog
 
+### Version 1.3.0 - February 27, 2021
+
+- Add ability to customize v17development's Flarum Blog pages.
+- Add ability to customize FriendsOfFlarum's Byobu pages.
+- Add ability to customize ClarkWinkelmann's Group List page.
+- Fix v17development's SEO inability to add SEO tags to customized pages.
+- Fix issue when setting a customized page as homepage.
+
 ### Version 1.2.0 - January 18, 2021
 
 - Add ability to customize Formulaire standalone form and submission URLs.
@@ -80,11 +88,13 @@ Custom Paths provides integration with the following extensions:
 - [FriendsOfFlarum's User Directory](https://discuss.flarum.org/d/5682)
 - [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301)
 - [FriendsOfFlarum's Gamification](https://discuss.flarum.org/d/20671) (since 1.1.0)
+- [FriendsOfFlarum's Byobu](https://discuss.flarum.org/d/4762) (since 1.3.0)
 - [Askvortsov's Categories](https://discuss.flarum.org/d/23184)
+- [v17development's Flarum Blog](https://discuss.flarum.org/d/25392) (since 1.3.0)
+- [ClarkWinkelmann's Group List](https://discuss.flarum.org/d/25386) (since 1.3.0)
 
 The following extensions are incompatible:
 
-- [JasperVriends's SEO](https://discuss.flarum.org/d/18316) (the extension won't be able to add SEO meta tags on pages that you have customized through Custom Paths). I will try to find some workaround.
 - [FriendsOfFlarum's Sitemap](https://discuss.flarum.org/d/14941) (paths are hard-coded in the sitemap extension)
 
 Most other Flarum extensions should work fine alongside Custom Paths, but no integration will be automatically provided.
@@ -102,6 +112,10 @@ Issues in previous versions that have been fixed as of 1.1.0:
 - You can't re-use an existing path, like `/d/` or `/all` or `/settings` or others anytime, `/t/` or `/tags` when the Tags extension is enabled, or `/p/` when the Pages extension is enabled.
 - The "Following" link in the side navigation doesn't have an "active" effect when the page is displayed if the path has been customized.
 - The Flags page can't be loaded or redirected when typing the URL directly. This is a bug in Flarum, see [flarum/flags#23](https://github.com/flarum/flags/pull/23).
+
+Issues that have been fixed as of 1.3.0:
+
+- [v17development's SEO](https://discuss.flarum.org/d/18316) was not able to add SEO tags to pages with customized URLs.
 
 ## Installation
 
