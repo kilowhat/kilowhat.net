@@ -64,6 +64,11 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.3.2 - February 28, 2021
+
+- Fix old email not being logged when users change email through the email change feature.
+- Fix error in the log browser when a `user.suspended` or `post.create_date_changed` log was visible.
+
 ### Version 1.3.1 - December 28, 2020
 
 - Add compatibility with Flarum beta 15.
