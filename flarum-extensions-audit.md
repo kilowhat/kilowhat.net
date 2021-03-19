@@ -69,6 +69,9 @@ To get access to all feature and to support the ongoing development of the exten
 - Add compatibility with Flarum beta 16.
 - Fix `post.dismissed_flags` being incorrectly logged every time a post was permanently deleted.
 
+This version can only be installed on Flarum beta 16.
+It will be automatically installed when you upgrade to Flarum beta 16 by following the official release guide.
+
 ### Version 1.3.2 - February 28, 2021
 
 - Fix old email not being logged when users change email through the email change feature.
@@ -85,7 +88,7 @@ This resulted in the old tags being logged as both old and new.
 The fix is only available for beta 15.
 
 This version can only be installed on Flarum beta 15.
-It will automatically install when you upgrade to Flarum beta 15 by following the official release guide.
+It will be automatically installed when you upgrade to Flarum beta 15 by following the official release guide.
 
 ### Version 1.3.0 - October 20, 2020
 
