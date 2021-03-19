@@ -8,7 +8,7 @@ permalink: /flarum/extensions/audit
 
 - **Price**: 4 USD/month or 40 USD/year
 - **Bundled translations**: English
-- **Flarum compatibility**: beta 15+
+- **Flarum compatibility**: beta 13-16
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/24206)
 
@@ -63,6 +63,11 @@ To get access to all feature and to support the ongoing development of the exten
 | Download                       | Via Packagist                | Via Extiverse |
 
 ## Changelog
+
+### Version 1.3.3 - March 19, 2021
+
+- Add compatibility with Flarum beta 16.
+- Fix `post.dismissed_flags` being incorrectly logged every time a post was permanently deleted.
 
 ### Version 1.3.2 - February 28, 2021
 
@@ -124,7 +129,7 @@ Initial release.
 
 ## Requirements
 
-- Flarum version must be beta 13 or beta 14
+- Flarum version must be beta 13 to 16
 - MySQL 5.7.8+ or MariaDB 10.2.7+ (for `JSON` data type support)
 - You must have SSH and Composer access on the Flarum hosting
 
