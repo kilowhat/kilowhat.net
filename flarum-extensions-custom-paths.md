@@ -36,6 +36,12 @@ You can optionally enable redirects from the old paths to the new paths.
 
 ## Changelog
 
+### Version 1.4.0 - March 23, 2021
+
+- Flarum beta 16 compatibility.
+
+This version can only be installed on Flarum beta 16 and will automatically be installed when you migrate to Flarum beta 16 with Flarum's official instructions.
+
 ### Version 1.3.0 - February 27, 2021
 
 - Add ability to customize v17development's Flarum Blog pages.
