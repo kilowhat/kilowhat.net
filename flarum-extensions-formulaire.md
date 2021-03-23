@@ -84,6 +84,15 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.4.0 - March 23, 2021
+
+- **Changed:** Compatible with Flarum beta 16.
+- **Fixed:** Guests not able to submit standalone forms.
+
+This version is only compatible with Flarum beta 16.
+
+The new version will automatically be installed when you migrate to Flarum beta 16 with Flarum's official instructions.
+
 ### Version 1.3.0 - January 18, 2021
 
 - **Changed:** Compatible with Flarum beta 15.
