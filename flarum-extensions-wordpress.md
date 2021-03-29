@@ -8,7 +8,7 @@ permalink: /flarum/extensions/wordpress
 
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English
-- **Flarum compatibility**: beta 15+
+- **Flarum compatibility**: beta 16+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/22229-premium-wordpress-integration)
 
@@ -79,6 +79,15 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 </div>
 
 ## Flarum changelog
+
+### Version 1.6.4 - March 29, 2021
+
+- Flarum beta 16 compatibility
+
+This version can only be installed on Flarum beta 16.
+
+The new version will automatically be installed when you migrate to Flarum beta 16 with Flarum's official instructions.
+Requires **version 1.4** or greater of the Wordpress plugin.
 
 ### Version 1.6.3 - December 28, 2020
 
@@ -267,7 +276,7 @@ Please get in touch if you would like admin access.
 ## Requirements
 
 - Wordpress version must be 5.0 or higher (lower might work, but not tested)
-- Flarum version must be beta 13
+- Flarum version must be beta 16
 - You must have SSH and Composer access on the Flarum hosting
 - Wordpress and Flarum must be hosted on the same domain, or subdomains of the same domain (cookie limitations)
 - Wordpress and Flarum must be accessible via HTTPS and HTTP urls must be redirected to HTTPS
