@@ -8,7 +8,7 @@ permalink: /flarum/extensions/audit
 
 - **Price**: 4 USD/month or 40 USD/year
 - **Bundled translations**: English
-- **Flarum compatibility**: beta 13-16
+- **Flarum compatibility**: 1.0+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/24206)
 
@@ -63,6 +63,20 @@ To get access to all feature and to support the ongoing development of the exten
 | Download                       | Via Packagist                | Via Extiverse |
 
 ## Changelog
+
+### Version 1.4.0 - June 3, 2021
+
+- Add compatibility with Flarum 1.0.
+- Add support for Flarum Nickname extension.
+- <span class="pro-badge">pro only</span> Add separate logs for nickname change requests in FoF Username Request extension.
+- <span class="pro-badge">pro only</span> Add "reason" log for FoF Impersonate extension (visible under raw log).
+- <span class="pro-badge">pro only</span> Fix "edited at" not correctly logged for Author Change extension.
+- <span class="pro-badge">pro only</span> Slug and display name driver settings changes are now logged with their values.
+
+FoF Ban IP support is still included but has not been tested for compatibility because it has not been updated for Flarum 1.0 yet.
+
+This version can be installed on Flarum 1.0.0 and all future 1.x versions.
+It will be automatically installed when you upgrade to Flarum 1.0 by following the official release guide.
 
 ### Version 1.3.3 - March 19, 2021
 
@@ -132,7 +146,7 @@ Initial release.
 
 ## Requirements
 
-- Flarum version must be beta 13 to 16
+- Flarum version must be 1.0.0 or greater
 - MySQL 5.7.8+ or MariaDB 10.2.7+ (for `JSON` data type support)
 - You must have SSH and Composer access on the Flarum hosting
 
@@ -226,7 +240,7 @@ The following gambits can be used to search in logs:
 - `action:<name>` (see action names below)
 - `actor:<username>`
 - `client:<client>` (see clients above)
-- `discussion:<i>` - returns both discussion and post events for the discussion
+- `discussion:<id>` - returns both discussion and post events for the discussion
 - `ip:<ip>`
 - `user:<username>`
 
@@ -287,6 +301,10 @@ As such, the activation of the extension is shown as Guest / unknown.
 - `discussion.locked`: When a discussion is locked
 - `discussion.unlocked`: When a discussion is unlocked
 
+### Flarum Nicknames
+
+- `user.nickname_changed`: When the nickname is changed via the Nicknames extension
+
 ### Flarum Sticky
 
 - `discussion.stickied`: When a discussion is stickied
@@ -315,7 +333,7 @@ As such, the activation of the extension is shown as Guest / unknown.
 
 ### FriendsOfFlarum Impersonate
 
-- `user.impersonated` <span class="pro-badge">pro only</span>: When a user is impersonated
+- `user.impersonated` <span class="pro-badge">pro only</span>: When a user is impersonated (data logged: reason)
 
 ### FriendsOfFlarum Mason
 
@@ -351,8 +369,6 @@ All files upload and downloads are already logged by Upload itself.
 
 ### FriendsOfFlarum User Bio
 
-*Note:* Requires version 0.2.0 or greater of `fof/user-bio`.
-
 - `user.bio_changed` <span class="pro-badge">pro only</span>: When a user bio is changed
 
 ### FriendsOfFlarum Username Request
@@ -360,6 +376,9 @@ All files upload and downloads are already logged by Upload itself.
 - `user.username_requested` <span class="pro-badge">pro only</span>: When a username request is created (data logged: new username)
 - `user.username_request_approved` <span class="pro-badge">pro only</span>: When a username request is approved (data logged: old username, new username)
 - `user.username_request_rejected` <span class="pro-badge">pro only</span>: When a username request is rejected (data logged: new username, reason)
+- `user.nickname_requested` <span class="pro-badge">pro only</span>: When a nickname request is created (data logged: new nickname)
+- `user.nickname_request_approved` <span class="pro-badge">pro only</span>: When a nickname request is approved (data logged: old nickname, new nickname)
+- `user.nickname_request_rejected` <span class="pro-badge">pro only</span>: When a nickname request is rejected (data logged: new nickname, reason)
 
 ### KILOWHAT Cimaise
 
@@ -386,8 +405,6 @@ Settings changes are logged by `setting_changed`.
 **Known issue**: no login or logout are logged for Wordpress users using SSO.
 
 ### ClarkWinkelmann Author Change
-
-*Note:* Requires version 0.2.0 or greater of `clarkwinkelmann/flarum-ext-author-change`.
 
 - `discussion.create_date_changed` <span class="pro-badge">pro only</span>: When a discussion start date is changed
 - `discussion.user_changed` <span class="pro-badge">pro only</span>: When a discussion author is changed
