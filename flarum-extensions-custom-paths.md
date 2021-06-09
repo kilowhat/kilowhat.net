@@ -8,7 +8,7 @@ permalink: /flarum/extensions/custom-paths
 
 - **Price**: 10 USD lifetime license
 - **Bundled translations**: English
-- **Flarum compatibility**: beta 15+
+- **Flarum compatibility**: 1.0+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23872)
 
@@ -35,6 +35,13 @@ You can optionally enable redirects from the old paths to the new paths.
 </div>
 
 ## Changelog
+
+### Version 1.5.0 - June 9, 2021
+
+- Flarum 1.0+ compatibility.
+
+This version can be installed on Flarum 1.0.0 and all future 1.x versions.
+It will be automatically installed when you upgrade to Flarum 1.0 by following the official release guide.
 
 ### Version 1.4.0 - March 23, 2021
 
