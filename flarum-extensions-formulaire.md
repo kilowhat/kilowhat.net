@@ -8,7 +8,7 @@ permalink: /flarum/extensions/formulaire
 
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English and French
-- **Flarum compatibility**: beta 15+
+- **Flarum compatibility**: 1.0+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23063)
 
@@ -83,6 +83,13 @@ This feature is in beta and fields can only be filled after a discussion has bee
 Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
+
+### Version 1.5.0 - June 9, 2021
+
+- **Changed:** Compatible with Flarum 1.0+.
+
+This version can be installed on Flarum 1.0.0 and all future 1.x versions.
+It will be automatically installed when you upgrade to Flarum 1.0 by following the official release guide.
 
 ### Version 1.4.0 - March 23, 2021
 
@@ -163,7 +170,7 @@ Please get in touch if you would like admin access.
 
 ## Requirements
 
-- Flarum version must be beta 13
+- Flarum version must be 1.0.0 or greater
 - MySQL 5.7.8+ or MariaDB 10.2.7+ (for `JSON` data type support)
 - You must have SSH and Composer access on the Flarum hosting
 
