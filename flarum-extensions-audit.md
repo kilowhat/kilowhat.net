@@ -64,6 +64,12 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.4.1 - July 21, 2021
+
+- Fix IP address not logged for login and signup.
+
+FoF Ban IP support has been confirmed.
+
 ### Version 1.4.0 - June 3, 2021
 
 - Add compatibility with Flarum 1.0.
