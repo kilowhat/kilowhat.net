@@ -453,6 +453,9 @@ Text field rendered as an HTML text input.
 **Email**: toggle to apply email validation to the field value.
 
 **Regular expression**: optional, enter a custom regular expression to validate the field value.
+Internally, the PHP [`preg_match`](https://www.php.net/manual/en/function.preg-match.php) function is used.
+The regular expression must include valid delimiters.
+For example: `/^.+@example\.com$/i`.
 
 ### Long text
 
