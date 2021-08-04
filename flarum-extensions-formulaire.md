@@ -84,6 +84,17 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.6.0 - August 5, 2021
+
+- **Added:** Checkboxes, Radio and Dropdown field types.
+- **Added:** Ability to include user email and activation status in exports. Protected by a new permission.
+- **Added:** `data-` attributes to the `body` element with Form and Submission IDs that can be used in custom CSS.
+- **Changed:** Use private title instead of public title as the default export filename.
+- **Changed:** On mobile the form title has been moved to the app header which was previously blank.
+- **Changed:** Short field type now has a maximum length of 255 (previously unrestricted) and Long now has a default maximum length of 25000 which can be customized to be longer.
+- **Fixed:** Inability to re-order multi-entries in form editor.
+- **Fixed:** Possible data loss if a form was edited and submitted multiple times without closing the editor. Newly added fields were having their unique keys re-generated on each new save which would break submissions made in the meantime.
+
 ### Version 1.5.0 - June 9, 2021
 
 - **Changed:** Compatible with Flarum 1.0+.
@@ -232,6 +243,9 @@ Or manually change the field key.
 Deleting an upload field will not delete the associated files on disk.
 Delete the submission or form to delete the associated files.
 
+If you delete an option inside a checkbox or radio field and that field has "Allow other values" enabled, the key of the deleted field might appear as the "other" value in submissions.
+If such a submission already had an "other" value, it might be impossible to edit that field in the submission again.
+
 ## Extension settings
 
 ### Settings modal
@@ -244,6 +258,15 @@ A Flarum validation error only shows up for files that are between the specified
 
 **Show side navigation on submission page**: toggle to show the left navigation from the homepage on submission pages in standalone mode.
 By default the form is shown centered on the page without any side navigation.
+
+**Checkbox style**: controls the look of the checkboxes rendered inside the Checkboxes field type.
+The "FontAwesome" options are custom designs implemented by Formulaire using the icons from Font Awesome.
+The Switch option re-uses the switch that comes with Flarum (the same one that controls this setting).
+The native option uses the browser `input` with `type="checkbox"`.
+
+**Radio style**: controls the look of the radio buttons rendered inside the Radio field type.
+The "FontAwesome" options are custom designs implemented by Formulaire using the icons from Font Awesome.
+The native option uses the browser `input` with `type="radio"`.
 
 ### Permission
 
@@ -260,19 +283,8 @@ Otherwise the "any" permission is evaluated.
 The "own" permission is evaluated if the profile belongs to the current visitor.
 Otherwise the "any" permission is evaluated.
 *Available since version 1.2.0.*
-There is currently no option to exclude locked or soft-deleted submissions, but you can include the lock and deletion dates and filter the data offline based on those columns.
 
-Other information in case you wanted to access the data manually:
-
-The data column of the formulaire_submissions table contains a JSON object representing a submission. Each key of the JSON object can be customized via “expert mode” in the form opions.
-
-Files are stored separately. The JSON object just contains the UUID of the uploaded file(s).
-Forms
-
-A form template is described by a JSON object.
-
-To import/export the JSON template, see Template import/export option above.
-**View own discussion fields**, **View any discussion fields**: which users can see the fields on a particular discussion.
+**See own discussion fields**, **See any discussion fields**: which users can see the fields on a particular discussion.
 The "own" permission is evaluated if the discussion belongs to the current visitor.
 Otherwise the "any" permission is evaluated.
 "View own" must be set to "Everyone / non-enabled users" to become available for the sign up form.
@@ -283,12 +295,20 @@ The "own" permission is evaluated if the discussion belongs to the current visit
 Otherwise the "any" permission is evaluated.
 *Available since version 1.2.0.*
 
-**Create forms**: which users can create new forms.
+**Create forms** (beta): which users can create new forms.
 The owner of a form can manage the form options and submissions.
 At the moment the owner cannot see the list of submissions.
+Long term, it's planned to make the form dashboard fully usable by individual users so they can manage their own forms.
 
 **Moderate all forms**: which users can see/edit all forms and submissions.
 This permission has priority over all other access settings, including "See/edit any profile/discussion fields".
+
+**Export submission data**: enables the use of the "Export" button on the submission list page.
+
+**Access user private data in exports**: allows including user email and user activation status as meta columns inside exports.
+These fields are protected by this additional permission since they aren't usually visible to non-admins.
+This permission isn't needed to access emails that are entered as fields in a form, it's only for the meta columns during export.
+*Available since version 1.6.0.*
 
 **View the list of forms that aren't deleted** (for third-party extensions): allows listing all forms, even if they no longer accept submissions.
 This permission was added for third-party extensions that might want to list forms to visitors.
@@ -486,6 +506,36 @@ Field rendered as an HTML number input.
 
 **Maximum**: optional, maximum (inclusive) allowed date.
 
+### Checkboxes
+
+A set of checkboxes. By default the user can select as few or many checkboxes as they wish.
+
+**Minimum**: optional, minimum (inclusive) number of options that must be selected.
+
+**Maximum**: optional, maximum (inclusive) number of options that must be selected.
+
+To enforce the minimum or maximum, set the field to required.
+If the field is optional, the maximum and minimum will only be validated if at least one value is selected.
+
+**Allow "other" user value**: allows the user to enter a custom value in addition to the available options.
+If a custom value is set, it always counts as 1 value towards the minimum or maximum configured.
+The validation of custom values currently cannot be customized and is any string of 1 to 255 characters long.
+
+### Radio
+
+A fieldset of radio buttons. The user can select only one value.
+
+Due to the way the radio buttons work in browsers, the user will unfortunately be unable to un-select all options even if the field is optional.
+If you are making an optional field and want to avoid this issue, you can use a Checkboxes field with a Max value set to 1.
+If you don't need the "Other" field, you can use a Dropdown.
+
+**Allow "other" user value**: allows the user to enter a custom value instead of selecting one of the available options.
+The validation of custom values currently cannot be customized and is any string of 1 to 255 characters long.
+
+### Dropdown
+
+Works the same way as a Radio field, but no "Other" field is possible and the options are rendered inside a dropdown.
+
 ### Content
 
 This special field simply renders custom content.
@@ -579,6 +629,20 @@ There is a known issue with the table preview: dates are not rendered correctly 
 The value is however correct in the exported file.
 
 There is currently no option to exclude locked or soft-deleted submissions, but you can include the lock and deletion dates and filter the data offline based on those columns.
+
+The **Access user private data in exports** permission allows exporting the user email and activation status as meta columns.
+
+The export can also be automated via the REST API (API user must have the export permission) with a `GET` request to the following endpoint:
+
+    /api/formulaire/forms/<form uid>/export.<file type>?fields=<comma-separated field uids>&meta=<comma-separated meta field names>
+
+For example:
+
+    /api/formulaire/forms/476f5bef-9207-4900-8465-9006382d28e2/export.xlsx?fields=myfield,otherfield&meta=uid,user_username,created_at
+
+The `fields` and `meta` query parameters can be omitted for all fields and default meta.
+
+The web export uses the same endpoint, so you can also compose and copy the exact URL for your needs from the browser network tools.
 
 Other information in case you wanted to access the data manually:
 
