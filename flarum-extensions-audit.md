@@ -64,6 +64,10 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.4.2 - August 25, 2021
+
+- Fix Flarum boot error if Flags extension has been uninstalled via Composer.
+
 ### Version 1.4.1 - July 21, 2021
 
 - Fix IP address not logged for login and signup.
