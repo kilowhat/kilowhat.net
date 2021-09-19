@@ -80,6 +80,10 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.7.1 - September 19, 2021
+
+- Fix broken link from comments iframe to discussion on forum
+
 ### Version 1.7.0 - June 16, 2021
 
 - Flarum 1.0+ compatibility
