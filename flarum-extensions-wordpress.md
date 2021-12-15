@@ -80,6 +80,11 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.7.2 - December 15, 2021
+
+- Hide Wordpress login button when SSO is disabled
+- Add support for query string inside of the Wordpress custom login path
+
 ### Version 1.7.1 - September 19, 2021
 
 - Fix broken link from comments iframe to discussion on forum
@@ -92,6 +97,9 @@ This version can only be installed on Flarum 1.0 and above.
 
 The new version will automatically be installed when you migrate to Flarum stable with Flarum's official instructions.
 Requires **version 1.4** or greater of the Wordpress plugin.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
 
 ### Version 1.6.4 - March 29, 2021
 
@@ -235,6 +243,8 @@ Works with any version of the Wordpress plugin.
 
 Initial release.
 
+</details>
+
 ## Wordpress changelog
 
 ### Version 1.4.0 - August 3, 2020
@@ -245,6 +255,9 @@ Initial release.
 The plugin must be manually updated.
 The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.4.0.zip).
 Works with any version of the Flarum extension.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
 
 ### Version 1.3.0 - May 16, 2020
 
@@ -277,6 +290,8 @@ Works with any version of the Flarum extension.
 ### Version 1.0.0 - December 10, 2019
 
 Initial release.
+
+</details>
 
 ## Demo
 
@@ -623,6 +638,9 @@ Do not include the leading `/`.
 For example if your Wordpress login is now at `https://example.com/secretlogin`, use `secretlogin`.
 
 Leaving this setting empty will use `wp-login.php`.
+
+Since version 1.7.2, the path can include a query string.
+The extension will replace existing query string parameters if necessary, in particular `redirect_to`.
 
 ### Username for new users
 
