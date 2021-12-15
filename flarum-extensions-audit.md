@@ -264,6 +264,7 @@ The following gambits can be used to search in logs:
 - `discussion.restored`: When a soft-deleted discussion is restored
 - `extension.enabled` <span class="pro-badge">pro only</span>: When an extension is enabled via the admin panel
 - `extension.disabled` <span class="pro-badge">pro only</span>: When an extension is disabled via the admin panel
+- `extension.uninstalled` <span class="pro-badge">pro only</span>: When an extension is rolled back via the admin panel
 - `permission_changed` <span class="pro-badge">pro only</span>: When a permission is edited via the admin panel (data logged: old groups, new groups)
 - `post.created`: When a post is created
 - `post.deleted`: When a post is permanently deleted
