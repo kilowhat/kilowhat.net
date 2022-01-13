@@ -463,7 +463,7 @@ Changing a key once data has been submitted will result in loss of data for that
 
 **Fill permission**: controls which users can edit the field value.
 A user can always see the value.
-If a user doesn't have the permission, they will be enable to change the field value from the current value.
+If a user doesn't have the permission, they will be unable to change the field value from the current value.
 If the field is required but doesn't have a current value, the user will be unable to submit the form.
 
 ### Short text
