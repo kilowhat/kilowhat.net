@@ -80,6 +80,10 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.7.3 - January 16, 2022
+
+- Fix incompatibility with extensions that load `firstPost` discussion relationship (including Blomstra Flag Duplicates)
+
 ### Version 1.7.2 - December 15, 2021
 
 - Hide Wordpress login button when SSO is disabled
