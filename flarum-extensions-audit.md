@@ -6,7 +6,7 @@ permalink: /flarum/extensions/audit
 
 [![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
 
-- **Price**: 4 USD/month or 40 USD/year
+- **Price**: 30 USD lifetime license
 - **Bundled translations**: English
 - **Flarum compatibility**: 1.2+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
