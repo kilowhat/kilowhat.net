@@ -8,7 +8,7 @@ permalink: /flarum/extensions/audit
 
 - **Price**: 4 USD/month or 40 USD/year
 - **Bundled translations**: English
-- **Flarum compatibility**: 1.0+
+- **Flarum compatibility**: 1.2+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/24206)
 
@@ -58,11 +58,23 @@ To get access to all feature and to support the ongoing development of the exten
 | Via admin panel                | <span class="yes">Yes</span> | <span class="yes">Yes</span> |
 | Via discussion and profiles    | <span class="no">No</span>   | <span class="yes">Yes</span> |
 | Customize who can see the logs | <span class="no">No</span>   | <span class="yes">Yes</span> |
+| IP Country indicator           | <span class="no">No</span>   | <span class="yes">Yes</span> |
 | **Support**                    |                              | |
 | Support                        | Community-only               | Email |
 | Download                       | Via Packagist                | Via Extiverse |
 
 ## Changelog
+
+### Version 1.5.0 - February 28, 2022
+
+- Add limited access permission and settings.
+- Add forum-side log access via session dropdown for users who cannot access admin panel.
+- Add optional IP country indicator. See [documentation](#ip-country-indicator) for how to enable.
+
+This version requires Flarum version 1.2 or higher.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
 
 ### Version 1.4.2 - August 25, 2021
 
@@ -154,9 +166,11 @@ This release was not tagged for the free version.
 
 Initial release.
 
+</details>
+
 ## Requirements
 
-- Flarum version must be 1.0.0 or greater
+- Flarum version must be 1.2.0 or greater
 - MySQL 5.7.8+ or MariaDB 10.2.7+ (for `JSON` data type support)
 - You must have SSH and Composer access on the Flarum hosting
 
@@ -218,10 +232,25 @@ The extension has a single setting which is a permission found on the Permission
 
 ### View audit log <span class="pro-badge">pro only</span>
 
-Users with this permission can access all logs via the API.
+Users with this permission can access all logs via the session dropdown and user/discussion pages.
 
-Due to non-admins not having access to the admin panel, non-admins can only use the discussion and profile log modals from the forum side.
-They could still access every log via the API.
+### View limited audit log <span class="pro-badge">pro only</span>
+
+Users with this permission get access to the same UI as the first permission, but only a subset of the logs will be visible.
+
+The button next to the permission name lets you configure what is visible:
+
+- **View IP Address**: restricts visibility of the IP address. The country indicator stays visible to every user with access to the logs.
+- **Actions**: select which actions are visible. If you hide all of `user.*` or `discussion.*`+`post.*`, the corresponding log button is hidden from user or discussion page.
+
+### IP Country Indicator
+
+The IP country is not shown by default.
+To enable, download the latest mmdb file from <https://db-ip.com/db/download/ip-to-country-lite> and extract it to `<flarum>/storage/dbip-country-lite.mmdb`.
+
+If you are giving access to the logs to other users, you are responsible for adding the DB-IP attribution to your page.
+
+The extension should also work with the commercial version of DB-IP, but it has not been tested.
 
 ## Logged actions
 
