@@ -65,11 +65,15 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.5.1 - March 22, 2022
+
+- Fix compatibility issues with some admin themes.
+
 ### Version 1.5.0 - February 28, 2022
 
-- Add limited access permission and settings.
-- Add forum-side log access via session dropdown for users who cannot access admin panel.
-- Add optional IP country indicator. See [documentation](#ip-country-indicator) for how to enable.
+- <span class="pro-badge">pro only</span> Add limited access permission and settings.
+- <span class="pro-badge">pro only</span> Add forum-side log access via session dropdown for users who cannot access admin panel.
+- <span class="pro-badge">pro only</span> Add optional IP country indicator. See [documentation](#ip-country-indicator) for how to enable.
 
 This version requires Flarum version 1.2 or higher.
 
