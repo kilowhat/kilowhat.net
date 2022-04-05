@@ -1,10 +1,11 @@
 ---
-layout: page
-title: Flarum Wordpress Integration
+layout: default
+title: Wordpress Integration
 permalink: /flarum/extensions/wordpress
+nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress)
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress){: .extiverse-badge}
 
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English

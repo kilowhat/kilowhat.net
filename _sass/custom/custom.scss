@@ -1,0 +1,51 @@
+h3 {
+  color: #f73c31;
+}
+
+.picture-row {
+  display: flex;
+  padding: 0 20px;
+  justify-content: center;
+
+  img {
+    flex-grow: 0;
+    flex-shrink: 1;
+    align-self: center;
+    width: 50%;
+    box-shadow: 0 0 2px rgba(black, 0.5);
+    margin: 10px;
+  }
+}
+
+.pro-badge {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 4px 8px;
+  font-size: 0.6em;
+  font-weight: bold;
+  background: #684ba6;
+  color: white;
+}
+
+.yes {
+  color: #009926;
+}
+
+.no {
+  color: #f73c31;
+}
+
+.extiverse-badge {
+  display: inline-block;
+  background: none; // Remove line that appears under the image
+  border: 2px solid #f9fafc; // Same color as Extiverse badge background
+
+  &:hover {
+    border-color: rgba(104, 75, 166, 0.45); // Same color as links hover
+  }
+
+  img {
+    display: block; // Prevent strange margins around image
+    min-height: 50px; // Prevent page content jumping on load
+  }
+}

@@ -1,10 +1,11 @@
 ---
-layout: page
+layout: default
 title: Custom Paths
 permalink: /flarum/extensions/custom-paths
+nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths)
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths){: .extiverse-badge}
 
 - **Price**: 10 USD lifetime license
 - **Bundled translations**: English

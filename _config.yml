@@ -1,27 +1,42 @@
-title: KILOWHAT
+title: Flarum extensions by KILOWHAT
+nav_title: KILOWHAT
 description: >
   Services and plugins offered by Clark Winkelmann
 baseurl: ""
 url: "https://kilowhat.net"
-twitter_username: clarkwinkelmann
-github_username:  clarkwinkelmann
 
 # Build settings
 markdown: kramdown
-theme: minima
-plugins:
-  - jekyll-feed
+remote_theme: just-the-docs/just-the-docs
 
-google_analytics: 1 # Enables Google Analytics, but we override it with Matomo
+collections:
+  extensions:
+    permalink: "/:collection/:path"
+    output: true
+
+just_the_docs:
+  # https://just-the-docs.github.io/just-the-docs/docs/configuration/#document-collections
+  collections:
+    extensions:
+      name: "Flarum Extensions"
+      nav_exclude: false
+      search_exclude: false
+    fake:
+      # Trick just_the_docs to add collection headers even though there's only one real collection
+      nav_exclude: true
+      search_exclude: true
+
+color_scheme: kilowhat
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+   - Gemfile
+   - Gemfile.lock
+   - node_modules
+   - vendor/bundle/
+   - vendor/cache/
+   - vendor/gems/
+   - vendor/ruby/
+   - .idea

@@ -1,10 +1,11 @@
 ---
-layout: page
-title: Flarum Audit Log
+layout: default
+title: Audit Log
 permalink: /flarum/extensions/audit
+nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro){: .extiverse-badge}
 
 - **Price**: 30 USD lifetime license
 - **Bundled translations**: English

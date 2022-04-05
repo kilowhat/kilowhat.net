@@ -1,5 +1,6 @@
 ---
-layout: page
+layout: default
+title: Home
 ---
 
 KILOWHAT is the name behind multiple projects offered by [Clark Winkelmann](https://clarkwinkelmann.com/).

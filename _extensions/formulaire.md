@@ -1,10 +1,11 @@
 ---
-layout: page
-title: Flarum Formulaire
+layout: default
+title: Formulaire
 permalink: /flarum/extensions/formulaire
+nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire)
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire){: .extiverse-badge}
 
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English and French
