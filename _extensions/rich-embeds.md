@@ -5,7 +5,7 @@ permalink: /flarum/extensions/rich-embeds
 nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-rich-embeds/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths){: .extiverse-badge}
+[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-rich-embeds/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-rich-embeds){: .extiverse-badge}
 
 - **Price**: 20 USD lifetime license
 - **Bundled translations**: English
