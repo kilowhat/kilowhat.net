@@ -41,6 +41,10 @@ A whitelist or blacklist of websites can be configured to control which websites
 
 ## Changelog
 
+### Version 1.0.2 - April 10, 2022
+
+- **Fixed** image proxy toggle not being applied.
+
 ### Version 1.0.1 - April 4, 2022
 
 Initial release.
