@@ -457,8 +457,6 @@ Settings changes are logged by `setting_changed`.
 - `post.edit_date_changed` <span class="pro-badge">pro only</span>: When a post edit date is changed
 - `post.user_changed` <span class="pro-badge">pro only</span>: When a post author is changed
 
-Integration planned for a future release.
-
 ### ClarkWinkelmann Catch The Fish
 
 No integration planned.
