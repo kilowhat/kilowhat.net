@@ -372,9 +372,9 @@ As such, the activation of the extension is shown as Guest / unknown.
 ### FriendsOfFlarum Ban IPs
 
 - `fof_ban_ips.banned` <span class="pro-badge">pro only</span>: When an IP is banned (data logged: IP, reason)
-- `fof_ban_ips.unbanned` <span class="pro-badge">pro only</span>: When an IP is unbanned (data logged: IP)
+- `fof_ban_ips.unbanned` <span class="pro-badge">pro only</span>: When the IPs of a user are unbanned (data logged: IP)
 
-**Known issue**: `unbanned` is not logged when unbanning a single issue due to [FriendsOfFlarum/ban-ips#4](https://github.com/FriendsOfFlarum/ban-ips/issues/4).
+**Known issue**: `unbanned` is not logged when unbanning a single IP due to [FriendsOfFlarum/ban-ips#4](https://github.com/FriendsOfFlarum/ban-ips/issues/4).
 
 ### FriendsOfFlarum Impersonate
 
