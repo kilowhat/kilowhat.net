@@ -17,6 +17,7 @@ Table of content:
 
 - [Introduction](#introduction)
 - [Changelog](#changelog)
+- [Requirements](#requirements)
 - [Compatibility](#compatibility)
 - [Installation](#installation)
 - [Update](#update)
@@ -35,11 +36,30 @@ Images and favicons can optionally be proxied through the server to protect the 
 
 A whitelist or blacklist of websites can be configured to control which websites are previewed and prevent abuse of the proxy script.
 
+Optionally, the extension will also retrieve and display metadata of images embedded into posts with bbcode or markdown. 
+
 <div class="picture-row">
 <img src="/medias/extensions/rich-embeds/post.png" alt="Post with 2 different styles of embed" style="width: 500px;">
 </div>
 
 ## Changelog
+
+### Version 1.1.0 - June 1st, 2022
+
+- **Added** Rich image embeds feature. Disabled by default.
+- **Changed** Rich link previews now show the domain name of the destination website if the URL was a redirect instead of the domain name from the posted link.
+- **Changed** Any link longer than 2048 characters is now automatically blacklisted and cannot be previewed.
+- **Fixed** errors when inserting links longer than 255 characters.
+- **Fixed** blacklist/whitelist not being applied to HTTP redirect destination.
+- **Fixed** favicon not aligned properly with text.
+- **Fixed** post preview now debounced to avoid many requests and crawls being performed if a URL is typed by hand.
+- **Fixed** inline preview not switching to page title label when entering a link without ending slash.
+
+This update also started collecting image Exif data, but this information is currently not displayed.
+It might be made visible in a future update.
+
+You must run `php flarum migrate` immediately after performing the update.
+Trying to create discussions or posts before the migrations have run will lead to errors.
 
 ### Version 1.0.2 - April 10, 2022
 
@@ -49,9 +69,23 @@ A whitelist or blacklist of websites can be configured to control which websites
 
 Initial release.
 
+## Requirements
+
+In addition to [Flarum's server requirements](https://docs.flarum.org/install/#server-requirements), you need:
+
+- Flarum 1.2+
+- PHP `libxml` extension
+- MySQL 5.7.8+ or MariaDB 10.2.7+ (for `JSON` data type support)
+- SSH and Composer access on the Flarum hosting
+
+Only the current Flarum version is supported.
+New features and fixes in the extension will only work with the latest Flarum version.
+
 ## Compatibility
 
 Rich Embeds overrides the TextFormatter `URL` rendering template and as such may conflict with other extensions.
+
+When image embeds are enabled, the `IMG` rendering template is also overridden.
 
 This page will be kept up to date with any known incompatibility that can't be worked around.
 
@@ -194,6 +228,26 @@ Don't forget to whitelist the domain names of any CDN server used by your whitel
 
 The extension will automatically blacklist all URLs that include private range IPs, unless you explicitly whitelist them.
 Consider blacklisting your internal domain names if the server is not isolated.
+
+### Rich Embeds for Images
+
+*This feature is experimental. Feedback is welcome!*
+
+Image embeds are an optional feature you can enable via the extension settings.
+After changing the setting you must clear the Flarum cache manually using the button in the admin panel or the `php flarum cache:clear` command.
+
+When this feature is enabled, the same preview crawler used for links will parse all image links from the post.
+
+If the image URL is whitelisted and returns a 200 HTTP code with `image/*` MIME type, the image in the post will show additional information on hover.
+
+The image overlay will show the image format, resolution, file size and domain name.
+It will also contain controls to copy the image URL or open it in a new tab.
+
+Exif metadata is also collected and will be shown in a future update.
+Suggestions for how to use this data are welcome!
+
+If an image metadata was successfully retrieved, the width and height will also be automatically injected into the DOM.
+This prevents the page "jumping" while loading images of unknown size and fixes Flarum jumping to the wrong post when following permalinks in discussions filled with many images.
 
 ### Permissions
 
