@@ -24,6 +24,9 @@ Table of content:
 - [Support](#support)
 - [Features](#features)
 - [Extension settings](#extension-settings)
+- [Site-specific integrations](#site-specific-integrations)
+- [Commands](#commands)
+- [MySQL requirements](#mysql-requirements)
 
 ## Introduction
 
@@ -43,6 +46,35 @@ Optionally, the extension will also retrieve and display metadata of images embe
 </div>
 
 ## Changelog
+
+### Version 1.2.0 - July 24, 2022
+
+- **Added** Scan command for import and update after permission changes
+- **Added** Refresh command to mass-refresh embeds
+- **Added** API-powered Flarum embeds (discussions+users)
+- **Added** API-powered GitHub embeds (repos+issues+pulls)
+- **Added** API-powered YouTube embeds (videos)
+- **Added** API-powered Google Drive embeds (files)
+- **Added** Embedded player on YouTube links
+- **Added** Popover on links that failed rendering to give access to refresh controls
+- **Added** MySQL version check during extension activation
+- **Changed** Tweaked colors and margins
+- **Changed** No longer proxying images to the same domain as Flarum
+- **Fixed** Links containing ampersands wouldn't render as blocks
+
+You must run `php flarum migrate` immediately after performing the update.
+Trying to create discussions or posts before the migrations have run will lead to errors.
+
+If you get an error saying your MySQL version is unsupported, see workaround in [MySQL requirements](#mysql-requirements) and please report your `select version() as version` SQL command output and I'll get it fixed ASAP.
+
+Most of the new features are disabled by default.
+Visit the extension page in the admin panel to configure.
+
+Just like in previous versions, the MediaEmbed feature from FoF Formatting has priority over regular links.
+This means the new YouTube and Google Drive rich embeds can only be used when MediaEmbed is disabled.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
 
 ### Version 1.1.0 - June 1st, 2022
 
@@ -69,6 +101,8 @@ Trying to create discussions or posts before the migrations have run will lead t
 
 Initial release.
 
+</details>
+
 ## Requirements
 
 In addition to [Flarum's server requirements](https://docs.flarum.org/install/#server-requirements), you need:
@@ -89,6 +123,12 @@ When image embeds are enabled, the `IMG` rendering template is also overridden.
 
 This page will be kept up to date with any known incompatibility that can't be worked around.
 
+### MediaEmbed
+
+The MediaEmbed feature provided by the FoF Formatting extension will always take priority over Rich Embeds.
+
+If you want to use the YouTube API/player or Google Drive API embeds, you will need to disable MediaEmbed.
+
 ## Installation
 
 - Purchase the ["KILOWHAT Rich Embeds"](https://extiverse.com/extension/kilowhat/flarum-ext-rich-embeds) extension via the Extiverse website
@@ -96,6 +136,8 @@ This page will be kept up to date with any known incompatibility that can't be w
 - Install the extension via Composer: `composer require kilowhat/flarum-ext-rich-embeds`
 - Open the Flarum admin panel and enable the extension
 - See below for the settings
+
+If you get an unsupported database error, see workaround in [MySQL requirements](#mysql-requirements).
 
 ## Update
 
@@ -251,6 +293,8 @@ This prevents the page "jumping" while loading images of unknown size and fixes 
 
 ### Permissions
 
+**View API-powered Google Drive thumbnails**: controls who can see Google Drive file thumbnails when API-powered Google Drive previews are enabled (see below).
+
 **Use embeds in own post**: controls which users can use embeds in their posts.
 When a post is edited, it's the author of the post that is evaluated.
 If the author of a post was deleted, editing the post will cause all embeds to be removed.
@@ -261,3 +305,266 @@ This option appears after the post has been successfully created.
 **Disable embeds on any post**: moderation equivalent of the *Disable embeds on own post* permission.
 
 **Refresh embeds on any post**: gives access to the button to refresh an existing embed.
+
+## Site-specific integrations
+
+The extension is able to render additional information not part of OpenGraph with site-specific HTML scraping or REST API access.
+
+Some of these features rely on external APIs which might come with rate limits or fees.
+
+Information collected from the external APIs is never exposed directly to the client.
+The full API responses are stored in the database but only some whitelisted fields are used to build the rich-"er" previews.
+
+### Flarum
+
+**Enable advanced Flarum previews**: This feature parses additional JSON data already included in the HTML by all Flarum-powered forums.
+It will work with any forum that runs Flarum 1.4+ and advertises the `X-Powered-By` Flarum header.
+
+This feature does not require any third-party credentials and therefore cannot incur any cost.
+
+The feature might not work properly or at all on heavily modified forums.
+It's designed to fail gracefully by displaying only the available information and falling back to OpenGraph.
+
+Disabling the feature will immediately hide the data on existing embeds.
+The data is preserved and won't be queried again if the feature is re-enabled later.
+
+The following information will be displayed:
+
+- For discussions:
+  - Title
+  - Replies count
+  - Participants count (number of different users)
+  - Start date
+  - Excerpt from first post (if the link points to the start of the discussion)
+  - Up to 2 images from first post
+- For user profiles:
+  - Display name
+  - Avatar
+  - Bio (if FoF User Bio extension is enabled and visible to guests)
+  - Discussion count
+  - Comment count
+  - Join date (if public)
+
+### GitHub
+
+**GitHub API Key**: Fill in to enable API-powered rich GitHub previews for repos, issues and PRs.
+This setting acts as both the storage for the key and enables the feature.
+
+This feature has been tested with [Personal Access Tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) but it should also work with app tokens or other method described in the [GitHub REST API documentation](https://docs.github.com/en/rest/guides/getting-started-with-the-rest-api#authentication).
+The extension is not able to perform any oauth flow.
+The same token will be used to retrieve every embed created by any user.
+
+This feature is intentionally designed to show private repos and issues if the token has access to it.
+Make sure to configure permissions correctly to prevent accidental exposure of your private repository information.
+Consider creating a GitHub "machine user" for this specific purpose if needed.
+
+This feature performs 1 API request for links to repository index pages, 1 API request for pull request pages and 2 API requests for issue pages.
+Other GitHub page links will not cause any API request to be performed.
+
+**Organisation whitelist**: Comma-separated list of GitHub organisations that will use the API-powered preview.
+Use this field to prevent every private repo accessible by the API key to be exposed, to reduce API usage or to only change the embed style of your own org.
+If left empty, any repo that the API key can access can be previewed.
+
+This setting only applies to new embeds.
+Existing embeds that already contain information about other organisations will continue to show their data until manually refreshed.
+
+The following information will be displayed:
+
+- For issues and pull requests:
+  - Title
+  - Excerpt from body (raw Markdown)
+  - Author name and avatar
+  - Comments count
+  - Creation date
+- Additionally, for pull requests:
+  - Review count
+  - Commit count
+- Repository index pages:
+  - Private indicator if repo is private
+  - Open issue count
+  - Watcher count
+  - Star count
+  - Fork count
+
+If the repository is public and has an OpenGraph image, the image will be shown.
+This can cause some information to be shown 2 times, as part of both GitHub's OpenGraph image and the rich embed.
+
+### Google
+
+This section contains settings that will apply to both **YouTube** and **Google Drive** since both rely on the Google API Client for PHP.
+
+The PHP Client is bundled with the extension, so you don't need to install any additional package.
+
+The PHP Client can pick up its configuration from environment variables like `GOOGLE_APPLICATION_CREDENTIALS`.
+If you use environment variables, you can leave the fields in this section empty and your credentials will automatically be read (`$client->useApplicationDefaultCredentials()` will be called).
+
+You need to enable the YouTube and Google Drive APIs in your Google Cloud Console project.
+
+**Google SDK API key**: use this setting to provide an [API key](https://cloud.google.com/docs/authentication/api-keys).
+The value will be passed via `$client->setDeveloperKey($key)` internally.
+
+**Google SDK Auth Config Path**: use this setting to provide a path to a [JSON file containing the credentials to a Service Account](https://cloud.google.com/docs/authentication/production#manually).
+The value will be passed via `$client->setAuthConfig($path)` internally.
+
+Using a Service Account instead of an API Key is useful if you wish to embed private information.
+You can share access to your YouTube account or Google Drive with the service account to make the information visible in Flarum.
+
+### YouTube
+
+**Allow playing YouTube videos from the preview**: When enabled an iframe player will be loaded on demand via a new "play" button that appears above the thumbnail in the preview.
+
+This feature is entirely client-side and doesn't require setting up the Google API client.
+No request is made to Google server until the play button is clicked.
+
+You might need to adjust your CSP settings to allow frames from `www.youtube.com` to be loaded on your forum.
+
+**Use YouTube no-cookie iframe domain**: When enabled, the domain for the play feature is replaced with `www.youtube-nocookie.com`.
+
+This feature doesn't appear to have a documentation page in Google Developer documentation.
+It's called the "Privacy-enhanced mode" in the embed share modal of YouTube's website.
+
+**Enable advanced API-powered rich YouTube previews**: Enables API-powered rich YouTube previews for videos.
+
+The Google API Client must be configured as described in the [Google](#google) section above.
+
+This feature performs 1 API request for each video link (`youtube.com` or `youtu.be` domains).
+Other YouTube links won't cause any API request.
+
+The following information will be displayed:
+
+- Medium quality thumbnail returned by the API
+- Video duration
+- View count
+- Like count
+- Comment count
+- Publish date
+
+### Google Drive
+
+**Enable advanced API-powered rich Google Drive previews**: Enables API-powered rich Google Drive previews for files.
+
+The Google API Client must be configured as described in the [Google](#google) section above.
+
+This feature performs 1 API request for each file link (`drive.google.com/file/[...]`).
+Other Google Drive links won't cause any API request.
+
+Additionally, 1 more request is performed to the Google CDN servers for each file thumbnail.
+This request doesn't count in the Google API quota.
+
+The following information will be displayed:
+
+- Google Drive site icon is replaced with the Google Drive icon for the file type
+- File thumbnail
+- File size
+- Creation date
+- Modified date (if more than 10 minutes after creation date)
+
+Customize the **View API-powered Google Drive thumbnails** permission to make the thumbnail visible to more users.
+
+The file thumbnails are cached by the forum because the links expire within about 1h for non-public files.
+If the Flarum cache is cleared, the file thumbnails will be deleted as well.
+They will automatically be retrieved again the next time the embed is viewed by a user.
+This will cause 1 API request and 1 CDN request again, and be cached.
+
+## Commands
+
+The following commands can be run via SSH.
+Connect to your server and `cd` into the Flarum folder to execute them (same place you would run `composer` commands).
+
+**Please read the documentation in detail** before running a command.
+The commands can take a long time to complete and can also fill your hosting or external service quotas very quickly.
+
+If you are using the API-powered options, the commands may incur costs for hundreds or thousands of requests.
+
+This website will show the options and behaviour for the latest version of the extension, which might not be the version you currently have.
+Use the `php flarum help` command as described to check the complete documentation for your exact version.
+
+### Scan command
+
+Check documentation with `php flarum help kilowhat:rich-embeds:scan`
+
+This command is useful to perform the initial import after you enable Rich Embeds for the first time.
+It will scan all comment posts on the forum for links, retrieve each page, create the embed and save the embed relationships.
+
+You can run the command with `--dry-run` first to scan the database but not actually perform any request.
+At the bottom of the output you'll see how many images and links have been found.
+Those numbers include duplicates of the same links as well as links that already have an embed generated.
+
+```sh
+php flarum kilowhat:rich-embeds:scan --dry-run
+ 123000/123000 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+
+Total images scanned 9
+Total bbcode scanned 0
+Total links scanned 36
+```
+
+Once you are ready to start the real import, run `php flarum kilowhat:rich-embeds:scan` and wait for the command to complete.
+
+All underlying API requests will be performed one after another without any wait.
+If all links point to the same servers, this could get you throttled.
+If that's happening to you, please reach out and I'll see what I can do.
+
+### Refresh command
+
+Check documentation with `php flarum help kilowhat:rich-embeds:refresh`
+
+This command updates the information about existing embeds that match the given conditions.
+
+It can be used in a CRON task to maintain the medata visible in some embeds up to date.
+It is most useful when combined with API-powered embeds which contain a lot of additional information, some of which is most useful when kept up to date.
+
+Some example usages:
+
+```sh
+# Update all links to your own website, including those created very recently
+php flarum kilowhat:rich-embeds:refresh https://*.mydomain.tld/* --any-age
+# Update all GitHub embeds that have not been updated in the last 10 days
+php flarum kilowhat:rich-embeds:refresh --api-resource="github.*" --older-than="10 days ago"
+# Just like the scan command, use --dry-run to get the output but not perform any actual request
+php flarum kilowhat:rich-embeds:refresh --dry-run
+```
+
+### Process command
+
+Check documentation with `php flarum help kilowhat:rich-embeds:process`
+
+This command is mostly meant for troubleshooting.
+You should not need it, but I might ask you to run it if you encounter issues.
+
+Example usage:
+
+```sh
+# Call with -v to get the complete JSON output of the OpenGraph, fallback and API parsers
+php flarum kilowhat:rich-embeds:process https://discuss.flarum.org/d/30516 -v
+```
+
+## MySQL requirements
+
+As described in [Requirements](#requirements), this extension requires a version of MySQL that supports JSON columns.
+
+Trying to enable the extension on an unsupported database will result in an error and a broken database state.
+
+To prevent users accidentally breaking their database, the extension attempts to guess if the MySQL version is supported before installation.
+
+This process is not entirely reliable because the format of the version is different on each operating system and might not be accurate for remote databases.
+
+If you cannot enable the extension due to a false positive, you can disable the MySQL version check by modifying Flarum's `config.php` file:
+
+If you encounter a false positive, please share your output of the `select version() as version` SQL command with me so I can fix it.
+
+```php
+<?php return array (
+  'debug' => false,
+  // [database configuration, headers, etc...]
+  // At the end of the array, add:
+  'kilowhat' => [
+    'ignore-mysql-requirement' => true,
+  ],
+);
+```
+
+After the initial activation of the extension, those additional lines can be removed.
+
+Behind the scenes, the check is performed by a special migration that runs before all other migrations.
+Once it has run, it won't run again even if the extension adds new migrations.
