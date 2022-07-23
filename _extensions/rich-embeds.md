@@ -42,7 +42,8 @@ A whitelist or blacklist of websites can be configured to control which websites
 Optionally, the extension will also retrieve and display metadata of images embedded into posts with bbcode or markdown. 
 
 <div class="picture-row">
-<img src="/medias/extensions/rich-embeds/post.png" alt="Post with 2 different styles of embed" style="width: 500px;">
+<img src="/medias/extensions/rich-embeds/post.png" alt="Post with 2 different styles of embed">
+<img src="/medias/extensions/rich-embeds/api-powered.png" alt="4 websites with API-powered embeds">
 </div>
 
 ## Changelog
