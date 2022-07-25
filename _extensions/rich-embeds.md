@@ -48,20 +48,30 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.2.1 - July 25, 2022
+
+- **Fixed** Rich Images wrapped in links not rendering correctly.
+- **Fixed** Alt text missing from Rich Images.
+- **Fixed** MySQL version check not comparing the correct numbers.
+
+You must clear the Flarum cache for the alt text fix to be applied.
+
+See 1.2.0 release notes if you are upgrading from an older version.
+
 ### Version 1.2.0 - July 24, 2022
 
-- **Added** Scan command for import and update after permission changes
-- **Added** Refresh command to mass-refresh embeds
-- **Added** API-powered Flarum embeds (discussions+users)
-- **Added** API-powered GitHub embeds (repos+issues+pulls)
-- **Added** API-powered YouTube embeds (videos)
-- **Added** API-powered Google Drive embeds (files)
-- **Added** Embedded player on YouTube links
-- **Added** Popover on links that failed rendering to give access to refresh controls
-- **Added** MySQL version check during extension activation
-- **Changed** Tweaked colors and margins
-- **Changed** No longer proxying images to the same domain as Flarum
-- **Fixed** Links containing ampersands wouldn't render as blocks
+- **Added** Scan command for import and update after permission changes.
+- **Added** Refresh command to mass-refresh embeds.
+- **Added** API-powered Flarum embeds (discussions+users).
+- **Added** API-powered GitHub embeds (repos+issues+pulls).
+- **Added** API-powered YouTube embeds (videos).
+- **Added** API-powered Google Drive embeds (files).
+- **Added** Embedded player on YouTube links.
+- **Added** Popover on links that failed rendering to give access to refresh controls.
+- **Added** MySQL version check during extension activation.
+- **Changed** Tweaked colors and margins.
+- **Changed** No longer proxying images to the same domain as Flarum.
+- **Fixed** Links containing ampersands wouldn't render as blocks.
 
 You must run `php flarum migrate` immediately after performing the update.
 Trying to create discussions or posts before the migrations have run will lead to errors.
