@@ -48,6 +48,13 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.2.2 - July 26, 2022
+
+- **Added** Ability to store the full Google JSON authentication payload in the setting instead of the file path.
+- **Fixed** Composer requirements incorrectly allowing Guzzle 6. Only Guzzle 7 is supported.
+
+See 1.2.0 release notes if you are upgrading from an older version.
+
 ### Version 1.2.1 - July 25, 2022
 
 - **Fixed** Rich Images wrapped in links not rendering correctly.
@@ -414,11 +421,14 @@ You need to enable the YouTube and Google Drive APIs in your Google Cloud Consol
 **Google SDK API key**: use this setting to provide an [API key](https://cloud.google.com/docs/authentication/api-keys).
 The value will be passed via `$client->setDeveloperKey($key)` internally.
 
-**Google SDK Auth Config Path**: use this setting to provide a path to a [JSON file containing the credentials to a Service Account](https://cloud.google.com/docs/authentication/production#manually).
+**Google SDK Auth Config Path or JSON**: use this setting to provide a path to a [JSON file containing the credentials to a Service Account](https://cloud.google.com/docs/authentication/production#manually).
 The value will be passed via `$client->setAuthConfig($path)` internally.
+You can also save a JSON string which will be decoded to a PHP array and fed to the same method.
 
 Using a Service Account instead of an API Key is useful if you wish to embed private information.
 You can share access to your YouTube account or Google Drive with the service account to make the information visible in Flarum.
+
+Google recommendation seems to be to *not* store the private key in the code or database, but this extension still allows it as it might be necessary in containerized or multi-tenant environments where the local filesystem is not writable/customizable.
 
 ### YouTube
 
