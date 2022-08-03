@@ -85,6 +85,12 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.6.2 - August 3, 2022
+
+- **Fixed:** all tags including children are now shown in tag selection dropdown.
+- **Fixed:** rename controls around enable and draft status for non-standalone to clear up confusion.
+- **Fixed:** make empty submission text translatable on discussion.
+
 ### Version 1.6.1 - August 3, 2022
 
 - **Fixed:** lock discussion forms on Flarum 1.3+. The changes in Flarum 1.3 had made possible to continue editing the form answers on a locked or soft deleted discussion.
@@ -395,11 +401,18 @@ The tag the form is linked to (if selected) will always be added in addition to 
 ### In "Access" tab
 
 **Accept new submissions**: enables the form.
-On standalone forms, this only controls the creation of new submissions.
-On user profiles or discussion fields, this controls whether the form is available for users or only in draft mode for moderators.
+Only available on standalone forms.
+This only controls the creation of new submissions.
 
 **Allow users to edit their existing submissions**: enables submission edit.
 Only available on standalone forms.
+
+**Enable**: enables the form.
+Only available on user profiles and discussion fields.
+While this setting is disabled, the form is in draft mode.
+In draft mode, form moderators can use the forms and see the answers, but regular users can't.
+Once enabled, the form will exit draft mode and be available according to the permissions configured globally or locally for that form.
+You should keep the form in draft mode until you have finished building the form template to reduce the risk of inconsistencies between early and later submissions.
 
 **Max submissions**: optional, the maximum number of submissions before the form automatically closes.
 When the max submissions number is reached, it has the same effect as if **Accept new submissions** was disabled.
