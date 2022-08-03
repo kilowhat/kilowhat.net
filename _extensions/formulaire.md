@@ -85,6 +85,14 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.6.1 - August 3, 2022
+
+- **Fixed:** lock discussion forms on Flarum 1.3+. The changes in Flarum 1.3 had made possible to continue editing the form answers on a locked or soft deleted discussion.
+- **Fixed:** unreadable colors in some parts of the form manager.
+- **Performance:** compiled javascript with Webpack 5 to reduce size.
+
+This version is only compatible with (and necessary for) Flarum 1.3 and later.
+
 ### Version 1.6.0 - August 5, 2021
 
 - **Added:** Checkboxes, Radio and Dropdown field types.
