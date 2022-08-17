@@ -39,20 +39,25 @@ The screenshot below is outdated and only shows a subset of the settings availab
 
 ## Changelog
 
-### Version 1.6.0 - August 17, 2022
+### Version 1.7.0 - August 17, 2022
 
 - Add ability to customize FoF Gamification user votes page.
 - Add ability to customize ClarkWinkelmann's Discussion Bookmarks page.
 - Add ability to customize ClarkWinkelmann's Post Bookmarks page.
 - Add ability to customize ClarkWinkelmann's Discussion Lists pages.
-- Add ability to customize Flamarkt pages.
 
-Discussion Lists and Flamarkt do not yet have any production-ready release, support was added for internal testing with clients.
+Discussion Lists does not yet have any production-ready release, support was added for internal testing with clients.
 
 This version requires Flarum 1.2 or greater.
 
 <details markdown="1">
 <summary markdown="span">Show older releases</summary>
+
+### Version 1.6.0 - August 27, 2021
+
+- Add ability to customize Flamarkt pages.
+
+Flamarkt does not yet have any production-ready release, support was added for internal testing with clients.
 
 ### Version 1.5.0 - June 9, 2021
 
