@@ -49,3 +49,8 @@ h3 {
     min-height: 50px; // Prevent page content jumping on load
   }
 }
+
+// Remove min-width because we have tables with many columns that go out of the screen
+th, td {
+  min-width: auto;
+}

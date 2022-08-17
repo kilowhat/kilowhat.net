@@ -9,7 +9,7 @@ nav_order: 50
 
 - **Price**: 10 USD lifetime license
 - **Bundled translations**: English
-- **Flarum compatibility**: 1.0+
+- **Flarum compatibility**: 1.2+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23872)
 
@@ -31,11 +31,28 @@ Custom Paths is a Flarum extension that allows you to customize the URL to vario
 When a path is customized, the original URL returns a 404 error.
 You can optionally enable redirects from the old paths to the new paths.
 
+The screenshot below is outdated and only shows a subset of the settings available in the latest version.
+
 <div class="picture-row">
 <img src="/medias/extensions/custom-paths/settings.png" alt="Settings Modal" style="max-width: 300px;">
 </div>
 
 ## Changelog
+
+### Version 1.6.0 - August 17, 2022
+
+- Add ability to customize FoF Gamification user votes page.
+- Add ability to customize ClarkWinkelmann's Discussion Bookmarks page.
+- Add ability to customize ClarkWinkelmann's Post Bookmarks page.
+- Add ability to customize ClarkWinkelmann's Discussion Lists pages.
+- Add ability to customize Flamarkt pages.
+
+Discussion Lists and Flamarkt do not yet have any production-ready release, support was added for internal testing with clients.
+
+This version requires Flarum 1.2 or greater.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
 
 ### Version 1.5.0 - June 9, 2021
 
@@ -90,26 +107,38 @@ This version can only be installed on Flarum beta 14 and will automatically be i
 
 Initial release.
 
+</details>
+
 ## Compatibility
 
 Custom Paths provides integration with the following extensions:
 
-- Flarum's Tags
-- Flarum's Subscriptions
-- Flarum's Flags
-- Flarum's Mentions (since 1.1.0)
-- [KILOWHAT Formulaire](/flarum/extensions/formulaire) (since 1.2.0)
-- [FriendsOfFlarum's User Directory](https://discuss.flarum.org/d/5682)
-- [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301)
-- [FriendsOfFlarum's Gamification](https://discuss.flarum.org/d/20671) (since 1.1.0)
-- [FriendsOfFlarum's Byobu](https://discuss.flarum.org/d/4762) (since 1.3.0)
-- [Askvortsov's Categories](https://discuss.flarum.org/d/23184)
-- [v17development's Flarum Blog](https://discuss.flarum.org/d/25392) (since 1.3.0)
-- [ClarkWinkelmann's Group List](https://discuss.flarum.org/d/25386) (since 1.3.0)
+An empty column means every version of the extension is supported by every version of Custom Paths.
+
+|-------------------------------------------------|----------------------------|-------------------------------|
+| Extension                                       | Extension version required | Custom Paths version required |
+|-------------------------------------------------|----------------------------|-------------------------------|
+| Flarum's Tags                                                                |      |      |
+| Flarum's Subscriptions                                                       |      |      |
+| Flarum's Flags                                                               |      |      |
+| Flarum's Mentions                                                            |      | 1.1+ |
+| [KILOWHAT Formulaire](/flarum/extensions/formulaire)                         |      | 1.2+ |
+| [FriendsOfFlarum's User Directory](https://discuss.flarum.org/d/5682)        |      |      |
+| [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301)                |      |      |
+| [FriendsOfFlarum's Gamification](https://discuss.flarum.org/d/20671)         |      | Rankings 1.1+<br>Votes 1.6+ |
+| [FriendsOfFlarum's Byobu](https://discuss.flarum.org/d/4762)                 |      | 1.3+ |
+| [Askvortsov's Categories](https://discuss.flarum.org/d/23184)                |      |      |
+| [v17development's Flarum Blog](https://discuss.flarum.org/d/25392)           |      | 1.3+ |
+| [ClarkWinkelmann's Group List](https://discuss.flarum.org/d/25386)           |      | 1.3+ |
+| [ClarkWinkelmann's Discussion Bookmarks](https://discuss.flarum.org/d/25357) | 2.0+ | 1.6+ |
+| [ClarkWinkelmann's Post Bookmarks](https://discuss.flarum.org/d/25386)       |      | 1.6+ |
+| ClarkWinkelmann's Discussion Lists (not yet released)                        |      | 1.6+ |
+| Flamarkt (not yet released)                                                  | Beta 1 | 1.6+ |
 
 The following extensions are incompatible:
 
-- [FriendsOfFlarum's Sitemap](https://discuss.flarum.org/d/14941) (paths are hard-coded in the sitemap extension)
+- [v17development's SEO](https://discuss.flarum.org/d/18316): Discussion and Profile URLs are not modified in meta tags, which will likely cause negative SEO effect. This is a problem in the SEO extension where all URLs have been hard-coded and don't support route renames nor custom slug drivers.
+- [FriendsOfFlarum's Sitemap](https://discuss.flarum.org/d/14941) 1.x only. Discussion, Tag and Profile URLs were not modified in sitemap. Those issues are resolved in version 2.0 of Sitemap.
 
 Most other Flarum extensions should work fine alongside Custom Paths, but no integration will be automatically provided.
 
@@ -129,7 +158,7 @@ Issues in previous versions that have been fixed as of 1.1.0:
 
 Issues that have been fixed as of 1.3.0:
 
-- [v17development's SEO](https://discuss.flarum.org/d/18316) was not able to add SEO tags to pages with customized URLs.
+- [v17development's SEO](https://discuss.flarum.org/d/18316) was not able to add SEO tags to pages with customized URLs. The meta tags still contain incorrect hard-coded URLs.
 
 ## Installation
 
