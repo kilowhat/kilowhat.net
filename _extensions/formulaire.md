@@ -74,16 +74,35 @@ Similar to the FriendsOfFlarum Masquerade open-source extension.
 
 ### Discussion fields
 
-The fields show up on discussions.
-The discussion author is able to edit them.
+The fields are added to the discussion composer and shown above the first post.
 
-This feature is in beta and fields can only be filled after a discussion has been created for now.
+The fields can be made editable by the discussion author or only moderators.
+When the discussion author is allowed to edit them, the permission will follow the same logic as post editing, so deleting or locking a discussion will prevent editing the fields.
 
-*Planned features:* fields in discussion composer.
+You can make fields global or scoped to a single tag.
+Multiple forms can be created with different tag scoping and permissions.
+
+The Flarum discussion composer is not well suited to contain many fields, so this feature is best used together with my free [Composer Page](https://github.com/clarkwinkelmann/flarum-ext-composer-page) extension which is fully supported when used together with Formulaire.
+
+You can also bypass the discussion composer and use a dedicated form page identical to the standalone form page.
+In this case you tell Formulaire where you want the discussion to be created and how to generate the title and content.
+Discussions created this way may be pushed to a tag that users cannot see at all.
+
+**Example use cases**: support threads, buy/sell posts, moderator notes, file attachments, ...
 
 Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
+
+### Version 1.7.0 - September 8, 2022
+
+- **Added:** discussion fields in start discussion composer.
+- **Added:** optional horizontal form layout for discussion, profile and standalone.
+- **Added:** contextual validation errors in sign up modal
+- **Changed:** the REST API validation error pointers for linked models are now prefixed with `formulaireForms/<form uid>/` to ensure the messages can be shown under the correct fields in case customized field keys are re-used across forms or conflict with native discussion or user attributes.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
 
 ### Version 1.6.2 - August 3, 2022
 
@@ -185,6 +204,8 @@ The new features were sponsored by [Konica Minolta](https://www.aire.link/). Tha
 
 Initial release.
 
+</details>
+
 ## Demo
 
 A demo/test website is available at <https://formulaire-demo.http418.ch/>.
@@ -216,6 +237,8 @@ As time goes on this section will be filled with any extension that could be inc
 - Install the extension via Composer: `composer require kilowhat/flarum-ext-formulaire`
 - Open the Flarum admin panel and enable the extension
 - See below for the settings
+
+If you are planning to use discussion fields, I recommend installing the optional free extension [Composer Page](https://github.com/clarkwinkelmann/flarum-ext-composer-page): `composer require clarkwinkelmann/flarum-ext-composer-page`
 
 ## Update
 
@@ -263,7 +286,7 @@ If such a submission already had an "other" value, it might be impossible to edi
 
 ## Extension settings
 
-### Settings modal
+### Admin panel settings
 
 **Max file size**: the maximum file size for the upload field type.
 Please note that if a user tries to upload a file bigger than your PHP file limit, the web server will throw an error before Flarum can even start.
@@ -282,6 +305,26 @@ The native option uses the browser `input` with `type="checkbox"`.
 **Radio style**: controls the look of the radio buttons rendered inside the Radio field type.
 The "FontAwesome" options are custom designs implemented by Formulaire using the icons from Font Awesome.
 The native option uses the browser `input` with `type="radio"`.
+
+**Use horizontal form layout**: the default layout always places the label above the field.
+In horizontal layout, the label and the field will be placed on a single line, and all fields will be aligned like a grid.
+On small screens, the label will revert to its original position, so this setting makes no difference on mobile.
+You should keep this setting to horizontal for the discussion composer, as the regular layout might not fit at all in the Flarum discussion composer.
+
+**Uniform discussion composer layout**: when this layout is used, Formulaire re-arranges the fields from other extensions in the discussion composer to match with its own styling.
+The following extensions are supported:
+
+- Discussion title gets a label added
+- Content gets a label added, but will not switch to horizontal
+- Tags get a label added, and the tag selector is made to look like a text field
+- FriendsOfFlarum Polls gets a label added
+- Flamarkt Taxonomies get their name added as label (requires Taxonomies 0.1.5) and the term selector is made to look like a text field
+- Other unrecognized inputs are split to their own line each, but get no label
+
+When the unified layout is active, some Flarum fields like the title will also use the contextual validation error styling from Formulaire.
+
+This feature is best used together with the free extension [Composer Page](https://github.com/clarkwinkelmann/flarum-ext-composer-page) which will create the vertical space required for this feature to work with more than 1-2 fields.
+This extension is also almost a requirement on mobile because the built-in Flarum composer behaves too badly on small screens.
 
 ### Permission
 
@@ -381,10 +424,20 @@ A better preview page is coming in a future version.
 **Special form types**: choose the type of form.
 See [Introduction](#introduction) for the explanation of the different types.
 
-**Show in sign up**: show fields inside of the sign up modal in addition to the user profile.
+*A note on group- or tag- scoped forms*: when you change the groups of a user or the tags of a discussion, existing forms and submissions are not detached.
+There is currently no special handling for this situation, so you should avoid changing the groups or tags if you can avoid it.
+The data might remain visible even when the group or tag no longer matches the original, and it might become impossible to edit it without reverting the group or tag change.
+
+**Show in sign up**: show fields inside the sign up modal in addition to the user profile.
 Only available for user profiles.
 When you enable this option, you must also verify that the permissions allow "Everyone / non-enabled members" to view and submit the form.
 *Available since version 1.2.0.*
+
+**Show in discussion composer**: show fields inside the Flarum discussion composer.
+Only available for discussion fields.
+If a form is restricted to a specific tag, the fields will only appear in the composer after that tag has been selected.
+The entered data is preserved even if the tag is removed and re-added during the course of writing the discussion.
+*Available since version 1.7.0*
 
 **Automatically create discussions from form submission**: only available for discussion fields.
 When disabled, submissions can only be created from an existing discussion page.
