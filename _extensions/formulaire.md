@@ -94,11 +94,19 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.7.1 - September 13, 2022
+
+- **Changed:** Formulaire fields now have the same layout in SignUp Modal as everywhere else instead of inheriting the larger SignUp fields input style (larger style would only apply to short text inputs and buttons which was inconsistent).
+- **Fixed:** missing margins in SignUp modal.
+- **Fixed:** discussion fields edit modal layout issue on Flarum 1.5.
+
+The extension was confirmed working on Flarum 1.5.
+
 ### Version 1.7.0 - September 8, 2022
 
 - **Added:** discussion fields in start discussion composer.
 - **Added:** optional horizontal form layout for discussion, profile and standalone.
-- **Added:** contextual validation errors in sign up modal
+- **Added:** contextual validation errors in sign up modal.
 - **Changed:** the REST API validation error pointers for linked models are now prefixed with `formulaireForms/<form uid>/` to ensure the messages can be shown under the correct fields in case customized field keys are re-used across forms or conflict with native discussion or user attributes.
 
 <details markdown="1">
