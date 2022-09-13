@@ -39,6 +39,18 @@ The screenshot below is outdated and only shows a subset of the settings availab
 
 ## Changelog
 
+### Version 1.8.0 - September 13, 2022
+
+- Add ability to customize Flarum 1.5 profile likes page.
+- Add ability to customize ClarkWinkelmann's Composer Page pages.
+- Add ability to customize Formulaire profile page.
+- Fix renamed profile tabs that were redirecting to the homepage instead of their intended new name.
+
+The extension was confirmed working on Flarum 1.5.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
+
 ### Version 1.7.0 - August 17, 2022
 
 - Add ability to customize FoF Gamification user votes page.
@@ -49,9 +61,6 @@ The screenshot below is outdated and only shows a subset of the settings availab
 Discussion Lists does not yet have any production-ready release, support was added for internal testing with clients.
 
 This version requires Flarum 1.2 or greater.
-
-<details markdown="1">
-<summary markdown="span">Show older releases</summary>
 
 ### Version 1.6.0 - August 27, 2021
 
@@ -135,12 +144,13 @@ An empty column means every version of the extension is supported by every versi
 | [Askvortsov's Categories](https://discuss.flarum.org/d/23184)                |      |      |
 | [v17development's Flarum Blog](https://discuss.flarum.org/d/25392)           |      | 1.3+ |
 | [ClarkWinkelmann's Group List](https://discuss.flarum.org/d/25386)           |      | 1.3+ |
-| [ClarkWinkelmann's Discussion Bookmarks](https://discuss.flarum.org/d/25357) | 2.0+ | 1.6+ |
-| [ClarkWinkelmann's Post Bookmarks](https://discuss.flarum.org/d/25386)       |      | 1.6+ |
-| ClarkWinkelmann's Discussion Lists (not yet released)                        |      | 1.6+ |
+| [ClarkWinkelmann's Discussion Bookmarks](https://discuss.flarum.org/d/25357) | 2.0+ | 1.7+ |
+| [ClarkWinkelmann's Post Bookmarks](https://discuss.flarum.org/d/25386)       |      | 1.7+ |
+| [ClarkWinkelmann's Discussion Lists](https://discuss.flarum.org/d/31560)     |      | 1.7+ |
+| [ClarkWinkelmann's Composer Page](https://discuss.flarum.org/d/31564)        |      | 1.8+ |
 | Flamarkt (not yet released)                                                  | Beta 1 | 1.6+ |
 
-The following extensions are incompatible:
+The following extensions are/were incompatible:
 
 - [v17development's SEO](https://discuss.flarum.org/d/18316): Discussion and Profile URLs are not modified in meta tags, which will likely cause negative SEO effect. This is a problem in the SEO extension where all URLs have been hard-coded and don't support route renames nor custom slug drivers.
 - [FriendsOfFlarum's Sitemap](https://discuss.flarum.org/d/14941) 1.x only. Discussion, Tag and Profile URLs were not modified in sitemap. Those issues are resolved in version 2.0 of Sitemap.
@@ -229,3 +239,5 @@ By enabling "Redirect default Flarum paths to new paths", a redirect to the new 
 
 - With debug mode enabled, a 302 temporary redirect is used.
 - With debug mode disabled, a 301 permanent redirect is used.
+
+Renamed profile page tabs are redirected with javascript instead of HTTP redirects due to their routing happening client-side.
