@@ -9,7 +9,7 @@ nav_order: 50
 
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English
-- **Flarum compatibility**: 1.0+
+- **Flarum compatibility**: 1.2+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/22229-premium-wordpress-integration)
 
@@ -80,6 +80,19 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 </div>
 
 ## Flarum changelog
+
+### Version 1.7.4 - September 13, 2022
+
+- Fix iframe incorrectly showing 1 total comment despite no comments having been made (fix will apply to new comment threads, existing threads will fix themselves upon first comment)
+- Fix Flarum discussion list showing 1 less reply than actual count
+- Fix iframe header layout on Flarum 1.5
+- Fix reply composer being off-center if the iframe is larger than `1000px`
+- Add class name to username pick modal
+- Tweak some texts and styling in admin panel
+- Make health check errors translatable
+- Compile javascript with Webpack 5
+
+The extension was confirmed working on Flarum 1.5.
 
 ### Version 1.7.3 - January 16, 2022
 
