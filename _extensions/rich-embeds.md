@@ -48,6 +48,15 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.2.3 - September 21, 2022
+
+- **Fixed** Check `url` index exists before deleting in migration. This allows re-attempting the migration if an error occurs while changing the `url` column size.
+
+The migration that was modified was introduced in version 1.1.0 in June.
+If you never encountered any error since updating to 1.1.0, you may skip this update.
+
+See 1.2.0 release notes if you are upgrading from an older version.
+
 ### Version 1.2.2 - July 26, 2022
 
 - **Added** Ability to store the full Google JSON authentication payload in the setting instead of the file path.
