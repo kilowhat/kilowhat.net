@@ -598,3 +598,32 @@ After the initial activation of the extension, those additional lines can be rem
 
 Behind the scenes, the check is performed by a special migration that runs before all other migrations.
 Once it has run, it won't run again even if the extension adds new migrations.
+
+### Doctrine JSON error
+
+It's possible that despite passing the MySQL version check, some migrations still fail with the following error message:
+
+    flarum.ERROR: Doctrine\DBAL\Exception: Unknown database type json requested, Doctrine\DBAL\Platforms\MySqlPlatform may not support it
+
+If that happens, it means the Doctrine DBAL package, used by Laravel migrations internally, was not able to detect your database version.
+Most likely, this will be because you are connecting to a remote database or some other sort of mysql-compatible cloud database.
+
+You can tell Doctrine your MySQL version by modifying Flarum's `config.php` file and adding `server_version` under `database`:
+
+```php
+<?php return array (
+  'debug' => false,
+  'database' => 
+  array (
+    'driver' => 'mysql',
+    'host' => 'localhost',
+    // [port, database, username, etc...]
+    'engine' => 'InnoDB',
+    'prefix_indexes' => true,
+    // after other database options, add:
+    // (adjust for your actual MySQL version)
+    'server_version' => '5.7.8',
+  ),
+  // [url, paths, headers, etc...]
+);
+```
