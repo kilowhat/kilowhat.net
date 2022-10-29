@@ -29,6 +29,7 @@ Table of content:
 - [Submission options](#submission-options)
 - [Field options](#fields-options)
 - [Replacement variables](#replacement-variables)
+- [Scout integration](#scout-integration)
 - [Import and export](#import-and-export)
 - [Extensibility](#extensibility)
 
@@ -93,6 +94,21 @@ Discussions created this way may be pushed to a tag that users cannot see at all
 Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
+
+### Version 1.8.0 - October 29, 2022
+
+- **Added**: (manager only) ability to search forms by title.
+- **Added**: (manager only) ability to search forms by title, slug and field names (Scout integration required).
+- **Added**: (manager only) ability to search submissions by field answers (Scout integration required).
+- **Added**: ability to search discussions by field answers (Scout integration required).
+- **Added**: ability to search users by field answers (Scout integration required).
+- **Added**: new PHP events for developers.
+- **Fixed**: updated French translation to consistently use "réponse" as the translation to "submission".
+
+See the documentation for how to configure Scout.
+
+Breaking change for developers: the signature to `FormRepository::store()` and `FormRepository::update()` changed to take `$data` instead of `$attributes`.
+I am not aware of any client using the repository classes directly but I'm mentioning this just in case.
 
 ### Version 1.7.1 - September 13, 2022
 
@@ -694,6 +710,50 @@ And you could set the notification email (to admin) to:
 {user_username}'s appointment on {af927b85-f19a-4710-8c94-add4ea6c3ca6}
 ```
 
+## Scout integration
+
+*(since version 1.8.0)*
+
+Formulaire can integrate with my free [Scout](https://github.com/clarkwinkelmann/flarum-ext-scout) extension for Flarum.
+
+The integration will automatically be active if both Formulaire and Scout are enabled at the same time.
+
+Version 0.3+ of Scout must be installed.
+Using Formulaire with an older Scout version will result in errors.
+
+> I have only tested the integration with the Meilisearch Scout driver.
+> However all drivers should be supported.
+> Please let me know if there's any issue with another driver.
+
+When Scout is enabled, 2 main areas become searchable:
+
+In the **Form Manager**, you will be able to search forms by title, slug and the label of and field inside the template (only title is searchable without Scout).
+Additionally, you can search submissions by user display name or any of the answers (without Scout submissions are not searchable and the search input is hidden).
+For indexing, a plain text version of the rich text is extracted from the HTML.
+File uploads are not part of the indexed data.
+
+In the **Flarum Search** (global search, mentions and FoF User Directory if enabled), you will be able to search discussions and users by the answers to their custom fields.
+Only answers visible to guests are indexed to prevent leaking any information.
+
+If you already have forms and answers in your database when you enable Scout, you need to rebuild the search index.
+To update everything, run:
+
+    php flarum scout:import-all
+
+If you only need to rebuild the Formulaire search indexes, you can manually specify those indexes:
+
+```sh
+# Full refresh of forms index
+# Flush is only needed to clear any stale record that Formulaire might have created previously
+php flarum scout:flush "Kilowhat\Formulaire\Form"
+php flarum scout:import "Kilowhat\Formulaire\Form"
+
+# Other relevant model names
+php flarum scout:import "Kilowhat\Formulaire\Submission"
+php flarum scout:import "Flarum\Discussion\Discussion"
+php flarum scout:import "Flarum\User\User"
+```
+
 ## Import and export
 
 ### Submissions
@@ -747,7 +807,14 @@ Formulaire is designed to be highly extensible by other extensions.
 
 Every javascript component is exposed and can be extended.
 
-PHP events exist for `SubmissionCreated` and `SubmissionUpdated`.
+A number of PHP events are available. Check the following namespaces in the source code for information:
+
+- `Kilowhat\Formulaire\Discussion\Event`.
+- `Kilowhat\Formulaire\Form\Event`.
+- `Kilowhat\Formulaire\Submission\Event`.
+- `Kilowhat\Formulaire\User\Event`.
+
+The older events in the `Kilowhat\Formulaire\Events` namespace (`SubmissionCreated` and `SubmissionUpdated`) are deprecated and shouldn't be used anymore.
 
 If you would like to create an integration, feel free to reach out to me.
 I'll need to find a way to share documentation about the javascript API.
