@@ -9,7 +9,7 @@ nav_order: 50
 
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English and French
-- **Flarum compatibility**: 1.0+
+- **Flarum compatibility**: 1.3+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-formulaire)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23063)
 
@@ -94,6 +94,13 @@ Discussions created this way may be pushed to a tag that users cannot see at all
 Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
+
+### Version 1.8.1 - November 12, 2022
+
+- **Changed**: links in content blocks now open in new tabs and no longer have `ugc nofollow` rel value.
+- **Fixed**: emails failing to send when the form contains checkbox, radio or select fields.
+- **Fixed**: rich text answers not rendered as HTML in emails.
+- **Fixed**: 500 errors not causing any visible feedback on the form submit and edit pages.
 
 ### Version 1.8.0 - October 29, 2022
 
