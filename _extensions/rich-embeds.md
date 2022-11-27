@@ -48,6 +48,22 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.2.4 - November 27, 2022
+
+> **This is a security update. All users should upgrade as soon as possible.**
+
+- **Changed** Sanitize SVG files to prevent image proxy endpoint being used as part of an XSS attack.
+- **Changed** explicitly whitelist common MIME types for images instead of previous `image/*` to reduce attack vectors.
+- **Changed** limit proxy file size to 5MB to make it harder to use as part of a denial of service attack.
+- **Changed** prevent usage of proxy endpoint if image proxy feature is disabled.
+- **Changed** proxy errors now returned as images. Previous JSON responses weren't very useful as they always resulted in broken image tags in frontend.
+
+I am not aware of these issues having been actively exploited.
+I discovered them through internal review.
+The XSS was only possible by tricking a user to click a URL that points to the proxy script.
+
+If you are using a whitelist of trusted domains, the XSS was only possible if an attacker could upload an SVG file to one of the trusted domains.
+
 ### Version 1.2.3 - September 21, 2022
 
 - **Fixed** Check `url` index exists before deleting in migration. This allows re-attempting the migration if an error occurs while changing the `url` column size.
