@@ -62,7 +62,7 @@ I am not aware of these issues having been actively exploited.
 I discovered them through internal review.
 The XSS was only possible by tricking a user to click a URL that points to the proxy script.
 
-If you are using a whitelist of trusted domains, the XSS was only possible if an attacker could upload an SVG file to one of the trusted domains.
+If you are using a whitelist of trusted domains, the XSS was only possible if an attacker could upload a malicious SVG file to one of the trusted domains.
 
 ### Version 1.2.3 - September 21, 2022
 
