@@ -81,6 +81,12 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.7.5 - November 29, 2022
+
+- Fix some internal Flarum links opening inside iframe instead of expected parent window.
+
+The extension was confirmed working on Flarum 1.6.
+
 ### Version 1.7.4 - September 13, 2022
 
 - Fix iframe incorrectly showing 1 total comment despite no comments having been made (fix will apply to new comment threads, existing threads will fix themselves upon first comment)
