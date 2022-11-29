@@ -381,7 +381,7 @@ See below for Wordpress settings.
 - If this is your first premium extension purchase from Extiverse, follow the "Composer configuration" instructions available at <https://extiverse.com/premium/subscriptions>
 - Install the extension via Composer: `composer require kilowhat/flarum-ext-wordpress`
 - Open the Flarum admin panel and enable the extension
-- Go to the new Wordpress tab and fill in your Wordpress credentials in the installation wizard
+- On the extension page, use the installation wizard tab to enter your Wordpress credentials
 
 See below for Flarum settings.
 
@@ -434,8 +434,6 @@ The checks includes:
 Green: no issues detected.
 
 Red: a list of the issues will be explained.
-
-The health check reports are hard-coded in English and can't be translated at this time.
 
 ### There is another error
 
