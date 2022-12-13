@@ -81,6 +81,12 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.7.6 - December 13, 2022
+
+- Fix new comment threads with no replies not showing as unread in Flarum discussion list. It will now show as unread + zero replies which Flarum would not natively do.
+
+This problem appeared in version 1.7.4 when the reply count was fixed for new discussions.
+
 ### Version 1.7.5 - November 29, 2022
 
 - Fix some internal Flarum links opening inside iframe instead of expected parent window.
