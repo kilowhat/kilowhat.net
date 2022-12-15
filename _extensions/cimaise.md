@@ -9,7 +9,7 @@ nav_order: 50
 
 [![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-cimaise/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-cimaise){: .extiverse-badge}
 
-- **Price**: 30 USD lifetime license (through early access)
+- **Price**: 30 USD / 50 USD lifetime license (special price for early access: non-profit/for-profit)
 - **Bundled translations**: English and French
 - **Flarum compatibility**: 1.2+
 - See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-cimaise)
