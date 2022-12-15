@@ -22,6 +22,7 @@ Table of content:
 - [Compatibility](#compatibility)
 - [Installation](#installation)
 - [Update](#update)
+- [Remove extension](#remove-extension)
 - [Support](#support)
 - [Extension settings](#extension-settings)
 - [Logged actions](#logged-actions)
@@ -221,7 +222,7 @@ You can use the following commands to update:
     php flarum migrate
     php flarum cache:clear
 
-## Delete
+## Remove extension
 
 For security, the data created by Audit Log is not deleted when you remove the extension, even if you use the "Purge" button or `php flarum migrate:reset` command.
 
