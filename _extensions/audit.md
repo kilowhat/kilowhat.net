@@ -66,6 +66,13 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.6.0 - December 15, 2022
+
+- Throw error if MySQL requirements are not met during enable.
+- No longer destroy the logs table when purging migrations to prevent tempering from a hijacked admin account.
+- Add CLI command to destroy the logs table.
+- <span class="pro-badge">pro only</span> Add CLI command to delete logs older than a specific date or threshold. This command is itself logged as `audit_log_cleared`.
+
 ### Version 1.5.1 - March 22, 2022
 
 - Fix compatibility issues with some admin themes.
@@ -214,6 +221,21 @@ You can use the following commands to update:
     php flarum migrate
     php flarum cache:clear
 
+## Delete
+
+For security, the data created by Audit Log is not deleted when you remove the extension, even if you use the "Purge" button or `php flarum migrate:reset` command.
+
+To delete the data permanently, follow these steps:
+
+- Verify the Audit Log extension is enabled in the admin panel.
+- Run `php flarum kilowhat:audit:clear --reset` from the command line in the Flarum folder.
+- Type "yes" and press Enter at the prompt to continue.
+- The database table has been deleted and the extension disabled.
+- You can remove the extension with `composer remove kilowhat/flarum-ext-audit-pro`.
+
+Pro users also have access to the `php flarum kilowhat:audit:clear --before=` command to only delete older logs while keeping recent logs.
+Run `php flarum kilowhat:audit:clear --help` to get documentation about all available options.
+
 ## Support
 
 > Support is only available for users of the Pro version.
@@ -287,6 +309,10 @@ The following gambits can be used to search in logs:
 - `discussion:<id>` - returns both discussion and post events for the discussion
 - `ip:<ip>`
 - `user:<username>`
+
+### Internal
+
+- `audit_log_cleared` <span class="pro-badge">pro only</span>: When logs are deleted via the `kilowhat:audit:clear --before` CLI command (data logged: query date, number of deleted entries). Not logged if zero entries were deleted.
 
 ### Flarum Core
 
