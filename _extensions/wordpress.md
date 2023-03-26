@@ -81,6 +81,23 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.8.0 - March 26, 2023
+
+- Added WP author sync to discussion owner.
+- Added WP thumbnail sync and display options.
+- Added WP tag override feature for multi-site use cases.
+- Added more information to WP request log in Flarum log file and disabled logging completely when debug mode is off.
+
+This update requires PHP **7.4** or **PHP 8.0+**. Support for PHP 7.3 has been dropped.
+
+The new features require updating the WordPress plugin to version 1.5.
+See below for WordPress plugin changelog.
+
+Both versions 1.7 and 1.8 of the Flarum extension have been verified compatible with Flarum 1.7.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
+
 ### Version 1.7.6 - December 13, 2022
 
 - Fix "WordPress" case in the extension name, documentation and English translations. The namespaces and attributes are unchanged and keep their lowercase "p".
@@ -128,9 +145,6 @@ This version can only be installed on Flarum 1.0 and above.
 
 The new version will automatically be installed when you migrate to Flarum stable with Flarum's official instructions.
 Requires **version 1.4** or greater of the WordPress plugin.
-
-<details markdown="1">
-<summary markdown="span">Show older releases</summary>
 
 ### Version 1.6.4 - March 29, 2021
 
@@ -278,6 +292,21 @@ Initial release.
 
 ## WordPress changelog
 
+### Version 1.5.0 - March 26, 2023
+
+- Added Flarum tags override feature.
+- Added post author ID synchronisation.
+- Added post thumbnail synchronisation.
+- Fixed capitalization of word "WordPress" in setting descriptions.
+
+The plugin must be manually updated.
+The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.5.0.zip).
+Works with any version of the Flarum extension.
+The new features work in pair with version 1.8 of the Flarum extension.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
+
 ### Version 1.4.0 - August 3, 2020
 
 - Enables the fixes released in the Flarum extension version 1.6.0
@@ -286,9 +315,6 @@ Initial release.
 The plugin must be manually updated.
 The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.4.0.zip).
 Works with any version of the Flarum extension.
-
-<details markdown="1">
-<summary markdown="span">Show older releases</summary>
 
 ### Version 1.3.0 - May 16, 2020
 
@@ -334,8 +360,10 @@ Please get in touch if you would like admin access.
 
 ## Requirements
 
-- WordPress version must be 5.0 or higher (lower might work, but not tested)
-- Flarum version must be 1.0.0 or higher
+- **PHP**: version 8.0+ is recommended for both Flarum and WordPress and are the only versions tested by the developer.
+- Minimum compatible PHP version are 7.4+ for Flarum (hard-requirement) and 7.3 for WordPress (soft-requirement). WordPress extension might work with lower PHP versions but is unsupported.
+- **WordPress** version must be 5.0 or higher (lower might work, but not tested)
+- **Flarum** version must be 1.2.0 or higher
 - You must have SSH and Composer access on the Flarum hosting
 - WordPress and Flarum must be hosted on the same domain, or subdomains of the same domain (cookie limitations)
 - WordPress and Flarum must be accessible via HTTPS and HTTP urls must be redirected to HTTPS
@@ -375,7 +403,7 @@ You must install both the WordPress plugin and Flarum extension.
 
 ### On WordPress
 
-- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.4.0.zip). Current version is 1.4.0
+- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.5.0.zip). Current version is 1.5.0
 - Extract the content of the ZIP file and place the `kilowhat-flarum` folder under `wp-content/plugins`
 - Open the WordPress admin panel and enable the plugin
 - Go to the **Flarum admin panel** and follow the installation wizard
@@ -572,6 +600,25 @@ Post types not included here will default to normal WordPress comments if commen
 
 Setting this value will not change whether comments are opened or closed by default.
 Default comments status is still controlled by the corresponding native WordPress settings.
+
+### Override Flarum discussion tags
+
+*Since version 1.5 of the WordPress plugin. Requires version 1.8+ of the Flarum extension*
+
+**Default value:** *not set*
+
+This setting is optional.
+The value provided here will override the **Tag for new comment threads** value set in the Flarum extension.
+In a WordPress multi-site context, this allows specifying different tags depending on the currently active WordPress site.
+If you are not using WordPress multi-site, I recommend leaving this setting empty and only using the settings on the Flarum side.
+
+The text input accepts a list of Flarum tag slugs or IDs separated by a comma.
+If an invalid slug or ID is provided, it will be ignored and a warning will be written to the Flarum log file.
+
+After the initial comment discussion creation in Flarum, the tags are not updated.
+I am not sure whether WordPress or any of its plugins allow moving a post from one site to another.
+If that happens, the behaviour might be unexpected.
+But most likely nothing will happen, the discussion will stay the same in Flarum and continue to be synced with the same WordPress post ID on the next operation.
 
 ### Shortcode for custom themes
 
@@ -798,6 +845,43 @@ This feature can be enabled together with the HTML whitelist.
 It can also be enabled together with the node count but it probably doesn't make much sense to do so.
 
 Setting 0 or an empty value (default) will skip this filter.
+
+### Show WordPress post thumbnail above excerpt
+
+*Since version 1.8, requires version 1.5+ of the WordPress plugin*
+
+Shows the WordPress post thumbnail above the post excerpt.
+The original image URL is hot-linked from WordPress and inserted in its own `<img>` tag.
+
+Discussions created before version 1.8(Flarum extension)/1.5(WordPress plugin) did not save the post thumbnail URL.
+If you edit the post in WordPress a new version of the post including thumbnail will be synced.
+
+### Show WordPress post thumbnail in Flarum discussion list
+
+*Since version 1.8, requires version 1.5+ of the WordPress plugin*
+
+Same as the setting above but the WordPress post thumbnail will be added when displaying the comment thread in the Flarum discussion list (homepage, tag page, etc.).
+
+The default styling is very simple.
+You can add additional styling targeting the `.KilowhatWordpressDiscussionListItem-Thumbnail` image tag.
+
+### Assign discussion author from SSO
+
+*Since version 1.8, requires version 1.5+ of the WordPress plugin*
+
+By default, the Flarum API user set in WordPress **Flarum User ID** setting will be used as the author of the comment discussion and its event posts.
+
+When this setting is enabled, Flarum will attempt to use the Flarum profile of the WordPress post author as discussion author.
+Matching is performed using the WordPress user ID which is set when the user connects to Flarum using the SSO feature.
+
+If the WordPress user has never logged into Flarum, its profile won't be found and the default user set as **Flarum User ID** will be used.
+
+Discussions created before version 1.8(Flarum extension)/1.5(WordPress plugin) will not be retroactively updated.
+You may use my free [Author Change extension](https://discuss.flarum.org/d/21731) to manually fix older discussions.
+Don't forget to update both the discussion and first post authors.
+
+When this setting is enabled, the first post author will be displayed similarly to regular Flarum comments, with the avatar in the left margin on desktop and a mouse-activated user card.
+If you customized the CSS of the WordPress summary, you can adjust the CSS variables `--wordpress-post-article-border-width` (originally `5px`) and `--wordpress-post-article-padding` (originally `20px`) on `.KilowhatWordpressSummaryPost` to automatically adjust the positioning of the avatar.
 
 ### Tag for new comment threads
 
