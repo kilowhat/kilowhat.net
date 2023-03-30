@@ -81,6 +81,12 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.8.1 - March 30, 2023
+
+- Fix WP thumbnail change not always synchronising.
+- Fix WP post URL slug change not synchronising.
+- Update Symfony dependencies to prevent conflict with other Flarum extensions.
+
 ### Version 1.8.0 - March 26, 2023
 
 - Added WP author sync to discussion owner.
