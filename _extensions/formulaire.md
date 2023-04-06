@@ -95,6 +95,13 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.8.2 - April 6, 2023
+
+- **Fixed** compatibility with Flarum 1.7+.
+
+This version will only install on Flarum 1.7+.
+All future updates will require Flarum 1.7+.
+
 ### Version 1.8.1 - November 12, 2022
 
 - **Changed**: links in content blocks now open in new tabs and no longer have `ugc nofollow` rel value.
