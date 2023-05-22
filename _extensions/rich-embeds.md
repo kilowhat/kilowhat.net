@@ -48,6 +48,33 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.2.5 - May 22, 2023
+
+> **This is a security update. All users should upgrade as soon as possible.**
+
+- **Changed** limit OpenGraph/Rich/Image crawler download to 5MB per URL to make it harder to use as part of a denial of service attack.
+- **Fixed** issue where the Image crawler could be exploited to access meta information of arbitrary images on the server filesystem or intranet, or leak server IP despite a blacklist.
+
+The vulnerability affected all versions of the extension since 1.1.0.
+
+**Attack vector**: an attacker could post a link to a malicious HTTP endpoint that would return a special payload.
+The endpoint would have to be an attacker-controlled server or a file hosting service that can be fooled into returning an incorrect MIME type in the HTTP headers.
+The extension would then automatically access any arbitrary URL or file path contained in the malicious payload.
+
+**Exposed information**: If the arbitrary URL points to a valid image on the filesystem or intranet, the image width, height and EXIF data would be made available through the Flarum REST API to anyone with permission to view embeds.
+If an asynchronous queue is not used, an attacker could time the request to try guessing whether a file (image or not) exists at a given path or intranet URL.
+The server IP is sent along with the request to the arbitrary URL, which could leak the server IP if a blacklist usually restrict it from being shared.
+
+**Mitigating circumstance**: if a whitelist/blacklist was used to restrict the domains to trusted websites, it's unlikely that an attacker could host the required attack payload on a regular un-compromised website.
+If a whitelist/blacklist was not used, the IP leak is not a vulnerability since any user could already publish a link to a server they control and get it accessed by the crawler.
+
+**Additional remedial steps**: scan the `kilowhat_rich_embeds.exif` column of your database for any maliciously exposed information.
+Set the value to MySQL `NULL` to redact it.
+
+There is no evidence of this vulnerability being exploited, it was discovered through internal audit.
+
+This version is compatible with Flarum versions 1.2 to 1.8.
+
 ### Version 1.2.4 - November 27, 2022
 
 > **This is a security update. All users should upgrade as soon as possible.**
