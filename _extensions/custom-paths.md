@@ -39,6 +39,15 @@ The screenshot below is outdated and only shows a subset of the settings availab
 
 ## Changelog
 
+### Version 1.9.0 - June 25, 2023
+
+- Fix user profile prefix not applying to new security page from Flarum 1.7.
+- Enable customization of security page suffix.
+- Enable customization of FoF Masquerade profile page.
+- Enable customization of FoF Moderator Notes profile page.
+- Enable customization of v17development's User Badges pages.
+- Sync user profile prefix in KILOWHAT Cimaise. Suffix and other pages customization will be added in a future update.
+
 ### Version 1.8.0 - September 13, 2022
 
 - Add ability to customize Flarum 1.5 profile likes page.
@@ -141,8 +150,11 @@ An empty column means every version of the extension is supported by every versi
 | [FriendsOfFlarum's Pages](https://discuss.flarum.org/d/18301)                |      |      |
 | [FriendsOfFlarum's Gamification](https://discuss.flarum.org/d/20671)         |      | Rankings 1.1+<br>Votes 1.6+ |
 | [FriendsOfFlarum's Byobu](https://discuss.flarum.org/d/4762)                 |      | 1.3+ |
+| [FriendsOfFlarum's Masquerade](https://discuss.flarum.org/d/5791)            |      | 1.9+ |
+| [FriendsOfFlarum's Moderator Notes](https://discuss.flarum.org/d/22925)      |      | 1.9+ |
 | [Askvortsov's Categories](https://discuss.flarum.org/d/23184)                |      |      |
 | [v17development's Flarum Blog](https://discuss.flarum.org/d/25392)           |      | 1.3+ |
+| [v17development's User Badges](https://discuss.flarum.org/d/26449)           |      | 1.9+ |
 | [ClarkWinkelmann's Group List](https://discuss.flarum.org/d/25386)           |      | 1.3+ |
 | [ClarkWinkelmann's Discussion Bookmarks](https://discuss.flarum.org/d/25357) | 2.0+ | 1.7+ |
 | [ClarkWinkelmann's Post Bookmarks](https://discuss.flarum.org/d/25386)       |      | 1.7+ |
@@ -161,7 +173,6 @@ You may request additional integrations on the Discuss page.
 
 ## Known issues
 
-- The user profile filters (`/discussions`, `/mentions` suffix) are not affected by the "Redirect" setting. Typing the old URL will always redirect to the homepage. (This is because this is a frontend-only route)
 - The eye icon in the FoF Pages admin panel won't open the correct URL if it was customized, but the customized path is correctly applied. (the original path is hard-coded in the admin panel)
 
 Issues in previous versions that have been fixed as of 1.1.0:
@@ -174,6 +185,10 @@ Issues in previous versions that have been fixed as of 1.1.0:
 Issues that have been fixed as of 1.3.0:
 
 - [v17development's SEO](https://discuss.flarum.org/d/18316) was not able to add SEO tags to pages with customized URLs. The meta tags still contain incorrect hard-coded URLs.
+
+Issues in previous versions that have been fixed as of 1.8.0:
+
+- The user profile filters (`/discussions`, `/mentions` suffix) were not affected by the "Redirect" setting. Typing the old URL would always redirect to the homepage.
 
 ## Installation
 
