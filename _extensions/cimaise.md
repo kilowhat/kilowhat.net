@@ -120,6 +120,31 @@ They can be implemented if there is demand:
 
 ## Changelog
 
+### Version 1.0.1 - July 9, 2023
+
+- Fixed multiple issues related to EXIF-tagged portait or upside-down images.
+  - Fixed image not orientating itself when re-generating thumbnails. This would happen when editing mask stickers, cropping, or manually re-creating thumbnails.
+  - Fixed `original_width` and `original_height` picture attributes not taking into account Exif orientation. This affected the placement of stickers in viewbox, even if the image was correctly orientated.
+- Fixed stickers overflowing outside the image viewbox.
+- Modified image editor to prevent resizing stickers below the minimum backend-validated size. It was previously very difficult to find the sticker that caused the error or resize it to just barely the accepted size.
+- Reduced minimum sticker size to 6px instead of previous 10px.
+- Fixed lightbox exit button sometimes not being clickable.
+- Added new options to `cimaise:migrate` CLI command: `--refresh-exif`, `--refresh-width-height`, `--refresh-filesize`.
+
+If your database contains any image with Exif-tagged orientation you should run the following commands after the update.
+
+`upgrade` with `--refresh-width-height` will correct any invalid original width/height value:
+
+    php flarum cimaise:upgrade --refresh-width-height
+
+If you have any image rendering sideways you can run `conversions:regenerate` to fix them:
+
+    php flarum cimaise:conversions:regenerate
+
+Both commands can take several minutes to run on a large number of pictures.
+There is a progress bar rendered when running.
+The last command might not be necessary if you never edited any of the pictures after the initial upload.
+
 ### Version 1.0.0 - December 15, 2022
 
 Initial early access release.
@@ -166,6 +191,7 @@ You can use the following commands to update:
 
     composer require kilowhat/flarum-ext-cimaise
     php flarum migrate
+    php flarum cimaise:upgrade
     php flarum cache:clear
 
 ## Support
@@ -286,7 +312,7 @@ If (zero) or (one + "Require selecting a license") licenses only are configured 
 
 When configuring a License in the admin panel, the following attributes are available:
 
-- **Key**: a unique value used to identify this License in the database. You shouldn't change it once a sticker has been used as it will stop showing up on pictures already using it.
+- **Key**: a unique value used to identify this License in the database. You shouldn't change it once a license has been used as it will break connections to existing pictures which will then show the orphaned old key as license.
 - **Label**: a translatable license name. Will be visible in the license choice dropdown and next to the copyright icon on the picture page.
 - **Description**: a translatable description. Will be visible behind an info icon next to the license label.
 
