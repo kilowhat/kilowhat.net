@@ -24,6 +24,7 @@ Table of content:
 - [Update](#update)
 - [Remove extension](#remove-extension)
 - [Support](#support)
+- [Known issues](#known-issues)
 - [Extension settings](#extension-settings)
 - [Logged actions](#logged-actions)
 
@@ -66,6 +67,13 @@ To get access to all feature and to support the ongoing development of the exten
 | Download                       | Via Packagist                | Via Extiverse |
 
 ## Changelog
+
+### Version 1.7.0 - August 8, 2023
+
+- Fix for possible MySQL errors if another extension added `id` or `slug` columns to intermediate relationship tables.
+- Fix for possible duplicate Nickname change logs if other extensions perform additional database queries during the same lifecycle.
+- <span class="pro-badge">pro only</span> Log events from FoF Merge Discussions extension.
+- <span class="pro-badge">pro only</span> Restore 1.5.1 fixes that were accidentally reverted in 1.6.0.
 
 ### Version 1.6.0 - December 15, 2022
 
@@ -254,6 +262,12 @@ Most replies should usually be within 24h.
 I only provide help solving specific issues with the extension.
 I won't install the extension for you.
 
+## Known issues
+
+If an asynchronous queue is used, Audit Log is unable to log the device and actor for some actions.
+The actions are still logged but just lack actor information.
+I am researching a solution.
+
 ## Extension settings
 
 The extension has a single setting which is a permission found on the Permissions page of the admin panel.
@@ -415,6 +429,16 @@ No integration planned. Waiting for a Mason update.
 
 Integration planned.
 
+### FriendsOfFlarum Merge Discussions
+
+*Note:* due to the immutability of audit logs, the logs that pre-date the merge from the other discussion(s) will not be visible into the remaining discussion audit log modal.
+The `discussion:` gambit will only return events for posts and other activities if those posts were in the given discussion at the moment of the event.
+
+- `discussion.merged_away` <span class="pro-badge">pro only</span>: When a discussion is merged (data logged: new discussion ID)
+- `discussion.merged_into` <span class="pro-badge">pro only</span>: When a discussion is merged (data logged: original discussion IDs, number of posts moved)
+
+Two events are used together so that they easily appear in both discussion's history.
+
 ### FriendsOfFlarum Pages
 
 Integration planned.
@@ -466,15 +490,15 @@ Settings changes are logged by `setting_changed`.
 
 Integration planned for a future release.
 
-### KILOWHAT Wordpress Integration
+### KILOWHAT WordPress Integration
 
 No special integration.
 
-Wordpress synchronisation will be logged under the actor selected for "Flarum User ID" and will show client "API Key" with the IP of your Wordpress server.
+WordPress synchronisation will be logged under the actor selected for "Flarum User ID" and will show client "API Key" with the IP of your WordPress server.
 
 Settings changes are logged by `setting_changed`.
 
-**Known issue**: no login or logout are logged for Wordpress users using SSO.
+**Known issue**: no login or logout are logged for WordPress users using SSO.
 
 ### ClarkWinkelmann Author Change
 
