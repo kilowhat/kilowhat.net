@@ -120,6 +120,12 @@ They can be implemented if there is demand:
 
 ## Changelog
 
+### Version 1.0.2 - August 9, 2023
+
+- Fixed permission issue that allowed anyone with "upload picture" permission to upload to personal albums they don't own.
+- Fixed messages not appearing on the page if an error happens during picture submission.
+- Modified picture error messages to reference which attribute the user is not authorized to edit for easier troubleshooting.
+
 ### Version 1.0.1 - July 9, 2023
 
 - Fixed multiple issues related to EXIF-tagged portait or upside-down images.
