@@ -95,6 +95,13 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.9.0 - August 10, 2023
+
+- **Added** ability to disable all fields on Byobu discussions so vanilla private discussions can be used alongside global Formulaire fields.
+
+These changes only have an effect if the Byobu extension is installed and the new setting is enabled in the admin panel.
+If you are only using tag-scoped discussion fields, enabling the new setting makes no difference.
+
 ### Version 1.8.2 - April 6, 2023
 
 - **Fixed** compatibility with Flarum 1.7+.
@@ -267,6 +274,10 @@ New features and fixes in the extension will only work with the latest Flarum ve
 Most other Flarum extensions should be compatible.
 
 As time goes on this section will be filled with any extension that could be incompatible.
+
+By default, private discussions created by the FriendsOfFlarum Byobu extension are treated just like any other discussion, meaning global discussion fields (not tag-scoped) will be available and enforced on those discussions as well.
+A setting is available in the admin panel to prevent Byobu discussions from inheriting the fields.
+There is currently no way to have fields exclusively for private discussions, but this feature could be implemented if there is interest.
 
 ## Installation
 
