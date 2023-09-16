@@ -81,6 +81,12 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.8.2 - September 16, 2023
+
+- Fix admin page breaking when other extensions try to customize the style of the header.
+
+This fixes the incompatibility with [Asirem Theme](https://discuss.flarum.org/d/27939-asirem-theme).
+
 ### Version 1.8.1 - March 30, 2023
 
 - Fix WP thumbnail change not always synchronising.
