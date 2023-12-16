@@ -48,6 +48,13 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.3.0 - December 16, 2023
+
+- **Added** configurable number of maximum images in previews. Defaults to 4.
+- **Changed** no longer show duplicate opengraph image even if the site provides it multiple times.
+- **Changed** in Flarum previews, no longer inject images from post if forum has opengraph.
+- **Changed** in Flarum previews without opengraph, remove hard-coded limit of 2 images and use new global setting.
+
 ### Version 1.2.5 - May 22, 2023
 
 > **This is a security update. All users should upgrade as soon as possible.**
@@ -303,6 +310,23 @@ Controls the look of the block preview:
 
 - **Vertical** (default): The images are placed under the text content and takes the full width of the block.
 - **Horizontal**: The images are placed to the right of the text content.
+
+### Maximum number of images in preview
+
+*Added in version 1.3.0*
+
+Controls how many images will be shown in the preview.
+The default value is 4.
+
+When choosing which images to display, the extension will first remove any duplicate URL, then it will show the n first remaining images according to this setting.
+
+This applies to the opengraph images, fallback images and Flarum post images.
+
+You can set the value to zero or an empty string to remove the limit but this is probably not a good idea considering sites could provide a quasi-unlimited number of images.
+
+The extension currently always stores as many image URLs as it can when crawling the website and only limits the number when rendering it, so you don't need to refresh the data of existing embeds when changing this setting.
+
+This setting value will not be reflected in the admin preview until you save the settings.
 
 ### Image Proxy
 
