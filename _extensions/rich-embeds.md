@@ -48,6 +48,16 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.3.1 - January 4, 2024
+
+- **Fixed** embed failing to render and crashing Flarum if a website returns an invalid opengraph image URL.
+- **Added** handle additional URL formats in opengraph tags.
+
+If you are updating from 1.3.0, you don't need to clear the forum cache as there have been no changes to the javascript or CSS.
+
+You don't have to refresh the broken embeds to fix Flarum.
+But if the embed shows no images after the update, a manual refresh might make them appear.
+
 ### Version 1.3.0 - December 16, 2023
 
 - **Added** configurable number of maximum images in previews. Defaults to 4.
