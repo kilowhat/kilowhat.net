@@ -81,6 +81,17 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 1.8.3 - January 5, 2024
+
+- Fix open redirect vulnerability in logout script
+
+Forum data and credentials were never at risk, this was just a bad practice that could potentially harm the forum domain reputation if used to facilitate spam.
+It could also potentially be abused in a phishing attack against the users of the forum to make a malicious link look more legitimate.
+
+The same vulnerability existed in Flarum core and was fixed in Flarum 1.8.5.
+This extension requires a patch because it uses a modified version of Flarum's logout controller that also contained the vulnerability.
+You don't need to add the WordPress domain name to the new `redirectDomains` config key, as the global login and logout feature doesn't use that Flarum mechanism.
+
 ### Version 1.8.2 - September 16, 2023
 
 - Fix admin page breaking when other extensions try to customize the style of the header.
