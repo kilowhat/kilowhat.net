@@ -120,6 +120,11 @@ They can be implemented if there is demand:
 
 ## Changelog
 
+### Version 1.0.4 - January 9, 2024
+
+- Fix compatibility with MariaDB.
+- Fix inability to un-crop via REST API.
+
 ### Version 1.0.3 - January 9, 2024
 
 - Fix error when submitting picture if licenses are not setup.
