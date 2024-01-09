@@ -70,7 +70,7 @@ I think the most fitting definition here is the wall or apparatus used to hang p
 
 The extension is currently in "early access". This means:
 
-- You get access to the extension at a discounted price, and you will receive the full extension when it releases in early 2023.
+- You get access to the extension at a discounted price, and you will receive the full extension when it releases.
 - A few features are still missing that will make the use in production a bit tricky.
 - There are still some bugs and suboptimal UX.
 - Not all texts can be translated. Many texts will be rewritten and/or moved for the final release.
@@ -83,7 +83,7 @@ The extension already meets the same security expectations as my other extension
 
 - Access control for all resources is implemented.
 - All visible permissions are implemented.
-- Uploads are already protect against possible attack vectors.
+- Uploads are already protected against possible attack vectors.
 - Any security issue will be promptly addressed through a patch release.
 
 Translators, please do not spend too much time on this extension yet.
