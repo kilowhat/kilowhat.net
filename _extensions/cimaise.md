@@ -120,6 +120,11 @@ They can be implemented if there is demand:
 
 ## Changelog
 
+### Version 1.0.3 - January 9, 2024
+
+- Fix error when submitting picture if licenses are not setup.
+- Update code to reduce number of deprecation warnings.
+
 ### Version 1.0.2 - August 9, 2023
 
 - Fixed permission issue that allowed anyone with "upload picture" permission to upload to personal albums they don't own.
