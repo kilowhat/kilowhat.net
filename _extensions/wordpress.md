@@ -27,6 +27,8 @@ Table of content:
 - [Support](#support)
 - [Settings in WordPress plugin](#settings-in-wordpress-plugin)
 - [Settings in Flarum extension](#settings-in-flarum-extension)
+- [Cross-origin setup](#cross-origin-setup)
+- [Syncing data after initial installation or to fix integrity](#syncing-data-after-initial-installation-or-to-fix-integrity)
 - [Third-party integrations](#third-party-integrations)
 - [How global login/logout works](#how-global-loginlogout-works)
 
@@ -34,7 +36,13 @@ Table of content:
 
 The Flarum WordPress integration is a premium extension developed by Clark Winkelmann.
 
+The older video shows the main features of the extension:
+
 <iframe width="740" height="416" src="https://www.youtube.com/embed/GyjRB6dEEmo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+The newer video shows the new features in version 2.0:
+
+<iframe width="740" height="416" src="https://www.youtube.com/embed/bG0fdXx8cAo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 It offers two main features:
 
@@ -81,6 +89,112 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 2.0.0 - May 9, 2024
+
+This is a major release.
+Please read this announcement and execute the migration commands listed below.
+
+Thanks to everyone who sent feedback in these last few months, I hope this update addresses most of your needs!
+
+#### Upgrade instructions
+
+This update requires a few additional steps.
+The extension will not work as intended if you skip them.
+
+If you have some sort of maintenance mode, I suggest enabling it so no user tries to login or post during the update.
+But it should only take a few minutes and most features of WordPress and Flarum should continue to work even if you haven't finished to update both sides yet.
+
+Update the WordPress plugin.
+The download link is available under the [WordPress changelog](#wordpress-changelog) below.
+
+First update the package (`require` will make sure you bump the major version):
+
+    composer require kilowhat/flarum-ext-wordpress
+
+Then open the Flarum admin panel, and enable the "Backoffice" extension which will have been automatically installed.
+
+Enabling this new extension should have automatically run the migrations and cleared the cache, but you can run them again to be sure:
+
+    php flarum migrate
+    php flarum cache:clear
+
+And finally, after having updated both the WordPress plugin and Flarum extension, run the following command on the Flarum server to migrate the settings to their new names and invalidate the old API Key:
+
+    php flarum kilowhat-wordpress:migrate:v2
+
+The command will list the actions that are about to be performed and ask you to accept.
+Press Enter to continue, or use the `--no-interaction` CLI flag when calling the command to skip confirmation.
+The command can be run again without any danger.
+
+That should be it!
+You can then check out the settings in the Flarum admin panel if you wish to enable the new features.
+
+If you encounter any error during the update process, please reach out.
+
+#### Improved security
+
+I have completely rewritten the way Flarum and WordPress communicate together.
+
+Previously, a Flarum API Key was used and also behaved like an API Key on the WordPress side, meaning a compromised key would allow performing any admin action on both Flarum and WordPress, resulting in a complete compromise of both sites.
+
+The new implementation uses a shared key that only authenticates synchronisation requests.
+If that key were to be compromised, it would at worst allow an attacker to create bogus discussions under the tags configured for WordPress comment threads.
+Or when the SSO feature is used, it would allow creating bogus user accounts but won't be able to give them arbitrary groups (but if you use role to group synchronisation, they could assign any of those groups).
+
+This change was made to follow best practices, I don't have any report of the old system being abused.
+For the key to be stolen in the first place, one of WordPress or Flarum (or their respective backups) would probably have to be compromised.
+The new system ensures my extension cannot be used as a vector to compromise the other website in case one is compromised.
+
+#### New global login methods
+
+In addition to the cookie-based global login previously used by the SSO module, 2 new methods have been added.
+
+These new methods remove the requirement to host WordPress and Flarum on a common top level domain.
+
+**Redirect** uses a redirect after the first login from WordPress to connect Flarum.
+
+**Iframe** uses a hidden iframe and the PostMessage web API to enable cross-origin communication between Flarum and WordPress and offer a one-click login, or optionally login through an automatic client-side page refresh.
+
+See the documentation for the pro and cons of each method.
+
+#### Improved cross-origin support, but...
+
+I have performed many tests for cross-origin support.
+I added more built-in headers that you don't have to setup manually and created a [section in the documentation](#cross-origin-setup) about what must be done manually.
+
+Unfortunately, the main conclusion of these many tests is that the setup will be infinitely easier if you stick to a common top-level domain.
+
+Despite the improvements, global login and interacting with the comments in the iframe probably won't work in private browsing or privacy-enhanced mode in most browsers.
+
+#### Role to group synchronisation
+
+As part of the SSO feature, you can now automatically assign groups to Flarum users based on their WordPress role.
+
+#### Forced Synchronisation commands
+
+You can now manually force a synchronisation of all posts or users.
+Useful if you have a lot of data already in WordPress before enabling the integration.
+
+Check out the `help` page for the commands and the [online documentation](#syncing-data-after-initial-installation-or-to-fix-integrity).
+
+    php flarum help kilowhat-wordpress:sync:posts
+    php flarum help kilowhat-wordpress:sync:users
+
+#### Feature toggles kept in sync
+
+Previously, the SSO and Comments features had to be toggled on both Flarum and WordPress side.
+
+In this new version, toggling a feature from the Flarum admin panel will automatically toggle it on WordPress side as well.
+
+#### Other changes
+
+- Added: Option to send Guzzle exceptions to the Flarum reporter instead of silencing them, useful with Sentry for example.
+- Changed: Moved settings to the "Backoffice" admin area in order to use some of the reusable components provided by that extension.
+- Fixed: The "last updated" date of a WordPress post is no longer bumped anytime a comment is written.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
+
 ### Version 1.8.3 - January 5, 2024
 
 - Fix open redirect vulnerability in logout script
@@ -117,9 +231,6 @@ The new features require updating the WordPress plugin to version 1.5.
 See below for WordPress plugin changelog.
 
 Both versions 1.7 and 1.8 of the Flarum extension have been verified compatible with Flarum 1.7.
-
-<details markdown="1">
-<summary markdown="span">Show older releases</summary>
 
 ### Version 1.7.6 - December 13, 2022
 
@@ -315,6 +426,30 @@ Initial release.
 
 ## WordPress changelog
 
+### Version 2.0.0 - May 9, 2024
+
+See release notes of the Flarum extension for the new features.
+
+Notable changes, particularly in case you made manual changes to the code:
+
+- The `admin:password` HTTP auth logic when the plugin has been installed but not yet configured has been removed. There's now a dedicated install endpoint and only that endpoint accepts credentials.
+- The shared API Key can no longer be used as a password to authenticate to the WordPress REST API. It's now sent as `X-Flarum-Key` header and is only accepted on the custom REST endpoints.
+- The shared API Key can no longer be used to perform API requests to Flarum. If you need to make requests, generate a new native Flarum API Key in Flarum database and use it instead. The shared key is sent as `X-WP-Key` and only works on the synchronisation endpoints.
+- Setting "Flarum User ID" has been removed from the UI. The setting name is still registered to allow Flarum to read the old value. This value is now stored on the Flarum side under the "Default Actor" setting.
+- Setting "Cookie Domain" has been completely removed. The value set on Flarum side will always apply everywhere.
+- Setting field `kilowhat_flarum_token_field` has been renamed `kilowhat_flarum_key_field`. This was a misspelling. It now matches with the setting name.
+- New `kilowhat_wordpress_format_user_for_api` method to prepare user data for the API synchronisation. Previously the payload creation code was duplicated in multiple locations and didn't always include all values.
+- New REST API endpoints in the `kilowhat-flarum` namespace to support the synchronisation. You shouldn't call them manually.
+
+This new version of the WordPress Plugin is required to use version 2.0+ of the Flarum extension.
+
+The plugin must be manually updated.
+The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-2.0.0.zip).
+Works with version 2.0+ of the Flarum extension.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
+
 ### Version 1.5.0 - March 26, 2023
 
 - Added Flarum tags override feature.
@@ -326,9 +461,6 @@ The plugin must be manually updated.
 The new version can be downloaded via [this link](/download/wordpress/kilowhat-flarum-1.5.0.zip).
 Works with any version of the Flarum extension.
 The new features work in pair with version 1.8 of the Flarum extension.
-
-<details markdown="1">
-<summary markdown="span">Show older releases</summary>
 
 ### Version 1.4.0 - August 3, 2020
 
@@ -385,10 +517,9 @@ Please get in touch if you would like admin access.
 
 - **PHP**: version 8.0+ is recommended for both Flarum and WordPress and are the only versions tested by the developer.
 - Minimum compatible PHP version are 7.4+ for Flarum (hard-requirement) and 7.3 for WordPress (soft-requirement). WordPress extension might work with lower PHP versions but is unsupported.
-- **WordPress** version must be 5.0 or higher (lower might work, but not tested)
+- **WordPress** version must be 5.9 or higher
 - **Flarum** version must be 1.2.0 or higher
 - You must have SSH and Composer access on the Flarum hosting
-- WordPress and Flarum must be hosted on the same domain, or subdomains of the same domain (cookie limitations)
 - WordPress and Flarum must be accessible via HTTPS and HTTP urls must be redirected to HTTPS
 - WordPress and Flarum may be hosted on the same server or a different server
 - WordPress and Flarum may use the same database (with different prefixes) or a different database
@@ -426,7 +557,7 @@ You must install both the WordPress plugin and Flarum extension.
 
 ### On WordPress
 
-- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-1.5.0.zip). Current version is 1.5.0
+- Download the plugin via [this link](/download/wordpress/kilowhat-flarum-2.0.0.zip). Current version is 2.0.0
 - Extract the content of the ZIP file and place the `kilowhat-flarum` folder under `wp-content/plugins`
 - Open the WordPress admin panel and enable the plugin
 - Go to the **Flarum admin panel** and follow the installation wizard
@@ -459,6 +590,12 @@ When an update is available, you can use the following commands to update:
     php flarum migrate
     php flarum cache:clear
 
+When upgrading from a version below 2.0, you must also run the following command:
+
+    php flarum kilowhat-wordpress:migrate:v2
+
+Press Enter after the command lists the actions that will be performed, or use the `--no-interaction` CLI flag to skip confirmation.
+
 ## Troubleshooting
 
 ### The installation wizard is stuck
@@ -472,7 +609,7 @@ If you previously ran the wizard and that an error happened, it's possible the s
 To run the wizard again:
 
 - Delete the "WordPress URL" setting in Flarum
-- Delete the "Flarum API key" setting in WordPress
+- Delete the "Flarum Shared API key" setting in WordPress
 
 And refresh the Flarum admin dashboard.
 The wizard should be available again.
@@ -499,7 +636,7 @@ Check the `<flarum>/storage/logs` folder.
 It will contain a log file named with the current date.
 
 All errors triggered by the Flarum extension should be logged in that file.
-The log file also contains the history of all requests that WordPress made to Flarum.
+The log file also contains the history of all requests that WordPress made to Flarum and vice-versa.
 
 ## Integrity considerations
 
@@ -529,7 +666,8 @@ I won't install the extension for you.
 
 ## Settings in WordPress plugin
 
-The settings can be found under Settings > General.
+The settings can be found under **Settings > General**.
+They don't have their own tab.
 
 ### Flarum URL
 
@@ -559,17 +697,24 @@ Invalid examples:
     http://example.com
     example.com
 
-### Flarum API Key
+### Flarum Shared API Key
 
 **Required**
 
 *This setting is auto-filled when you configure the extension via the wizard in the Flarum admin dashboard.*
 
-In the Flarum extension settings, copy the **Flarum API Key** value and paste it here.
+In the Flarum extension settings, copy the **Shared API Key** value and paste it here.
 
-You cannot use another Flarum API key, it has to be the one shown in the Flarum extension settings because it's also used for url signing and reverse authentication by Flarum.
+You cannot use another Flarum API key, it has to be the value shown in the Flarum extension settings because it's also used for url signing and reverse authentication by Flarum.
+
+*Prior to version 2.0, this setting was just called "Flarum API Key" on both WordPress and Flarum side.*
 
 ### Flarum User ID
+
+*Removed in version 2.0 of the plugin. See "Default Actor" setting in Flarum.*
+
+<details markdown="1">
+<summary markdown="span">See documentation for 1.x</summary>
 
 **Required, default value: 1**
 
@@ -581,14 +726,22 @@ It must be an admin user.
 
 The user will be used as the actor of all actions performed by WordPress, but is mostly visible in two locations only: they will be set as discussion authors, and will be shown as the ones renaming the discussion title if the name changes.
 
+</details>
+
 ### Enable SSO integration
 
 Enables the "single sign on" integration features.
 The corresponding setting must be enabled in the Flarum extension as well.
+Since version 2.0, the toggle will automatically follow the value of the toggle set in Flarum, so it's easier to just change it from Flarum side.
 
 Most settings regarding SSO integration are found in the Flarum extension.
 
 ### Cookie domain
+
+*Removed in version 2.0 of the plugin. Use the setting with the same name on the Flarum side.*
+
+<details markdown="1">
+<summary markdown="span">See documentation for 1.x</summary>
 
 **Required if WordPress domain is different from Flarum domain**
 
@@ -602,12 +755,13 @@ For example WordPress at `https://example.com` and Flarum at `https://example.co
 If the subdomains are different, the higher-level domain must be used.
 Example WordPress: `https://www.example.com`, Flarum `https://forum.example.com`. Cookie domain = `example.com`.
 
-If WordPress and Flarum are not on subdomains of the same domain, the SSO integration cannot work.
+</details>
 
 ### Enable comments integration
 
 Enables the "comments" integration features.
 The corresponding setting must be enabled in the Flarum extension as well.
+Since version 2.0, the toggle will automatically follow the value of the toggle set in Flarum, so it's easier to just change it from Flarum side.
 
 All settings regarding comments integration are found in the Flarum extension.
 
@@ -656,18 +810,35 @@ Make sure the post type is whitelisted in the settings and that comments are ena
 
 ## Settings in Flarum extension
 
-### Flarum API Key
+### Shared API Key
 
 **Auto-generated**
 
-This is a secret Flarum master API key generated for you when the extension is enabled for the first time.
+This is a secret key generated for you when the extension is enabled for the first time.
 
-If the key has been compromised, you have to delete it from Flarum. You can use the following MySQL commands in your database:
+You can click the recycling icon next to the setting to generate a new value.
+If you generate a new value, you must manually update it on WordPress side.
+If you use SSO and were not already logged in, you will encounter a redirect error when trying to connect to WordPress to enter the new value.
+But you can manually type the WordPress admin panel URL after the failed redirect to access the settings page.
+
+*This setting was named "Flarum API Key" in version 1.x*
+
+<details markdown="1">
+<summary markdown="span">See documentation for 1.x</summary>
+
+In version 1.x, the shared key was also a Flarum API key.
+If the key has been compromised, you have to delete it from Flarum's database.
+You can use the following MySQL commands to delete it:
 
     DELETE FROM api_keys WHERE key = '<the key from the settings>';
     DELETE FROM settings WHERE key = 'kilowhat-wordpress.api_key';
 
-Then refresh the admin panel page to automatically generate a new API key. Don't forget to update it on the WordPress side.
+Then refresh the admin panel page to automatically generate a new API key.
+Don't forget to update it on the WordPress side.
+
+If you used the V2 migration command on the CLI, the API Key has already been deleted for you.
+
+</details>
 
 ### WordPress URL
 
@@ -692,13 +863,53 @@ Invalid examples:
     http://example.com
     example.com
 
+### Default Actor
+
+*Since version 2.0*
+
+**Required**
+
+The user selected here will be set as the author of all discussions and (event/reply) posts created by the extension, as well as the actor of any event dispatched to other extensions.
+
+The user doesn't need to have any group or permission (the WordPress Integration doesn't check them), but it's preferable if they have the ability to create/reply/lock discussions and suspend any user to prevent any conflict with other extensions.
+
+A default value for this setting is set after completing the installation wizard.
+When migrating from version 1.x, the migration command will set this setting to the Flarum User ID previously set on the WordPress side.
+
+The admin panel provides a search input and picker to find a user.
+The underlying setting in the database (`kilowhat-wordpress.default_actor_id`) stores the user ID.
+
+The underlying setting also accepts a username.
+If you set a username, the user picker will not show their icons or display name but it will work.
+If the selection is invalid, the health check will say it.
+
+### Send WordPress REST API HTTP errors to configured Flarum reporters
+
+*Since version 2.0*
+
+Whenever Flarum performs a request to the WordPress REST API, it will add a short message to the log file, including whether it was successful or not.
+It will never throw errors.
+
+If you want to receive the Guzzle exceptions in your reporting stack, you can enable this setting.
+This will send the original exception with its backtrace to all error reporters configured in Flarum.
+Only transfer and 5xx errors will be reported.
+
+This is most useful if you want to track these errors in a tool like Sentry.
+
 ### WordPress admin username
+
+*Removed in version 2.0 of the plugin. There is no replacement, the synchronisation no longer needs it.*
+
+<details markdown="1">
+<summary markdown="span">See documentation for 1.x</summary>
 
 **Required with the comments integration**
 
 *This setting is auto-filled when you configure the extension via the wizard.*
 
 Must be a valid WordPress username that is allowed to enable and disable comments on any post.
+
+</details>
 
 ### Enable SSO integration
 
@@ -714,6 +925,58 @@ Users created through WordPress SSO will have a special flag in the database pre
 
 See login/logout section below for details on how the global login works.
 
+### Global Login Mechanism
+
+*Since version 2.0. Previously it was always Cookie.*
+
+Multiple global login mechanisms are available.
+Each have their benefits and downsides.
+
+#### Cookie
+
+Sets a cookie on a top level domain on the first login.
+
+Pros:
+
+- Fastest method, as it doesn't require additional redirects on login and no client-side requests or refresh when visiting Flarum after logging on WordPress.
+
+Cons:
+
+- WordPress and Flarum must share a top level domain.
+
+#### Redirect
+
+Redirects through Flarum on every WordPress login.
+
+Pros:
+
+- Works with different top level domains.
+- No client-side requests or page reloads necessary.
+- No `SameSite=None` cookies necessary on WordPress side.
+
+Cons:
+
+- Slower login as you go through the redirect every time, even if you don't end up visiting the forum.
+- Redirect might conflict with other WordPress plugins.
+
+Depends:
+
+- This is the only method that boots the Flarum session at the same time as WordPress. It could be desirable or not. This will bump the last seen time, and allow extensions to run middlewares for the user at that time. But since it never loads the homepage most extension logic won't run yet.
+
+#### Hidden Iframe
+
+Uses a hidden iframe on the forum to communicate with WordPress client-side.
+
+Pros:
+
+- Works with different top level domains.
+- Combined with the "Iframe delay" below this can be used to only login on demand.
+
+Cons:
+
+- A page refresh is necessary when visiting the forum to enter the account. The prompt or automatic redirect can be a suboptimal experience.
+- Uses `SameSite=None` cookies on WordPress side.
+
 ### Cookie Domain
 
 **Required if WordPress domain is different from Flarum domain**
@@ -721,9 +984,22 @@ See login/logout section below for details on how the global login works.
 *This setting is auto-filled when you configure the extension via the wizard.*
 
 The domain entered here will be used to clear Flarum login cookies set by WordPress.
-The value must match with the corresponding setting in the WordPress plugin.
+
+Before version 2.0, the value set here must match with the corresponding setting in the WordPress plugin.
+Since version 2.0, only the value set on the Flarum side is used.
 
 See the documentation for the WordPress plugin for how to choose the value.
+
+### Iframe Redirect Delay
+
+*Since version 2.0*
+
+This setting is only used when using "Hidden Iframe" login mechanism.
+
+How long after the initial Flarum page load the extension will still attempt a login and page refresh without user interaction.
+If it takes longer than this value to get an answer from WordPress, the user will simply get a suggestion to login and refresh.
+
+Set to zero to always suggest login to the user instead of automatically refreshing.
 
 ### WordPress login path
 
@@ -740,6 +1016,13 @@ Leaving this setting empty will use `wp-login.php`.
 
 Since version 1.7.2, the path can include a query string.
 The extension will replace existing query string parameters if necessary, in particular `redirect_to`.
+
+### Open WordPress login as a page instead of popup
+
+*Since version 2.0*
+
+By default, clicking the login link from Flarum will open the WordPress login page in a popup, like other OAuth methods.
+When this setting is enabled, the current browser tab will navigate to the WordPress login page and redirect to Flarum afterward.
 
 ### Username for new users
 
@@ -804,6 +1087,36 @@ A new user will be able to register with the same email and/or username.
 Requires the Suspend extension to be enabled.
 The user will be unlinked from WordPress.
 The user will be able to request a password reset if normal login is allowed, but will not be able to interact with Flarum anymore as long as they stay suspended.
+
+### Role to Group Synchronisation
+
+*Since version 2.0*
+
+This setting allows you to map WordPress roles to Flarum groups.
+
+The selected groups will be automatically added to and removed from users by the extension, so it's probably best to use dedicated Flarum groups that you never assign manually and aren't also managed by other extensions.
+
+You probably shouldn't assign the admin group this way, both for security reasons and to make sure you don't get accidentally locked out.
+
+You can assign multiple groups to a role and a group can be mapped to more than one role.
+You can create additional Flarum groups and give them permissions on the Flarum Permissions page, they will then be available to pick in the dropdown in the WordPress Integration settings.
+
+If a WordPress role or Flarum group doesn't appear in the list, you can choose "Custom" and manually type the role slug and group ID.
+This should generally not be needed.
+The interface is built that way, so it doesn't break if you delete a role or group.
+
+If you delete a role or group, the health report will show a problem, and you should delete the now invalid entry in the list of mappings.
+
+All other Flarum groups that have been manually given to a user and are not part of a synchronisation role will not be touched.
+
+The syncing happens when:
+
+- A role is added or removed on a user by WordPress
+- The user connects with the WordPress login form
+- A [manual data sync is performed](#syncing-data-after-initial-installation-or-to-fix-integrity)
+
+Editing the settings for the synchronisation doesn't trigger a synchronisation.
+You need to use the manual sync.
 
 ### Enable comments integration
 
@@ -981,6 +1294,144 @@ A singe permission is currently visible on the Permissions page of Flarum:
 **Third-party gambits**: see below for third-party integrations.
 Keep it on Admin only unless you know what you're doing!
 
+## Cross-origin setup
+
+If Flarum and WordPress are installed on the same domain (at different paths) or on different subdomains of the same main domain, you should be ready to go without any additional configuration.
+
+However, if Flarum and WordPress are on entirely different domains, there are a number of cross-origin challenges that the extension doesn't automatically handle.
+
+The following changes lower the overall security of your applications, so you should change only the minimum required based on the features you use.
+
+Cross-origin setup only works and can only be tested with **HTTPS**.
+Testing locally is an absolute pain because the browsers have different security rules for localhost.
+
+### If you are using the comments integration
+
+By default, browsers will not send the Flarum session cookie to the comments iframe.
+This means the iframe would be read-only and the login link within won't work.
+To make sessions work, the [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#controlling_third-party_cookies_with_samesite) attribute of the cookie must be set to `None`.
+
+Flarum allows changing this value through an edit in `config.php`.
+The `cookie` section is an optional section that you can create at the top level of the settings, for example below `database`:
+
+```php
+<?php return array (
+  'debug' => false,
+  'database' => 
+  array (
+    'driver' => 'mysql',
+    'host' => 'localhost',
+    'port' => 3306,
+    'database' => 'flarum',
+    'username' => 'flarum',
+    'password' => 'secret',
+    'charset' => 'utf8mb4',
+    'collation' => 'utf8mb4_unicode_ci',
+    'prefix' => '',
+    'strict' => false,
+    'engine' => 'InnoDB',
+    'prefix_indexes' => true,
+  ),
+  'cookie' => 
+  array (
+    'samesite' => 'None',
+  ),
+  'url' => 'https://flarum.tld',
+  'paths' => 
+  array (
+    'api' => 'api',
+    'admin' => 'admin',
+  ),
+  'headers' => 
+  array (
+    'poweredByHeader' => true,
+    'referrerPolicy' => 'same-origin',
+  )
+);
+```
+
+The `cookie` namespace also accepts `name` (prefix), `path`, `domain`, `secure` attributes, but you shouldn't need to modify those.
+
+The embedded page on Flarum automatically sets its `Content-Security-Policy` header with a single `frame-ancestors` rule for itself.
+It should work out of the box, but could conflict with CSP or Frame-Options headers set by other extensions or the webserver.
+If that's the case, you should make sure that those headers are not added for paths starting with `/wordpress-embed`.
+
+Notably, Laravel Forge has `add_header X-Frame-Options "SAMEORIGIN";` in its default nginx config which Firefox doesn't like when returned together with the CSP header.
+
+### If you are using the hidden iframe login mechanism
+
+I have spent many hours testing this feature, there are so many edge cases that I wouldn't recommend using it in a cross-origin situation yet.
+
+By default, browsers will not send the WordPress cookies to the hidden iframe for the same reason explained above.
+
+The extension automatically sets its own WordPress cookie to `SameSite=None` and the required CSP `frame-ancestors` on its iframe headers, so the feature should work out of the box.
+
+The instant login popup is able to show the name and avatar of the WordPress user, but this feature will not work in cross-origin setups by default because the WordPress session cookie doesn't have `SameSite=None`.
+
+Unfortunately, WordPress doesn't offer a setting to customize the `SameSite` property of their cookies.
+If you want to make the name+avatar feature work, my suggestion is to use Apache/Nginx rules to edit the response headers on the WordPress server.
+
+For **Apache**, with the `header` module enabled:
+
+    Header edit Set-Cookie ^(wordpress_logged_in_.*)$ $1;SameSite=None
+
+For **nginx** with the `ngx_http_proxy_module` module 1.19.3+:
+
+    proxy_cookie_flags ^wordpress_logged_in_ samesite=none;
+
+I am not exactly sure how much this lowers the security of WordPress as I can't find any article about doing this.
+Because WordPress uses a pair of cookies to authenticate the admin panel and the rule above only changes one of the 2 to `SameSite=None`, it shouldn't affect the admin panel security in any way.
+
+But even if you configure all this, the feature will likely still not work in many situations.
+Firefox and Chrome private browsing, as well as other privacy-enhanced modes for all browsers will block or containerize third-party cookies in iframes, preventing this feature from working.
+The main login link of Flarum will still work, just not the instant login.
+
+There's also an issue when using iframe login with comments integration, as it create a double nesting of iframes which browsers like even less.
+This part I will probably address in a future update by having the iframe communicate directly with the top level WordPress.
+
+## Syncing data after initial installation or to fix integrity
+
+*Since version 2.0*
+
+Both the user and posts/comments synchronisation is done "live" via webhooks each time an account or post is interacted with.
+
+Comment threads are created when a WordPress post is created or its comment status manually changed.
+
+For SSO, Flarum accounts are created when the user logs in.
+(this means users who register on WordPress but never connect won't have a Flarum account).
+
+You can force a synchronisation to create Flarum entries for all WordPress posts or users.
+This is done through the command line on the Flarum side.
+Both commands have similar syntaxes.
+
+Use the `help` command to see all available options:
+
+    php flarum help kilowhat-wordpress:sync:posts
+    php flarum help kilowhat-wordpress:sync:users
+
+The implementation is a bit crude, but should get the work done.
+The command scans a range of IDs on the WordPress API and creates/updates records as necessary in Flarum.
+
+Be mindful of any rate limiting you might have on your WordPress server, as the command will perform one request per ID in the range.
+A sleep timer can be configured with `--sleep-between-requests=`.
+
+If you need to fix a specific post/user, you can just provide its WordPress ID:
+
+    php flarum help kilowhat-wordpress:sync:posts 42
+
+To import all historical data, you can specify a range.
+If you don't provide any parameter to the command it will automatically scan the range 1-10000 and stop after 50 missed hits.
+
+    php flarum help kilowhat-wordpress:sync:posts --from-id=1 --to-id=10000 --stop-after-missing=50
+
+If you know the largest ID in your database (or the largest ID you want to import to), it's best to set `--stop-after-missing=0` so a large gap in deleted IDs doesn't stop the loop.
+This is likely to happen for `posts` since custom post types are used for many things including drafts which get deleted.
+Similar thing for users if you had to delete a lot of spam users in the past, there will be a large gap.
+
+It should be relatively safe to CTRL+C the command to force exit before reaching the end of the loop, but it's not advised.
+
+You can run either command with `--dry-run` option to get a list of what will be changed without actually making any change in the database.
+
 ## Third-party integrations
 
 *Since version 1.2*
@@ -1026,8 +1477,18 @@ If you login from WordPress, the following happens:
 
 - Credentials are validated by WordPress and the WordPress session is open
 - Flarum account is created via a server-side API call if it doesn't already exist
-- Flarum remember cookie is set on the cookie domain
-- A subsequent visit of the forum will open the Flarum session via the remember me feature
+- What happens next depends on the "Global Login Mechanism" setting
+  - **Cookie**:
+    - Flarum remember cookie is set on the cookie domain
+    - A subsequent visit of the forum will open the Flarum session via the remember me feature
+  - **Redirect**:
+    - The WordPress login page is redirected to an endpoint on Flarum which immediately redirects back to the default login redirect destination
+    - The "remember" token is sent to Flarum via the URL and a session is immediately started without setting any global cookie
+  - **Iframe**:
+    - The Flarum remember cookie is set on the WordPress domain only
+    - A later visit to Flarum opens a hidden iframe that can read the cookie and pass its value back to Flarum
+    - Flarum shows a prompt for instant login or automatically refreshes the page based on the settings
+    - On refresh the Flarum session opens via the remember token
 
 If you login from Flarum, the following happens:
 
@@ -1036,6 +1497,7 @@ If you login from Flarum, the following happens:
 - Flarum account is created via a server-side API call if it doesn't already exist
 - WordPress returns the "remember" token directly to Flarum without setting any cookie
 - Flarum session opens via the token
+- (The "Global Login Mechanism" choice has no incidence on this flow)
 
 If you logout from WordPress, the following happens:
 
@@ -1048,3 +1510,7 @@ If you logout from Flarum, the following happens:
 - User is redirected to WordPress for classic WordPress logout
 
 The logout process is based on redirects to signed urls that prevent any cross-site request forgery vulnerability.
+
+The current implementation has no special handling for natural session expiration.
+All cookies used are short-lived, but due to the use of Flarum "remember me" tokens, the Flarum session will likely remain active in the background if the user doesn't logout.
+Those Flarum sessions can be seen and cleared by the user in their Flarum Security dashboard.
