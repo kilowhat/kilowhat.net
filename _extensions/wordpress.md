@@ -89,6 +89,19 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 2.0.1 - June 1, 2024
+
+- Require backoffice 0.1.4, move WordPress settings page back to Flarum admin panel.
+
+The reason the settings were moved to the Backoffice screen in 2.0.0 was because I wanted to avoid updating Backoffice and the components needed by the WordPress Integration were only available on the Backoffice screen.
+Now that I had to release a bugfix to Backoffice for subfolder support, I also added made the components available in the regular admin panel.
+Backoffice must remain activated, but you don't need to visit its dedicated screen anymore.
+
+If you are still on 1.x version, follow the upgrade instructions in the 2.0.0 release.
+If you are already on 2.0.0, just clear the cache with `php flarum cache:clear`.
+This update is only for the Flarum extension.
+The WordPress plugin doesn't have a 2.0.1 release.
+
 ### Version 2.0.0 - May 9, 2024
 
 This is a major release.
@@ -101,30 +114,37 @@ Thanks to everyone who sent feedback in these last few months, I hope this updat
 This update requires a few additional steps.
 The extension will not work as intended if you skip them.
 
-If you have some sort of maintenance mode, I suggest enabling it so no user tries to login or post during the update.
+(1) If you have some sort of maintenance mode, I suggest enabling it so no user tries to login or post during the update.
 But it should only take a few minutes and most features of WordPress and Flarum should continue to work even if you haven't finished to update both sides yet.
 
-Update the WordPress plugin.
+(2) Update the WordPress plugin.
 The download link is available under the [WordPress changelog](#wordpress-changelog) below.
 
-First update the package (`require` will make sure you bump the major version):
+(3) In the Flarum admin panel, disable the "WordPress Integration" extension.
+
+(4) Update the Flarum package (`require` will make sure you bump the major version):
 
     composer require kilowhat/flarum-ext-wordpress
 
-Then open the Flarum admin panel, and enable the "Backoffice" extension which will have been automatically installed.
+(5) Open the Flarum admin panel, and enable the "Backoffice" extension which will have been automatically installed.
 
-Enabling this new extension should have automatically run the migrations and cleared the cache, but you can run them again to be sure:
+(6) Enable the "WordPress Integration extension" again.
+The Health Report will show problems, that's expected.
+
+(7) Enabling the extensions should have automatically run the migrations and cleared the cache, but you can run them again to be sure:
 
     php flarum migrate
     php flarum cache:clear
 
-And finally, after having updated both the WordPress plugin and Flarum extension, run the following command on the Flarum server to migrate the settings to their new names and invalidate the old API Key:
+(8) Finally, after having updated both the WordPress plugin and Flarum extension, run the following command on the Flarum server to migrate the settings to their new names and invalidate the old API Key:
 
     php flarum kilowhat-wordpress:migrate:v2
 
 The command will list the actions that are about to be performed and ask you to accept.
 Press Enter to continue, or use the `--no-interaction` CLI flag when calling the command to skip confirmation.
 The command can be run again without any danger.
+
+(9) Verify the Health Report shows green in the Flarum admin panel.
 
 That should be it!
 You can then check out the settings in the Flarum admin panel if you wish to enable the new features.
@@ -569,7 +589,8 @@ See below for WordPress settings.
 - Purchase the ["KILOWHAT WordPress Integration"](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress) extension via the Extiverse website
 - If this is your first premium extension purchase from Extiverse, follow the "Composer configuration" instructions available at <https://extiverse.com/premium/subscriptions>
 - Install the extension via Composer: `composer require kilowhat/flarum-ext-wordpress`
-- Open the Flarum admin panel and enable the extension
+- Open the Flarum admin panel and enable the "Backoffice" extension which has automatically been installed
+- Still in the Flarum admin panel, enable the "WordPress Integration" extension
 - On the extension page, use the installation wizard tab to enter your WordPress credentials
 
 See below for Flarum settings.
