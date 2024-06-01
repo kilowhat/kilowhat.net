@@ -93,8 +93,10 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 - Require backoffice 0.1.4, move WordPress settings page back to Flarum admin panel.
 
+If you see "Problem loading user selection dropdown" message in the admin panel, disable and re-enable the WordPress Integration extension.
+
 The reason the settings were moved to the Backoffice screen in 2.0.0 was because I wanted to avoid updating Backoffice and the components needed by the WordPress Integration were only available on the Backoffice screen.
-Now that I had to release a bugfix to Backoffice for subfolder support, I also added made the components available in the regular admin panel.
+Now that I had to release a bugfix to Backoffice for subfolder support, I also made the components available in the regular admin panel.
 Backoffice must remain activated, but you don't need to visit its dedicated screen anymore.
 
 If you are still on 1.x version, follow the upgrade instructions in the 2.0.0 release.
