@@ -1440,12 +1440,12 @@ A sleep timer can be configured with `--sleep-between-requests=`.
 
 If you need to fix a specific post/user, you can just provide its WordPress ID:
 
-    php flarum help kilowhat-wordpress:sync:posts 42
+    php flarum kilowhat-wordpress:sync:posts 42
 
 To import all historical data, you can specify a range.
 If you don't provide any parameter to the command it will automatically scan the range 1-10000 and stop after 50 missed hits.
 
-    php flarum help kilowhat-wordpress:sync:posts --from-id=1 --to-id=10000 --stop-after-missing=50
+    php flarum kilowhat-wordpress:sync:posts --from-id=1 --to-id=10000 --stop-after-missing=50
 
 If you know the largest ID in your database (or the largest ID you want to import to), it's best to set `--stop-after-missing=0` so a large gap in deleted IDs doesn't stop the loop.
 This is likely to happen for `posts` since custom post types are used for many things including drafts which get deleted.
