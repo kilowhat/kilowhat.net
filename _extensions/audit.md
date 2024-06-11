@@ -68,6 +68,14 @@ To get access to all feature and to support the ongoing development of the exten
 
 ## Changelog
 
+### Version 1.7.1 - June 11, 2024
+
+- Fix tag edit event being generated on every start/reply/delete discussion when `askvortsov/flarum-categories` extension is active.
+
+This release only exists for the pro version.
+
+If you have not already updated from Extiverse to Flarum.org premium repository, do that first before updating the extension.
+
 ### Version 1.7.0 - August 8, 2023
 
 - Fix for possible MySQL errors if another extension added `id` or `slug` columns to intermediate relationship tables.
