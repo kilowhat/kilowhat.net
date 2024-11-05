@@ -95,6 +95,10 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.9.1 - November 5, 2024
+
+- **Fixed** profile forms sometimes not appearing in the side navigation.
+
 ### Version 1.9.0 - August 10, 2023
 
 - **Added** ability to disable all fields on Byobu discussions so vanilla private discussions can be used alongside global Formulaire fields.
