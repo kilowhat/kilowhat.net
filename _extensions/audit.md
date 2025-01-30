@@ -535,3 +535,9 @@ Users logging in via passwordless will be logged as `user.logged_in` like passwo
 ### ClarkWinkelmann Status
 
 Integration planned, but only after Status gets an overhaul.
+
+### MatteoContrini's Imgur Upload
+
+Integration impossible, because the uploads are performed client-side directly to Imgur.
+
+I recommend using FriendsOfFlarum Upload with Imgur adapter if you want to keep a trace of who uploaded which file.
