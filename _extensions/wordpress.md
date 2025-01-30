@@ -89,6 +89,12 @@ Some screenshots of the admin panel that you will find in the Flarum dashboard.
 
 ## Flarum changelog
 
+### Version 2.0.2 - January 30, 2025
+
+- Allow more recent versions of the dependencies to be used, increasing compatibility with other extensions.
+- Strip `<span>` and `<div>` from the WP post content when read as Markdown by third-party extensions.
+- Fix typo in setting description.
+
 ### Version 2.0.1 - June 1, 2024
 
 - Require backoffice 0.1.4, move WordPress settings page back to Flarum admin panel.
