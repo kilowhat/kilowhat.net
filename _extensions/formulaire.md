@@ -95,6 +95,19 @@ Similar to the FriendsOfFlarum Mason open-source extension.
 
 ## Changelog
 
+### Version 1.9.2 - March 11, 2025
+
+- **Fixed** lost uploads when editing other fields in a form.
+- **Fixed** uploads metadata not loading when opening submission page from submission list.
+
+If you only see the file UUID in an upload field but not the filename, size or link, try refreshing the page with F5.
+If the UUID is still visible, this unfortunately means the file was lost due to the bug that this release addresses.
+Lost files have already been deleted from disk and cannot be recovered unless you have a backup of the `assets` folder and the database.
+If you have such backups and would like to rebuild the production database, please get in touch and I will help as best as I can.
+
+Integration tests have been added to cover this scenario and prevent this problem from re-appearing in the future.
+I'm really sorry for the inconvenience.
+
 ### Version 1.9.1 - November 5, 2024
 
 - **Fixed** profile forms sometimes not appearing in the side navigation.
