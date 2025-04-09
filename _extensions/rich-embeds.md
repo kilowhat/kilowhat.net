@@ -48,6 +48,15 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.3.2 - April 9, 2025
+
+- **Fixed** embeds falling back to inline mode instead of block if the URL contains multiple ampersands.
+- **Fixed** rich images not rendering when logged out or on other posts when not having permissions to use embeds.
+- **Fixed** embeds appearing on posts by users without the necessary permission when another post with permission had the same embed in the same discussion.
+- **Fixed** possible issue where images could appear in "separated" mode, but only links are supposed to be included.
+- **Added** summary of provided options to `refresh` command to make it more obvious why there might be zero matches.
+- **Added** output in javascript console when debug mode is enabled to help troubleshoot future issues.
+
 ### Version 1.3.1 - January 4, 2024
 
 - **Fixed** embed failing to render and crashing Flarum if a website returns an invalid opengraph image URL.
