@@ -48,6 +48,14 @@ Optionally, the extension will also retrieve and display metadata of images embe
 
 ## Changelog
 
+### Version 1.4.0 - April 28, 2025
+
+- **Fixed** dependency conflict with FoF Upload 1.7+.
+- **Fixed** missing request timeout. Defaults to 10 seconds, new setting available to customize.
+- **Fixed** embed design glitching when rendering a play button without any image.
+- **Fixed** handle more YouTube URLs including `/live/`.
+- **Added** YouTube smart fallback.
+
 ### Version 1.3.2 - April 9, 2025
 
 - **Fixed** embeds falling back to inline mode instead of block if the URL contains multiple ampersands.
@@ -384,6 +392,32 @@ Don't forget to whitelist the domain names of any CDN server used by your whitel
 The extension will automatically blacklist all URLs that include private range IPs, unless you explicitly whitelist them.
 Consider blacklisting your internal domain names if the server is not isolated.
 
+### Crawler request timeout
+
+Value in seconds. Integer, 1 or higher.
+The maximum time allowed for the full request lifecycle, from request to complete page download.
+If the request does not complete within that time, the site will be treated as an error and the embed will not render.
+
+This value is set as the `timeout` value of the Guzzle HTTP library.
+It applies to the opengraph and HTML crawler, the image proxy, the GitHub API client and the Google Drive thumbnail downloader.
+
+This value does not apply to other requests made by the Google SDK for YouTube and Google Drive, which has its own logic which is currently not configurable through this extension.
+
+When you use an asynchronous queue, you can set this value to anything you'd like.
+The PHP script usually runs without time limit, it'll just hold your task queue.
+If you have a single queue process, you should probably keep a low value as to not delay other things like emails.
+
+When you use a synchronous queue, you should set this value below your PHP `max_execution_time` value, so the extension still has time to handle and store the error message after a timeout.
+Since users will be waiting for the response in their browser, it also makes sense to choose a low value for best user experience.
+
+If your users mostly share links that are hosted in servers from another country, you might need to set the value a bit higher than if every link is local or served through distributed networks.
+The default value of 10 seconds is probably already overkill for most use cases.
+
+If your users regularly share links to servers that take very long to respond or never respond to bots, consider black-listing the domain name so you don't waste resources just waiting for the timeout.
+
+In a future version I might add a feature that allows profiling the time requests usually take.
+Let me know if that's something you would find useful.
+
 ### Rich Embeds for Images
 
 *This feature is experimental. Feedback is welcome!*
@@ -538,6 +572,22 @@ You might need to adjust your CSP settings to allow frames from `www.youtube.com
 
 This feature doesn't appear to have a documentation page in Google Developer documentation.
 It's called the "Privacy-enhanced mode" in the embed share modal of YouTube's website.
+
+**Smart YouTube OpenGraph fallback**: When OpenGraph is not being returned, this will offer a better fallback than the "without OpenGraph data" setting.
+
+For undocumented reasons, YouTube sometimes doesn't include OpenGraph data in the HTML response.
+For impacted customers, this seems to impact every single request made by the Flarum server to YouTube server.
+It must be linked to the way YouTube categorized the server IP address.
+
+When this setting is enabled, instead of falling back to the basic HTML preview, a nicer preview will be created by extracting the video ID and retrieving the video thumbnail from the predictable URL.
+The site name will be hard-coded as "YouTube" and the title only will be taken from the HTML fallback.
+
+This feature can be used even if the "without OpenGraph" fallback is disabled for other links.
+It can be used together with the API-powered preview, though it probably doesn't make sense to do so as every valid link should already have data from the API-power.
+
+If YouTube returned an error page, the smart preview will not generate and the embed will not render, like regular invalid links.
+
+This setting applies retroactively to existing embeds, no need to refresh them.
 
 **Enable advanced API-powered rich YouTube previews**: Enables API-powered rich YouTube previews for videos.
 
