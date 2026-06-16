@@ -5,12 +5,10 @@ permalink: /flarum/extensions/audit
 nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro){: .extiverse-badge}
-
 - **Price**: 30 USD lifetime license
 - **Bundled translations**: English
 - **Flarum compatibility**: 1.2+
-- See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro)
+- This extension is retired and cannot be purchased anymore. A free replacement is available from the [Flarum Foundation](https://docs.flarum.org/extensions/audit).
 - See on [Flarum Discuss](https://discuss.flarum.org/d/24206)
 
 Table of content:
@@ -30,6 +28,11 @@ Table of content:
 
 ## Introduction
 
+> In June 2026, this extension was adopted and made free by the Flarum Foundation.
+>
+> The documentation below only applies to the version published by KILOWHAT.
+> The new extension, its requirements and support options can be found [on Flarum's website](https://docs.flarum.org/extensions/audit).
+
 Audit Log is a premium extension that adds an extensive action logging feature to Flarum.
 
 Administrators can browse all logs from the admin panel.
@@ -42,6 +45,9 @@ The logs are read-only, preventing any tempering.
 </div>
 
 ## Free vs Pro
+
+> The free version published by the Flarum Foundation contains most of the features of both free and pro.
+> See their documentation for details.
 
 A [free version](https://discuss.flarum.org/d/24432) is available with limited features.
 
@@ -64,9 +70,25 @@ To get access to all feature and to support the ongoing development of the exten
 | IP Country indicator           | <span class="no">No</span>   | <span class="yes">Yes</span> |
 | **Support**                    |                              | |
 | Support                        | Community-only               | Email |
-| Download                       | Via Packagist                | Via Extiverse |
+| Download                       | Via Packagist                | Via Floxum |
 
 ## Changelog
+
+### Future
+
+The Flarum Foundation has published compatible updates for Flarum 1.x and soon Flarum 2.x.
+
+You can follow [their instructions](https://docs.flarum.org/extensions/audit) to update.
+Your data will be preserved.
+
+While you remain on Flarum 1.x, you can continue using the KILOWHAT version to benefit from the support included with your subscription.
+
+Because the extension has been adopted by the Flarum Foundation, I will not be publishing a KILOWHAT 2.x-compatible version.
+If you need help during the transition to the Flarum extension, I will assist as best as I can.
+Only community support will then be available once you are running the Flarum Foundation version of the extension.
+
+<details markdown="1">
+<summary markdown="span">Show older releases</summary>
 
 ### Version 1.7.1 - June 11, 2024
 
@@ -101,9 +123,6 @@ If you have not already updated from Extiverse to Flarum.org premium repository,
 - <span class="pro-badge">pro only</span> Add optional IP country indicator. See [documentation](#ip-country-indicator) for how to enable.
 
 This version requires Flarum version 1.2 or higher.
-
-<details markdown="1">
-<summary markdown="span">Show older releases</summary>
 
 ### Version 1.4.2 - August 25, 2021
 
@@ -219,7 +238,10 @@ As time goes on this section will be filled with any extension that could be inc
 > These instructions apply to the Pro version only.
 > For the free version, consult the dedicated [Discuss](https://discuss.flarum.org/d/24432) thread.
 
-- Purchase the ["KILOWHAT Audit Pro"](https://extiverse.com/extension/kilowhat/flarum-ext-audit-pro) extension via the Extiverse website
+> The extension is no longer available for purchase.
+> Existing subscribers can continue to use the extension and use the following instructions to install.
+
+- Before June 2026, Purchase the ["KILOWHAT Audit Pro"](https://floxum.com/extension/kilowhat/flarum-ext-audit-pro) extension via the Floxum website
 - If this is your first premium extension purchase from Extiverse, follow the "Composer configuration" instructions available at <https://extiverse.com/premium/subscriptions>
 - Install the extension via Composer: `composer require kilowhat/flarum-ext-audit-pro`
 - Open the Flarum admin panel and enable the extension
@@ -259,7 +281,7 @@ Run `php flarum kilowhat:audit:clear --help` to get documentation about all avai
 
 If you are having issues with the extension, check the following:
 
-- If the extension doesn't install, check you have correctly configured Extiverse's private repository.
+- If the extension doesn't install, check you have correctly configured Floxum's private repository.
 - If an error happens during activation or usage of the extension, check the logs in `<flarum>/storage/logs`.
 
 If you are still having issues, please copy the output of the logs above, as well as the output of `php flarum info` and send an email to <support@kilowhat.net>.
