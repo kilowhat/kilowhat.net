@@ -5,12 +5,10 @@ permalink: /flarum/extensions/wordpress
 nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-wordpress/badge)](https://flarum.org/extension/kilowhat/flarum-ext-wordpress){: .extiverse-badge}
-
 - **Price**: 5 USD/month or 50 USD/year
 - **Bundled translations**: English
 - **Flarum compatibility**: 1.2+
-- See and purchase on [Flarum.org](https://flarum.org/extension/kilowhat/flarum-ext-wordpress)
+- See and purchase on [Floxum](https://floxum.org/extension/kilowhat/flarum-ext-wordpress)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/22229-premium-wordpress-integration)
 
 Table of content:
@@ -594,8 +592,8 @@ See below for WordPress settings.
 
 ### On Flarum
 
-- Purchase the ["KILOWHAT WordPress Integration"](https://flarum.org/extension/kilowhat/flarum-ext-wordpress) extension on Flarum.org
-- If this is your first premium extension purchase from Flarum.org, click and follow the "Instructions" button at the top of your [subscriptions page](https://flarum.org/dashboard/subscriptions)
+- Purchase the ["KILOWHAT WordPress Integration"](https://floxum.org/extension/kilowhat/flarum-ext-wordpress) extension via the Floxum website
+- If this is your first premium extension purchase from Floxum, click the "Instructions" button at the top of your [Subscriptions list](https://floxum.com/subscriptions)
 - Install the extension via Composer: `composer require kilowhat/flarum-ext-wordpress`
 - Open the Flarum admin panel and enable the "Backoffice" extension which has automatically been installed
 - Still in the Flarum admin panel, enable the "WordPress Integration" extension

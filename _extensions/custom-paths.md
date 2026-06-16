@@ -5,12 +5,10 @@ permalink: /flarum/extensions/custom-paths
 nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths){: .extiverse-badge}
-
 - **Price**: 10 USD lifetime license
 - **Bundled translations**: English
 - **Flarum compatibility**: 1.2+
-- See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths)
+- See and purchase on [Floxum](https://floxum.org/extension/kilowhat/flarum-ext-custom-paths)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/23872)
 
 Table of content:
@@ -192,8 +190,8 @@ Issues in previous versions that have been fixed as of 1.8.0:
 
 ## Installation
 
-- Purchase the ["KILOWHAT Custom Paths"](https://extiverse.com/extension/kilowhat/flarum-ext-custom-paths) extension via the Extiverse website
-- If this is your first premium extension purchase from Extiverse, follow the "Composer configuration" instructions available at <https://extiverse.com/premium/subscriptions>
+- Purchase the ["KILOWHAT Custom Paths"](https://floxum.com/extension/kilowhat/flarum-ext-custom-paths) extension via the Floxum website
+- If this is your first premium extension purchase from Floxum, click the "Instructions" button at the top of your [Subscriptions list](https://floxum.com/subscriptions)
 - Install the extension via Composer: `composer require kilowhat/flarum-ext-custom-paths`
 - Open the Flarum admin panel and enable the extension
 - See below for the settings
@@ -212,7 +210,7 @@ You can use the following commands to update:
 
 If you are having issues with the extension, check the following:
 
-- If the extension doesn't install, check you have correctly configured Extiverse's private repository.
+- If the extension doesn't install, check you have correctly configured Floxum's private repository.
 - If an error happens during activation or usage of the extension, check the logs in `<flarum>/storage/logs`.
 
 If you are still having issues, please copy the output of the logs above, as well as the output of `php flarum info` and send an email to <support@kilowhat.net>.

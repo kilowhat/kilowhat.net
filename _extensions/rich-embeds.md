@@ -5,12 +5,10 @@ permalink: /flarum/extensions/rich-embeds
 nav_order: 50
 ---
 
-[![Extiverse badge](https://extiverse.com/extension/kilowhat/flarum-ext-rich-embeds/badge)](https://extiverse.com/extension/kilowhat/flarum-ext-rich-embeds){: .extiverse-badge}
-
 - **Price**: 20 USD lifetime license
 - **Bundled translations**: English
 - **Flarum compatibility**: 1.2+
-- See and purchase on [Extiverse](https://extiverse.com/extension/kilowhat/flarum-ext-rich-embeds)
+- See and purchase on [Floxum](https://floxum.com/extension/kilowhat/flarum-ext-rich-embeds)
 - See on [Flarum Discuss](https://discuss.flarum.org/d/30516)
 
 Table of content:
@@ -235,8 +233,8 @@ If you want to use the YouTube API/player or Google Drive API embeds, you will n
 
 ## Installation
 
-- Purchase the ["KILOWHAT Rich Embeds"](https://extiverse.com/extension/kilowhat/flarum-ext-rich-embeds) extension via the Extiverse website
-- If this is your first premium extension purchase from Extiverse, follow the "Composer configuration" instructions available at <https://extiverse.com/premium/subscriptions>
+- Purchase the ["KILOWHAT Rich Embeds"](https://floxum.com/extension/kilowhat/flarum-ext-rich-embeds) extension via the Floxum website
+- If this is your first premium extension purchase from Floxum, click the "Instructions" button at the top of your [Subscriptions list](https://floxum.com/subscriptions)
 - If using Composer 2.9 or higher, disable the `block-insecure` feature with `composer config audit.block-insecure false` or see below for more options
 - Install the extension via Composer: `composer require kilowhat/flarum-ext-rich-embeds`
 - Open the Flarum admin panel and enable the extension
@@ -281,7 +279,7 @@ You can use the following commands to update:
 
 If you are having issues with the extension, check the following:
 
-- If the extension doesn't install, check you have correctly configured Extiverse's private repository.
+- If the extension doesn't install, check you have correctly configured Floxum's private repository.
 - If an error happens during activation or usage of the extension, check the logs in `<flarum>/storage/logs`.
 
 If you are still having issues, please copy the output of the logs above, as well as the output of `php flarum info` and send an email to <support@kilowhat.net>.
